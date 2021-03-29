@@ -1,8 +1,10 @@
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Property extends Model
 {
-    private static String table_name = "products";
+    private static String table_name = "property";
 
     public int id;
     public int userId;
@@ -41,6 +43,22 @@ public class Property extends Model
         this.bedrooms = bedrooms;
         this.size = size;
         this.pricePerNight = pricePerNight;
+    }
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", locationId=" + locationId +
+                ", ownerId=" + ownerId +
+                ", description='" + description + '\'' +
+                ", propertyTypeId=" + propertyTypeId +
+                ", imagePath='" + imagePath + '\'' +
+                ", bedrooms=" + bedrooms +
+                ", size=" + size +
+                ", pricePerNight=" + pricePerNight +
+                '}';
     }
 
     public int getId() {
@@ -121,5 +139,31 @@ public class Property extends Model
 
     public void setPricePerNight(double pricePerNight) {
         this.pricePerNight = pricePerNight;
+    }
+
+    @Override
+    public ArrayList<Property> get() {
+        ArrayList<HashMap<String,String>> list_of_rows = super.getData();
+        ArrayList<Property> properties = new ArrayList<Property>();
+
+        for (HashMap<String, String> row: list_of_rows) {
+            Property property = new Property();
+            for (String attribute: row.keySet()) {
+                switch (attribute) {
+                    case "id": property.setId(Integer.parseInt(row.get(attribute))); break;
+                    case "userId": property.setUserId(Integer.parseInt(row.get(attribute))); break;
+                    case "locationId": property.setLocationId(Integer.parseInt(row.get(attribute))); break;
+                    case "ownerId": property.setOwnerId(Integer.parseInt(row.get(attribute))); break;
+                    case "description": property.setDescription(row.get(attribute)); break;
+                    case "propertyTypeId": property.setPropertyTypeId(Integer.parseInt(row.get(attribute))); break;
+                    case "imagePath": property.setImagePath(row.get(attribute)); break;
+                    case "bedrooms": property.setBedrooms(Integer.parseInt(row.get(attribute))); break;
+                    case "size": property.setSize(Integer.parseInt(row.get(attribute))); break;
+                    case "pricePerNight": property.setPricePerNight(Double.parseDouble(row.get(attribute))); break;
+                }
+            }
+            properties.add(property);
+        }
+        return properties;
     }
 }

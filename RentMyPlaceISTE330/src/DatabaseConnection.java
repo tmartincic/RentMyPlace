@@ -11,7 +11,7 @@ public class DatabaseConnection {
     private static String url = "";
     private static String host = "localhost";
     private static String port = "3306";
-    private static String database = "llacan";
+    private static String database = "rent_my_place";
     private static String user = "root";
     private static String password = "";
     private Connection con;
@@ -29,6 +29,9 @@ public class DatabaseConnection {
         try{
             stmt = (Statement) this.getCon().createStatement();
             return stmt.executeQuery(sql);
+        }
+        catch (SQLSyntaxErrorException sqlse) {
+            System.out.println("Query not formed correctly: " + sqlse.getMessage());
         }
         catch (Exception e) {
             e.printStackTrace();

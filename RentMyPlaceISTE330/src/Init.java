@@ -7,10 +7,15 @@ public class Init {
 //        where price is less then 500 and results ordered by ascending price and
 //
         ArrayList<Property> properties_from_labin = new Property()
-                .select(new String[]{"name", "price", "created_at"})
-                .where("price", "<", "20")
-                .where("is_pommes", "=", "0")
-                .orderBy(new String[]{"price", "created_at"}, "ASC")
+                .select(new String[]{"id", "description", "pricePerNight", "size", "bedrooms"})
+                .where("pricePerNight", "<", "150")
+                .orWhere("size", "=", "55")
+                .orderBy(new String[]{"pricePerNight", "size"}, "ASC")
                 .get();
+
+        System.out.println("size: " + properties_from_labin.size());
+        for (Property property : properties_from_labin) {
+            System.out.println(property.toString());
+        }
     }
 }
