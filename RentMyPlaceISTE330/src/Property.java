@@ -1,6 +1,7 @@
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Property extends Model
 {
@@ -141,6 +142,23 @@ public class Property extends Model
         this.pricePerNight = pricePerNight;
     }
 
+    public Property assign(Map<String, String> row) {
+        for (String attribute: row.keySet()) {
+            switch (attribute) {
+                case "id": this.setId(Integer.parseInt(row.get(attribute))); break;
+                case "userId": this.setUserId(Integer.parseInt(row.get(attribute))); break;
+                case "locationId": this.setLocationId(Integer.parseInt(row.get(attribute))); break;
+                case "ownerId": this.setOwnerId(Integer.parseInt(row.get(attribute))); break;
+                case "description": this.setDescription(row.get(attribute)); break;
+                case "propertyTypeId": this.setPropertyTypeId(Integer.parseInt(row.get(attribute))); break;
+                case "imagePath": this.setImagePath(row.get(attribute)); break;
+                case "bedrooms": this.setBedrooms(Integer.parseInt(row.get(attribute))); break;
+                case "size": this.setSize(Integer.parseInt(row.get(attribute))); break;
+                case "pricePerNight": this.setPricePerNight(Double.parseDouble(row.get(attribute))); break;
+            }
+        }
+        return this;
+    }
     @Override
     public ArrayList<Property> get() {
         ArrayList<HashMap<String,String>> list_of_rows = super.getData();
@@ -148,22 +166,18 @@ public class Property extends Model
 
         for (HashMap<String, String> row: list_of_rows) {
             Property property = new Property();
-            for (String attribute: row.keySet()) {
-                switch (attribute) {
-                    case "id": property.setId(Integer.parseInt(row.get(attribute))); break;
-                    case "userId": property.setUserId(Integer.parseInt(row.get(attribute))); break;
-                    case "locationId": property.setLocationId(Integer.parseInt(row.get(attribute))); break;
-                    case "ownerId": property.setOwnerId(Integer.parseInt(row.get(attribute))); break;
-                    case "description": property.setDescription(row.get(attribute)); break;
-                    case "propertyTypeId": property.setPropertyTypeId(Integer.parseInt(row.get(attribute))); break;
-                    case "imagePath": property.setImagePath(row.get(attribute)); break;
-                    case "bedrooms": property.setBedrooms(Integer.parseInt(row.get(attribute))); break;
-                    case "size": property.setSize(Integer.parseInt(row.get(attribute))); break;
-                    case "pricePerNight": property.setPricePerNight(Double.parseDouble(row.get(attribute))); break;
-                }
-            }
+            property.assign(row);
             properties.add(property);
         }
         return properties;
+    }
+
+    //persist to database, assign variables (without performing another select query)
+    //and set ID (because we cannot add it to immutableMap (row)), return
+    public Property create(Map<String, String> row) {
+        int id = super.createModel(row);
+        setId(id);
+        this.assign(row);
+        return this;
     }
 }

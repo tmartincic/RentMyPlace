@@ -1,7 +1,8 @@
-import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /*
     Class model represents a model, a table in the database.
@@ -36,6 +37,27 @@ public class Model<T> {
             else this.select += attributes[i] +c+s;
         }
         return this;
+    }
+
+    /*
+        Persists row to the database and
+        returns the ID of inserted model
+     */
+    public int createModel(Map<String, String> row) {
+        String sq = "'";
+        String query = "INSERT INTO " + this.table_name + "(";
+        for (String attribute: row.keySet()) query += attribute +c;
+        query = query.substring(0, query.length() - 1); //remove last comma
+        query += ") VALUES (";
+        for (String attribute: row.values()) query +=  sq+attribute +sq+c;
+        query = query.substring(0, query.length() - 1); //remove last comma
+        query += ");";
+
+        DatabaseConnection con = new DatabaseConnection();
+        con.connect();
+        int id = con.executeQuery(query);
+        con.close();
+        return id;
     }
 
     /*
@@ -93,13 +115,13 @@ public class Model<T> {
         logicaly equal to HashMap<Column, Value>. This way we can generically retrieve all
         columns in the same manner, and we only have to override the declaration of retrieved attributes, check the get() method.
      */
-    public ArrayList<HashMap<String, String>>getData() {
+    public ArrayList<Map<String, String>>getData() {
         ArrayList<Property> properties = new ArrayList<Property>();
         DatabaseConnection con = new DatabaseConnection();
         con.connect();
-        ResultSet rs = con.executeQuery(sqlToString());
+        ResultSet rs = con.getResultSet(sqlToString());
         //Array list of rows (each row is a HashMap<Column, Value>)
-        ArrayList<HashMap<String, String>> column_value_list = new ArrayList<HashMap<String, String>>();
+        ArrayList<Map<String, String>> column_value_list = new ArrayList<Map<String, String>>();
         try{
             while(rs.next()) {
                 //This row map represents row in database and exists due to
@@ -122,6 +144,7 @@ public class Model<T> {
             return null;
         }
         con.close();
+        if(column_value_list.size() == 0) System.out.println("No results were found in following query: "+sqlToString());
         return column_value_list;
     }
 
@@ -149,21 +172,11 @@ public class Model<T> {
     public ArrayList<T> get() {
     /*
         ArrayList<HashMap<String,String>> list_of_rows = super.getData();
-        ArrayList<THIS_CLASS> NAME_OF_THIS_CLASS = new ArrayList<THIS_CLASS>();
+        ArrayList<Property> properties = new ArrayList<Property>();
 
         for (HashMap<String, String> row: list_of_rows) {
-            THIS_CLASS thisClass = new THIS_CLASS();
-            for (String attribute: row.keySet()) {
-                switch (attribute) {    //row.get(attribute) is always the same, but should be parsed appropriately
-                    case "id": thisClass.setId(Integer.parseInt(row.get(attribute))); break;
-                    case "attribute1": thisClass.setAttribute1(Double.parseDouble(row.get(attribute))); break;
-                    case "someAttribute": thisClass.setSomeAttribute(row.get(attribute)); break;
-                    case "otherAttribute": thisClass.setOtherAttribute(row.get(attribute)); break;
-                    //..
-                    //..
-                    //add all remaining attributes to this list
-                }
-            }
+            Property property = new Property();
+            property.assign(row);
             properties.add(property);
         }
         return properties;

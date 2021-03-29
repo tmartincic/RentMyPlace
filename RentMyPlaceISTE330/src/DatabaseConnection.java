@@ -21,7 +21,7 @@ public class DatabaseConnection {
     /*
         Execute SQL Querry and return resultSet or null
      */
-    public ResultSet executeQuery(String sql) {
+    public ResultSet getResultSet(String sql) {
 
         Statement stmt = null;
         ResultSet rs = null;
@@ -37,6 +37,30 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /*
+        Execute SQL Query
+        Returns ID of inserted column
+     */
+    public int executeQuery(String sql) {
+        try{
+            PreparedStatement stmt = (PreparedStatement) this.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.execute();
+            ResultSet rs = stmt.getGeneratedKeys();
+            if(rs.next()) {
+                return rs.getInt(1);
+            }
+            return -1;
+        }
+        catch (SQLSyntaxErrorException sqlse) {
+            System.out.println("Insert not formed correctly: " + sqlse.getMessage());
+            return -1;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     public boolean connect() {
