@@ -55,6 +55,7 @@ public class Init {
         //we won't return apartment with size exactly 55. OrderBy can be commented out and we wont get any order.
         //All of these functions can be chained in ANY order and NONE ARE MANDITORY. It can be as simply as
         //new Property().get() to retrieve all properties from table "properties"
+        System.out.println("\n### SELECT: ");
         ArrayList<Property> properties_from_labin = new Property()
                 .select(new String[]{"id", "description", "pricePerNight", "size", "bedrooms"})
                 .where("pricePerNight", "<", "800")
@@ -64,7 +65,5 @@ public class Init {
         for (Property property : properties_from_labin) {
             System.out.println(property.toString());
         }
-
-
     }
 }
