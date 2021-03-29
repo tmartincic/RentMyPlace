@@ -1,4 +1,4 @@
-public class Contact  implements Model
+public class Contact
 {
     public int id;
     public String fullName;
@@ -12,12 +12,6 @@ public class Contact  implements Model
         this.email = null;
         this.phone = -1;
         this.locationId = -1;
-    }
-
-    @Override
-    public Contact findModelById(int id) {
-        //JDBC SELECT from table WHERE ID = id;
-        return this;
     }
 
     public Contact(int id, String fullName, String email, int phone, int locationId) {

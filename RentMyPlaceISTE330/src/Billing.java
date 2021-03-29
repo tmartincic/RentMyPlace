@@ -1,6 +1,6 @@
 import java.sql.Date;
 
-public class Billing implements Model {
+public class Billing {
     public int id;
     public String billingAddress;
     public String creditCardNum;
@@ -8,11 +8,6 @@ public class Billing implements Model {
     public java.sql.Date expireDate;
     public String ownerName;
 
-    @Override
-    public Billing findModelById(int id) {
-        //JDBC SELECT from table WHERE ID = id;
-        return this;
-    }
 
     public Billing() {
         this.id = -1;

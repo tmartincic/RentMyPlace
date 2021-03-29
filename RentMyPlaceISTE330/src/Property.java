@@ -1,5 +1,9 @@
-public class Property
+import java.util.ArrayList;
+
+public class Property extends Model
 {
+    private static String table_name = "products";
+
     public int id;
     public int userId;
     public int locationId;
@@ -12,6 +16,7 @@ public class Property
     public double pricePerNight;
 
     public Property() {
+        super(table_name);
         this.id = -1;
         this.userId = -1;
         this.locationId = -1;
@@ -25,6 +30,7 @@ public class Property
     }
 
     public Property(int id, int userId, int locationId, int ownerId, String description, int propertyTypeId, String imagePath, int bedrooms, int size, double pricePerNight) {
+        super(table_name);
         this.id = id;
         this.userId = userId;
         this.locationId = locationId;
