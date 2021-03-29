@@ -24,6 +24,7 @@ public class Model<T> {
         this.table_name = table;
         this.select = "SELECT *";
         this.from = "FROM " + table;
+        this.whereSql = "WHERE 1";
     }
     /*
         Used to build select part of query
