@@ -29,6 +29,17 @@ public class Reservations extends Model
       this.price = price;
    }
 
+   @Override
+   public String toString() {
+      return "Reservations{" +
+              ", userId=" + userId +
+              ", propertyId=" + propertyId +
+              ", from=" + from +
+              ", to=" + to +
+              ", price=" + price +
+              '}';
+   }
+
    public int getUserId() {
       return userId;
    }
@@ -69,15 +80,37 @@ public class Reservations extends Model
       this.price = price;
    }
 
+   public Reservations assign(Map<String, String> row) {
+      for (String attribute: row.keySet()) {
+         switch (attribute) {
+            case "userId" -> this.setUserId(Integer.parseInt(row.get(attribute)));
+            case "propertyId" -> this.setPropertyId(Integer.parseInt(row.get(attribute)));
+            case "from" -> this.setFrom(Date.valueOf(row.get(attribute)));
+            case "to" -> this.setTo(Date.valueOf(row.get(attribute)));
+            case "price" -> this.setPrice(Double.parseDouble(row.get(attribute)));
+         }
+      }
+      return this;
+   }
+
    @Override
    public ArrayList<Reservations> get() {
+      ArrayList<HashMap<String, String>> list_of_rows = super.getData();
       ArrayList<Reservations> reservations = new ArrayList<Reservations>();
-   
-      /*
-      Finish method
-       */
-   
+
+      for(HashMap<String, String> row : list_of_rows) {
+         Reservations reservation = new Reservations();
+         reservation.assign(row);
+         reservations.add(reservation);
+      }
       return reservations;
+   }
+
+   public Reservations create(Map<String, String> row) {
+      int id = super.createModel(row);
+      setUserId(userId);
+      this.assign(row);
+      return this;
    }
 
 }
