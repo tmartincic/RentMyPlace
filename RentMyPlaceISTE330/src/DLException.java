@@ -7,7 +7,12 @@ import java.sql.*;
 public class DLException extends Exception{
     private BufferedWriter logger = null;
     // constructor
-    public DLException(SQLException sqlException, String stmt){
+    public DLException(SQLException sqlException){
+        super("The operation can not be completed. Please contact the administrator.");
+        this.log(sqlException);
+    }
+
+    public DLException(SQLSyntaxErrorException sqlException, String stmt){
         super("The operation can not be completed. Please contact the administrator.");
         this.log(sqlException, stmt);
     }
@@ -19,12 +24,22 @@ public class DLException extends Exception{
     }
 
     /**
-     * Method for logging SQLException
-     * @param sqlException SQLException
+     * Method for logging SQLSyntaxErrorException
+     * @param sqlException SQLSyntaxErrorException
      * @param stmt String
      */
-    public void log(SQLException sqlException, String stmt){
+    public void log(SQLSyntaxErrorException sqlException, String stmt){
         String exceptionOutput = "Query: " + stmt + "\nSQL state code: " + sqlException.getSQLState() + "\nError code: " + sqlException.getErrorCode() + "\nCause: " + sqlException.getCause() + "\nMessage: " + sqlException.getMessage() + "\n";
+
+        this.write(exceptionOutput);
+    }
+
+    /**
+     * Method for logging SQLException
+     * @param sqlException SQLException
+     */
+    public void log(SQLException sqlException){
+        String exceptionOutput = "SQL state code: " + sqlException.getSQLState() + "\nError code: " + sqlException.getErrorCode() + "\nCause: " + sqlException.getCause() + "\nMessage: " + sqlException.getMessage() + "\n";
 
         this.write(exceptionOutput);
     }

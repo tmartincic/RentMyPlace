@@ -54,9 +54,25 @@ public class Model<T> {
         query += ");";
 
         DatabaseConnection con = new DatabaseConnection();
-        con.connect();
-        int id = con.executeQuery(query);
-        con.close();
+        int id = 0;
+        try {
+            con.connect();
+        }
+        catch(DLException e){
+            System.out.println(e);
+        }
+        try {
+            id = con.executeQuery(query);
+        }
+        catch(DLException e){
+            System.out.println(e);
+        }
+        try {
+            con.close();
+        }
+        catch(DLException e){
+            System.out.println(e);
+        }
         return id;
     }
 
@@ -118,8 +134,19 @@ public class Model<T> {
     public ArrayList<Map<String, String>>getData() {
         ArrayList<Property> properties = new ArrayList<Property>();
         DatabaseConnection con = new DatabaseConnection();
-        con.connect();
-        ResultSet rs = con.getResultSet(sqlToString());
+        try {
+            con.connect();
+        }
+        catch(DLException e){
+            System.out.println(e);
+        }
+        ResultSet rs = null;
+        try {
+            rs = con.getResultSet(sqlToString());
+        }
+        catch(DLException e){
+            System.out.println(e);
+        }
         //Array list of rows (each row is a HashMap<Column, Value>)
         ArrayList<Map<String, String>> column_value_list = new ArrayList<Map<String, String>>();
         try{
@@ -134,16 +161,31 @@ public class Model<T> {
             }
         }
         catch (NullPointerException npe) {
-            con.close();
+            try {
+                con.close();
+            }
+            catch(DLException e){
+                System.out.println(e);
+            }
             System.out.println("Result set from query is null.");
             return null;
         }
         catch (Exception e) {
-            con.close();
+            try {
+                con.close();
+            }
+            catch(DLException dle){
+                System.out.println(dle);
+            }
             e.printStackTrace();
             return null;
         }
-        con.close();
+        try {
+            con.close();
+        }
+        catch(DLException e){
+            System.out.println(e);
+        }
         if(column_value_list.size() == 0) System.out.println("No results were found in following query: "+sqlToString());
         return column_value_list;
     }

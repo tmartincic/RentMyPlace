@@ -21,7 +21,7 @@ public class DatabaseConnection {
     /*
         Execute SQL Querry and return resultSet or null
      */
-    public ResultSet getResultSet(String sql) {
+    public ResultSet getResultSet(String sql) throws DLException{
 
         Statement stmt = null;
         ResultSet rs = null;
@@ -31,19 +31,18 @@ public class DatabaseConnection {
             return stmt.executeQuery(sql);
         }
         catch (SQLSyntaxErrorException sqlse) {
-            System.out.println("Query not formed correctly: " + sqlse.getMessage());
+            throw new DLException(sqlse, sql);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            throw new DLException(e);
         }
-        return null;
     }
 
     /*
         Execute SQL Query
         Returns ID of inserted column
      */
-    public int executeQuery(String sql) {
+    public int executeQuery(String sql) throws DLException {
         try{
             PreparedStatement stmt = (PreparedStatement) this.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.execute();
@@ -54,35 +53,29 @@ public class DatabaseConnection {
             return -1;
         }
         catch (SQLSyntaxErrorException sqlse) {
-            System.out.println("Insert not formed correctly: " + sqlse.getMessage());
-            return -1;
+            throw new DLException(sqlse, sql);
         }
         catch (Exception e) {
-            e.printStackTrace();
-            return -1;
+            throw new DLException(e);
         }
     }
 
-    public boolean connect() {
+    public boolean connect() throws DLException{
         try{
             this.con= (Connection) DriverManager.getConnection(this.url, this.user, this.password);
             return true;
         }catch(SQLException sqle) {
-            System.out.println(sqle.getSQLState());
-            System.out.println(sqle.getErrorCode());
-            sqle.printStackTrace();
-            return false;
+            throw new DLException(sqle);
         }
     }
 
-    public boolean close() {
+    public boolean close() throws DLException{
         try{
             this.con.close();
             return true;
         }
         catch(Exception e){
-            System.out.println(e);
-            return false;
+            throw new DLException(e);
         }
     }
 
@@ -105,7 +98,7 @@ public class DatabaseConnection {
         return con;
     }
     public void generateUrl() {
-        this.url = "jdbc:mysql://"+host+":"+port+"/"+database;
+        this.url = "jdbc:mysql://"+host+":"+port+"/"+database+"?serverTimezone=CET";
     }
 
     public void setHost(String host) {
