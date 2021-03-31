@@ -1,6 +1,12 @@
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Billing {
+public class Billing extends Model{
+
+    private static final String table_name="billing";
+
     public int id;
     public String billingAddress;
     public String creditCardNum;
@@ -10,6 +16,7 @@ public class Billing {
 
 
     public Billing() {
+        super(table_name);
         this.id = -1;
         this.billingAddress = null;
         this.creditCardNum = null;
@@ -19,6 +26,7 @@ public class Billing {
     }
 
     public Billing(int id, String billingAddress, String creditCardNum, String CVC, Date expireDate, String ownerName) {
+        super(table_name);
         this.id = id;
         this.billingAddress = billingAddress;
         this.creditCardNum = creditCardNum;
@@ -73,5 +81,40 @@ public class Billing {
 
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
+    }
+
+    public Billing assign(Map<String, String> row) {
+        for (String attribute: row.keySet()) {
+            switch (attribute) {
+                case "id" -> this.setId(Integer.parseInt(row.get(attribute)));
+                case "billingAddress" -> this.setBillingAddress(row.get(attribute));
+                case "creditCardNum" -> this.setCreditCardNum(row.get(attribute));
+                case "CVC" -> this.setCVC(row.get(attribute));
+                case "expireDate" -> this.setExpireDate(Date.valueOf(row.get(attribute)));
+                case "ownerName" -> this.setOwnerName(row.get(attribute));
+            }
+        }
+        return this;
+    }
+
+    //TODO
+    @Override
+    public ArrayList<Billing> get(){
+        ArrayList<HashMap<String, String>> list_of_rows = super.getData();
+        ArrayList<Billing> billings = new ArrayList<>();
+
+        for(HashMap< String, String> row : list_of_rows){
+            Billing billing = new Billing();
+            billing.assign(row);
+            billings.add(billing);
+        }
+        return billings;
+    }
+
+    public Billing create(Map<String, String> row) {
+        int id = super.createModel(row);
+        setId(id);
+        this.assign(row);
+        return this;
     }
 }
