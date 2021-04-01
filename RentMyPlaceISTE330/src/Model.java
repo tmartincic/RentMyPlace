@@ -20,6 +20,7 @@ public class Model<T> {
     //quick space and comma references for sql construction
     private String s = " ";
     private String c = ",";
+    private String sq = "'";
 
     public Model (String table) {
         this.table_name = table;
@@ -57,17 +58,7 @@ public class Model<T> {
         int id = 0;
         try {
             con.connect();
-        }
-        catch(DLException e){
-            System.out.println(e);
-        }
-        try {
             id = con.executeQuery(query);
-        }
-        catch(DLException e){
-            System.out.println(e);
-        }
-        try {
             con.close();
         }
         catch(DLException e){
@@ -97,8 +88,17 @@ public class Model<T> {
         Defaults to AND where, for OR operator check orWhere() function
      */
     private Model _where(String attribute, String operator, String value, String chain) {
-        if(firstWhere) this.whereSql = "WHERE" +s+ attribute +s+ operator +s+ value;
-        else this.whereSql += s+chain +s+ attribute +s+ operator +s+ value;
+        String valueFormated = "";
+        //If we are dealing with numeric value, leave as is, if we're dealing with string, add single quotes
+        try{
+            Double.parseDouble(value);
+            valueFormated = value;
+        }
+        catch (NumberFormatException nfe) {
+            valueFormated = sq+value+sq;
+        }
+        if(firstWhere) this.whereSql = "WHERE" +s+ attribute +s+ operator +s+valueFormated;
+        else this.whereSql += s+chain +s+ attribute +s+ operator +s+ valueFormated;
         firstWhere = false;
         return this;
     }
@@ -212,17 +212,64 @@ public class Model<T> {
      */
 
     public ArrayList<T> get() {
-    /*
-        ArrayList<HashMap<String,String>> list_of_rows = super.getData();
-        ArrayList<Property> properties = new ArrayList<Property>();
-
-        for (HashMap<String, String> row: list_of_rows) {
-            Property property = new Property();
-            property.assign(row);
-            properties.add(property);
-        }
-        return properties;
-      */
         return new ArrayList<T>();
     };
+
+    /**
+     * Deletes certain row in a table based on the id
+     * @param id int
+     * @return boolean
+     */
+    public boolean deleteModel(int id) {
+        String query = "DELETE FROM " + this.table_name + " WHERE id = " + id;
+
+        DatabaseConnection con = new DatabaseConnection();
+        try {
+            con.connect();
+            con.executeQuery(query);
+            con.close();
+        }
+        catch(DLException e){
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Updates table
+     *               <column, value>
+     * @param row Map<String, String>
+     * @param id int
+     * @return boolean
+     */
+    public boolean updateModel(Map<String, String> row, int id) {
+        String sq = "'";
+        String query = "UPDATE " + this.table_name + " SET ";
+        String valueFormated = "";
+        for (String attribute: row.keySet()) {
+            try{
+                Double.parseDouble(row.get(attribute));
+                valueFormated = row.get(attribute);
+            }
+            catch (NumberFormatException nfe) {
+                valueFormated = sq+row.get(attribute)+sq;
+            }
+            query += attribute + "=" + valueFormated + c;
+        }
+        query = query.substring(0, query.length() - 1); //remove last comma
+        query += " WHERE id = " + id + ";";
+
+        DatabaseConnection con = new DatabaseConnection();
+        try {
+            con.connect();
+            con.executeQuery(query);
+            con.close();
+        }
+        catch(DLException e){
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
 }

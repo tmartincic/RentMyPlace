@@ -12,7 +12,6 @@ public class Init {
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "1"),
                 Map.entry("locationId", "5"),
-                Map.entry("ownerId", "3"),
                 Map.entry("description", "Kumlerovi dvori, just above Zagreb."),
                 Map.entry("propertyTypeId", "5"),
                 Map.entry("imagePath", "https://picsum.photos/200/300.jpg"),
@@ -26,7 +25,6 @@ public class Init {
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "2"),
                 Map.entry("locationId", "8"),
-                Map.entry("ownerId", "1"),
                 Map.entry("description", "Panorama Hotel, center of Zagreb, big glass wall building."),
                 Map.entry("propertyTypeId", "2"),
                 Map.entry("imagePath", "https://picsum.photos/200/500.jpg"),
@@ -34,14 +32,23 @@ public class Init {
                 Map.entry("size", "5000"),
                 Map.entry("pricePerNight", "799.99")
         ));
-        System.out.println(createdProperty.toString());
+        System.out.println(createdProperty.updateModel(Map.ofEntries(
+                //Map.entry(KEY, VALUE), //both key and value are String
+                Map.entry("userId", "3"),
+                Map.entry("locationId", "9"),
+                Map.entry("description", "Updated hotel."),
+                Map.entry("propertyTypeId", "5"),
+                Map.entry("imagePath", "https://picsum.photos/200/500.jpg"),
+                Map.entry("bedrooms", "150"),
+                Map.entry("size", "5000"),
+                Map.entry("pricePerNight", "799.99")
+        ), createdProperty.getId()));
 
         //Create new property and persist in database and print the model
         System.out.println(new Property().create(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "1"),
                 Map.entry("locationId", "2"),
-                Map.entry("ownerId", "7"),
                 Map.entry("description", "Sheraton Hotel, fancy shmancy  hotel, again, like a glass wall."),
                 Map.entry("propertyTypeId", "2"),
                 Map.entry("imagePath", "https://picsum.photos/100/600.jpg"),

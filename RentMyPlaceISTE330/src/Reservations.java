@@ -7,25 +7,25 @@ public class Reservations extends Model
 
    public int userId;
    public int propertyId;
-   public java.sql.Date from;
-   public java.sql.Date to;
+   public java.sql.Date arrivalDate;
+   public java.sql.Date departureDate;
    public double price;
 
    public Reservations() {
       super(table_name);
       this.userId = -1;
       this.propertyId = -1;
-      this.from = null;
-      this.to = null;
+      this.arrivalDate = null;
+      this.departureDate = null;
       this.price = -1;
    }
 
-   public Reservations(int userId, int propertyId, Date from, Date to, double price) {
+   public Reservations(int userId, int propertyId, Date arrivalDate, Date departureDate, double price) {
       super(table_name);
       this.userId = userId;
       this.propertyId = propertyId;
-      this.from = from;
-      this.to = to;
+      this.arrivalDate = arrivalDate;
+      this.departureDate = departureDate;
       this.price = price;
    }
 
@@ -34,8 +34,8 @@ public class Reservations extends Model
       return "Reservations{" +
               ", userId=" + userId +
               ", propertyId=" + propertyId +
-              ", from=" + from +
-              ", to=" + to +
+              ", arrivalDate=" + arrivalDate +
+              ", departureDate=" + departureDate +
               ", price=" + price +
               '}';
    }
@@ -56,20 +56,20 @@ public class Reservations extends Model
       this.propertyId = propertyId;
    }
 
-   public Date getFrom() {
-      return from;
+   public Date getArrivalDate() {
+      return arrivalDate;
    }
 
-   public void setFrom(Date from) {
-      this.from = from;
+   public void setarrivalDate(Date arrivalDate) {
+      this.arrivalDate = arrivalDate;
    }
 
-   public Date getTo() {
-      return to;
+   public Date getdepartureDate() {
+      return departureDate;
    }
 
-   public void setTo(Date to) {
-      this.to = to;
+   public void setdepartureDate(Date departureDate) {
+      this.departureDate = departureDate;
    }
 
    public double getPrice() {
@@ -85,8 +85,8 @@ public class Reservations extends Model
          switch (attribute) {
             case "userId" -> this.setUserId(Integer.parseInt(row.get(attribute)));
             case "propertyId" -> this.setPropertyId(Integer.parseInt(row.get(attribute)));
-            case "from" -> this.setFrom(Date.valueOf(row.get(attribute)));
-            case "to" -> this.setTo(Date.valueOf(row.get(attribute)));
+            case "arrivalDate" -> this.setarrivalDate(Date.valueOf(row.get(attribute)));
+            case "departureDate" -> this.setdepartureDate(Date.valueOf(row.get(attribute)));
             case "price" -> this.setPrice(Double.parseDouble(row.get(attribute)));
          }
       }

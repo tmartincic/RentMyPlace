@@ -10,7 +10,6 @@ public class Property extends Model
     public int id;
     public int userId;
     public int locationId;
-    public int ownerId;
     public String description;
     public int propertyTypeId;
     public String imagePath;
@@ -23,7 +22,6 @@ public class Property extends Model
         this.id = -1;
         this.userId = -1;
         this.locationId = -1;
-        this.ownerId = -1;
         this.description = null;
         this.propertyTypeId = -1;
         this.imagePath =  null;
@@ -32,12 +30,11 @@ public class Property extends Model
         this.pricePerNight = -1;
     }
 
-    public Property(int id, int userId, int locationId, int ownerId, String description, int propertyTypeId, String imagePath, int bedrooms, int size, double pricePerNight) {
+    public Property(int id, int userId, int locationId, String description, int propertyTypeId, String imagePath, int bedrooms, int size, double pricePerNight) {
         super(table_name);
         this.id = id;
         this.userId = userId;
         this.locationId = locationId;
-        this.ownerId = ownerId;
         this.description = description;
         this.propertyTypeId = propertyTypeId;
         this.imagePath = imagePath;
@@ -52,7 +49,6 @@ public class Property extends Model
                 "id=" + id +
                 ", userId=" + userId +
                 ", locationId=" + locationId +
-                ", ownerId=" + ownerId +
                 ", description='" + description + '\'' +
                 ", propertyTypeId=" + propertyTypeId +
                 ", imagePath='" + imagePath + '\'' +
@@ -84,14 +80,6 @@ public class Property extends Model
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
     }
 
     public String getDescription() {
@@ -148,7 +136,6 @@ public class Property extends Model
                 case "id": this.setId(Integer.parseInt(row.get(attribute))); break;
                 case "userId": this.setUserId(Integer.parseInt(row.get(attribute))); break;
                 case "locationId": this.setLocationId(Integer.parseInt(row.get(attribute))); break;
-                case "ownerId": this.setOwnerId(Integer.parseInt(row.get(attribute))); break;
                 case "description": this.setDescription(row.get(attribute)); break;
                 case "propertyTypeId": this.setPropertyTypeId(Integer.parseInt(row.get(attribute))); break;
                 case "imagePath": this.setImagePath(row.get(attribute)); break;
