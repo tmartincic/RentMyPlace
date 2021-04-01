@@ -63,8 +63,8 @@ public class Location extends Model
     public String toString() {
         return "Location{" +
                 ", id=" + id +
-                ", street=" + street +
-                ", city=" + city +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
                 ", zip=" + zip +
                 '}';
     }
