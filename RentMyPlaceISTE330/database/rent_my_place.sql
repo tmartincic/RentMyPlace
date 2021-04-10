@@ -63,7 +63,7 @@ CREATE TABLE `favorite` (
   `propertyId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `favorite` (`userId`, `propertyId`) VALUES
+INSERT INTO `favorite` (`id`, `userId`, `propertyId`) VALUES
 (1, 1, 2),
 (2, 1, 5),
 (3, 3, 10),
