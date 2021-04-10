@@ -58,17 +58,18 @@ INSERT INTO `contact` (`id`, `fullName`, `email`, `phone`, `locationId`) VALUES
 --
 
 CREATE TABLE `favorite` (
+  `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `propertyId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `favorite` (`userId`, `propertyId`) VALUES
-(1, 2),
-(1, 5),
-(3, 10),
-(4, 5),
-(2, 6),
-(5, 7);
+(1, 1, 2),
+(2, 1, 5),
+(3, 3, 10),
+(4, 4, 5),
+(5, 2, 6),
+(6, 5, 7);
 
 --
 -- Table structure for table `feature`
@@ -191,6 +192,7 @@ INSERT INTO `property_type` (`id`, `type`) VALUES
 --
 
 CREATE TABLE `reservations` (
+  `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `propertyId` int(11) NOT NULL,
   `arrivalDate` date NOT NULL,
@@ -198,8 +200,8 @@ CREATE TABLE `reservations` (
   `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `reservations` (`userId`, `propertyId`, `arrivalDate`, `departureDate`, `price`) VALUES
-(1, 5, '2021-03-03', '2021-03-10', 2000.00);
+INSERT INTO `reservations` (`id`, `userId`, `propertyId`, `arrivalDate`, `departureDate`, `price`) VALUES
+(1, 1, 5, '2021-03-03', '2021-03-10', 2000.00);
 
 --
 -- Table structure for table `user`
@@ -242,6 +244,7 @@ ALTER TABLE `contact`
 -- Indexes for table `favorite`
 --
 ALTER TABLE `favorite`
+  ADD PRIMARY KEY(`id`),
   ADD KEY `Favorite_fk0` (`userId`),
   ADD KEY `Favorite_fk1` (`propertyId`);
 
@@ -249,6 +252,12 @@ ALTER TABLE `favorite`
 -- Indexes for table `feature`
 --
 ALTER TABLE `feature`
+  ADD PRIMARY KEY (`id`);
+
+  --
+-- Indexes for table `reservations`
+--
+ALTER TABLE `reservations`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -346,47 +355,45 @@ ALTER TABLE `user`
 -- Constraints for table `contact`
 --
 ALTER TABLE `contact`
-  ADD CONSTRAINT `Contact_fk0` FOREIGN KEY (`locationId`) REFERENCES `location` (`id`);
+  ADD CONSTRAINT `Contact_fk0` FOREIGN KEY (`locationId`) REFERENCES `location` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `favorite`
 --
 ALTER TABLE `favorite`
-  ADD CONSTRAINT `Favorite_fk0` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `Favorite_fk1` FOREIGN KEY (`propertyId`) REFERENCES `property` (`id`);
+  ADD CONSTRAINT `Favorite_fk0` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)  ON DELETE CASCADE,
+  ADD CONSTRAINT `Favorite_fk1` FOREIGN KEY (`propertyId`) REFERENCES `property` (`id`)  ON DELETE CASCADE;
 
 --
 -- Constraints for table `featureproperty`
 --
 ALTER TABLE `feature_property`
-  ADD CONSTRAINT `FeatureProperty_fk0` FOREIGN KEY (`propertyId`) REFERENCES `property` (`id`),
-  ADD CONSTRAINT `FeatureProperty_fk1` FOREIGN KEY (`featureId`) REFERENCES `feature` (`id`);
+  ADD CONSTRAINT `FeatureProperty_fk0` FOREIGN KEY (`propertyId`) REFERENCES `property` (`id`)  ON DELETE CASCADE,
+  ADD CONSTRAINT `FeatureProperty_fk1` FOREIGN KEY (`featureId`) REFERENCES `feature` (`id`)  ON DELETE CASCADE;
 
 --
 -- Constraints for table `reservations`
 --
 ALTER TABLE `reservations`
-  ADD CONSTRAINT `Reservations_fk0` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `Reservations_fk1` FOREIGN KEY (`propertyId`) REFERENCES `property` (`id`);
+  ADD CONSTRAINT `Reservations_fk0` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)  ON DELETE CASCADE,
+  ADD CONSTRAINT `Reservations_fk1` FOREIGN KEY (`propertyId`) REFERENCES `property` (`id`)  ON DELETE CASCADE;
 
 --
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `User_fk0` FOREIGN KEY (`contactId`) REFERENCES `contact` (`id`),
-  ADD CONSTRAINT `User_fk1` FOREIGN KEY (`billingId`) REFERENCES `billing` (`id`);
+  ADD CONSTRAINT `User_fk0` FOREIGN KEY (`contactId`) REFERENCES `contact` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `User_fk1` FOREIGN KEY (`billingId`) REFERENCES `billing` (`id`)  ON DELETE CASCADE;
 
-ALTER TABLE `Property` 
-	ADD CONSTRAINT `Property_fk0` FOREIGN KEY (`userId`) REFERENCES `User`(`id`);
-ALTER TABLE `Property` 
-	ADD CONSTRAINT `Property_fk1` FOREIGN KEY (`locationId`) REFERENCES `location`(`id`);
-ALTER TABLE `Property` 
-	ADD CONSTRAINT `Property_fk2` FOREIGN KEY (`propertyTypeId`) REFERENCES `property_type`(`id`);
+ALTER TABLE `Property`
+	ADD CONSTRAINT `Property_fk0` FOREIGN KEY (`userId`) REFERENCES `User`(`id`)  ON DELETE CASCADE;
+ALTER TABLE `Property`
+	ADD CONSTRAINT `Property_fk1` FOREIGN KEY (`locationId`) REFERENCES `location`(`id`) ON DELETE CASCADE;
+ALTER TABLE `Property`
+	ADD CONSTRAINT `Property_fk2` FOREIGN KEY (`propertyTypeId`) REFERENCES `property_type`(`id`)  ON DELETE CASCADE;
 
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
