@@ -1,6 +1,11 @@
+import com.mysql.cj.protocol.Message;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,7 +26,7 @@ public class Init {
         ));*/
 
         //Create new property, persist in database and assign to variable
-        Property createdProperty = new Property().create(Map.ofEntries(
+       /*Property createdProperty = new Property().create(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "2"),
                 Map.entry("locationId", "9"),
@@ -31,7 +36,7 @@ public class Init {
                 Map.entry("bedrooms", "150"),
                 Map.entry("size", "5000"),
                 Map.entry("pricePerNight", "799.99")
-        ));
+        ));*/
         /*System.out.println(createdProperty.updateModel(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "3"),
@@ -44,7 +49,7 @@ public class Init {
                 Map.entry("pricePerNight", "799.99")
         ), createdProperty.getId()));*/
 
-        System.out.println(createdProperty.update(Map.ofEntries(
+       /*System.out.println(createdProperty.update(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "3"),
                 Map.entry("locationId", "7"),
@@ -54,8 +59,8 @@ public class Init {
                 Map.entry("bedrooms", "150"),
                 Map.entry("size", "5000"),
                 Map.entry("pricePerNight", "799.99")
-        )));
-        createdProperty.delete();
+        )));*/
+        //createdProperty.delete();
         //System.out.println("Updated property id: " + createdProperty.getId() + ", new description is " + createdProperty.getDescription());
 
         //System.out.println("deleting property: " + createdProperty.toString() + createdProperty.delete());
@@ -72,7 +77,7 @@ public class Init {
                 Map.entry("size", "250"),
                 Map.entry("pricePerNight", "599.99")
         )).toString());
-*/
+        */
         //Each query line can be comented out (EXCEPT get(), get() is manditory) and the query will still perform,
         //try commenting .select() and you will get all properties instead of selected ones, if orWhere is commented
         //we won't return apartment with size exactly 55. OrderBy can be commented out and we wont get any order.
@@ -89,15 +94,36 @@ public class Init {
             System.out.println(property.toString());
         }*/
 
-
-        System.out.println("\n### SELECT: ");
+        //TESTING DELETE METHOD
+        /*System.out.println("\n### SELECT: ");
         ArrayList<Feature> features_to_delete = new Feature()
                 .select(new String[]{"id", "feature"})
-                .where("id", "=", "5")
+                .where("id", "=", "2")
                 .get();
         for (Feature feature : features_to_delete) {
             System.out.println("Deleting: " + feature.toString());
             feature.delete();
-        }
+        }*/
+
+        //ADDING NEW USER TESTING
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Username: ");
+        String username = sc.nextLine();
+        System.out.print("Password: ");
+        String pass = sc.nextLine();
+
+       String convPass = Authentication.convert(pass);
+       System.out.println(new User().create(Map.ofEntries(
+                //Map.entry(KEY, VALUE), //both key and value are String
+                Map.entry("username", username),
+                Map.entry("password", convPass),
+                Map.entry("userType", "g"),
+                Map.entry("contactId", "2"),
+                Map.entry("billingId", "2")
+        )).toString());
+
+
+       //RentMyPlaceController controller = new RentMyPlaceController(new LoginGUI(), new Model());
+
     }
 }
