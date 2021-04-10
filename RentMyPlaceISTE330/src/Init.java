@@ -1,5 +1,8 @@
 import edu.rit.iste330.team7.RentMyPlace.controller.Authentication;
+import edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController;
+import edu.rit.iste330.team7.RentMyPlace.model.Model;
 import edu.rit.iste330.team7.RentMyPlace.model.User;
+import edu.rit.iste330.team7.RentMyPlace.view.LoginGUI;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -101,7 +104,7 @@ public class Init {
         }*/
 
         //ADDING NEW USER TESTING
-        Scanner sc = new Scanner(System.in);
+        /*Scanner sc = new Scanner(System.in);
         System.out.print("Username: ");
         String username = sc.nextLine();
         System.out.print("Password: ");
@@ -115,10 +118,9 @@ public class Init {
                 Map.entry("userType", "g"),
                 Map.entry("contactId", "2"),
                 Map.entry("billingId", "2")
-        )).toString());
+        )).toString());*/
 
-
-       //edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController controller = new edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController(new edu.rit.iste330.team7.RentMyPlace.view.LoginGUI(), new edu.rit.iste330.team7.RentMyPlace.model.Model());
+        RentMyPlaceController controller = new RentMyPlaceController(new LoginGUI(), new Model("user"));
 
     }
 }

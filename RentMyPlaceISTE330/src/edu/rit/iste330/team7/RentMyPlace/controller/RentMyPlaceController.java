@@ -2,17 +2,25 @@ package edu.rit.iste330.team7.RentMyPlace.controller;
 
 import edu.rit.iste330.team7.RentMyPlace.model.User;
 import edu.rit.iste330.team7.RentMyPlace.view.GUI;
+import edu.rit.iste330.team7.RentMyPlace.model.Model;
+import edu.rit.iste330.team7.RentMyPlace.view.LoginGUI;
+import java.awt.event.*;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class RentMyPlaceController {
-    /*edu.rit.iste330.team7.RentMyPlace.view.LoginGUI gui;
-    edu.rit.iste330.team7.RentMyPlace.model.Model model;
-    public edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController(edu.rit.iste330.team7.RentMyPlace.view.LoginGUI gui, edu.rit.iste330.team7.RentMyPlace.model.Model model){
+    LoginGUI gui;
+    Model model;
+    GUI mainGui = new GUI();
+    public RentMyPlaceController(LoginGUI gui, Model model){
         this.gui = gui;
         this.model = model;
-    }*/
+
+        gui.setVisible(true);
+        gui.addLoginListener(new LoginListener());
+    }
 
     public RentMyPlaceController(){}
 
@@ -35,24 +43,36 @@ public class RentMyPlaceController {
     public boolean autorization(User user){
         if(user.getUserType().equals("g")){
             System.out.println("Guest");
-            GUI gui = new GUI();
-            gui.setVisible(true);
 
-            gui.getjTabbedPane2().setEnabledAt(2,false);
-            gui.getjTabbedPane2().setEnabledAt(3,false);
-            gui.getjTabbedPane2().setEnabledAt(4,false);
+            mainGui.getjTabbedPane2().setEnabledAt(2,false);
+            mainGui.getjTabbedPane2().setEnabledAt(3,false);
+            mainGui.getjTabbedPane2().setEnabledAt(4,false);
         }
         else if(user.getUserType().equals("u")){
             System.out.println("User");
-            GUI gui = new GUI();
-            gui.setVisible(true);
         }
         else if(user.getUserType().equals("a")){
             System.out.println("Admin");
-            GUI gui = new GUI();
-            gui.setVisible(true);
         }
 
         return true;
+    }
+
+    class LoginListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            boolean authenticated = false;
+            authenticated = checkUser(gui.getjTextField1().getText(), gui.getjPasswordField1().getText());
+            if(authenticated){
+                JOptionPane jopMessage = new JOptionPane();
+                jopMessage.showMessageDialog(gui, "Log in successful.");
+                gui.dispose();
+                mainGui.setVisible(true);
+            }
+            else{
+                JOptionPane jopMessage = new JOptionPane();
+                jopMessage.showMessageDialog(gui, "Try again.");
+            }
+        }
     }
 }

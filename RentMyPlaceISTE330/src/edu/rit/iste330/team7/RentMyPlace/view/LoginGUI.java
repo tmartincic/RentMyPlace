@@ -3,6 +3,7 @@ package edu.rit.iste330.team7.RentMyPlace.view;
 import edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 public class LoginGUI extends javax.swing.JFrame {
 
@@ -51,11 +52,11 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         jButton1.setText("Log in");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        /*jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
-        });
+        });*/
 
         jLabel3.setText("Username");
 
@@ -114,38 +115,21 @@ public class LoginGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        boolean authenticated = false;
-        /*ArrayList<edu.rit.iste330.team7.RentMyPlace.model.User> all_users = new edu.rit.iste330.team7.RentMyPlace.model.User()
-                .select(new String[]{"id", "username", "password"})
-                .get();
-        for (edu.rit.iste330.team7.RentMyPlace.model.User user : all_users) {
-            if(user.authenticate(jTextField1.getText(), jPasswordField1.getText())) {
-                System.out.println("edu.rit.iste330.team7.RentMyPlace.model.User found: " + user.toString());
-                JOptionPane jopMessage = new JOptionPane();
-                jopMessage.showMessageDialog(this, "Log in successful.");
-                authenticated = true;
-                edu.rit.iste330.team7.RentMyPlace.view.GUI gui = new edu.rit.iste330.team7.RentMyPlace.view.GUI();
-                gui.setVisible(true);
-                this.dispose();
-                break;
-            }
-        }*/
-        RentMyPlaceController controller = new RentMyPlaceController();
-        authenticated = controller.checkUser(jTextField1.getText(), jPasswordField1.getText());
-        if(authenticated){
-            JOptionPane jopMessage = new JOptionPane();
-            jopMessage.showMessageDialog(this, "Log in successful.");
-            /*GUI gui = new GUI();
-            gui.setVisible(true);*/
-            this.dispose();
-        }
-        else{
-            JOptionPane jopMessage = new JOptionPane();
-            jopMessage.showMessageDialog(this, "Try again.");
-        }
+    public JPasswordField getjPasswordField1() {
+        return jPasswordField1;
     }
 
+    public JTextField getjTextField1() {
+        return jTextField1;
+    }
+
+    public JButton getjButton1() {
+        return jButton1;
+    }
+
+    public void addLoginListener(ActionListener ae){
+        jButton1.addActionListener(ae);
+    }
     /**
      * @param args the command line arguments
      */
@@ -174,11 +158,11 @@ public class LoginGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+       /* java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginGUI().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify                     
