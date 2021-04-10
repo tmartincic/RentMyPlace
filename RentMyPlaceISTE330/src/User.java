@@ -2,6 +2,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import com.mysql.cj.protocol.Message;
+import java.security.*;
 
 public class User extends Model
 {
@@ -147,5 +149,15 @@ public class User extends Model
     public User delete(){
         super.deleteModel(this.id);
         return this;
+    }
+
+    public boolean authenticate(String givenUsername, String givenPassword){
+        String convertedPassword = Authentication.convert(givenPassword);
+        if(this.username.equals(givenUsername) && this.password.equals(convertedPassword)){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
