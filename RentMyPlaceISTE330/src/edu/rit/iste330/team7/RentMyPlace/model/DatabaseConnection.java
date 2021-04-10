@@ -1,3 +1,4 @@
+package edu.rit.iste330.team7.RentMyPlace.model;
 
 import java.sql.*;
 import com.mysql.cj.jdbc.Driver;
@@ -21,7 +22,7 @@ public class DatabaseConnection {
     /*
         Execute SQL Querry and return resultSet or null
      */
-    public ResultSet getResultSet(String sql) throws DLException{
+    public ResultSet getResultSet(String sql) throws DLException {
 
         Statement stmt = null;
         ResultSet rs = null;
@@ -60,7 +61,7 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean connect() throws DLException{
+    public boolean connect() throws DLException {
         try{
             this.con= (Connection) DriverManager.getConnection(this.url, this.user, this.password);
             return true;
@@ -69,7 +70,7 @@ public class DatabaseConnection {
         }
     }
 
-    public boolean close() throws DLException{
+    public boolean close() throws DLException {
         try{
             this.con.close();
             return true;

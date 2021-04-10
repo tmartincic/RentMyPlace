@@ -1,3 +1,5 @@
+package edu.rit.iste330.team7.RentMyPlace.model;
+
 import java.io.*;
 import java.sql.*;
 

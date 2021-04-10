@@ -1,19 +1,14 @@
-import com.mysql.cj.protocol.Message;
+import edu.rit.iste330.team7.RentMyPlace.controller.Authentication;
+import edu.rit.iste330.team7.RentMyPlace.model.User;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Init {
     public static void main(String[] args){
 
         //Create new property and persist in database
-       /* new Property().create(Map.ofEntries(
+       /* new edu.rit.iste330.team7.RentMyPlace.model.Property().create(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "1"),
                 Map.entry("locationId", "5"),
@@ -26,7 +21,7 @@ public class Init {
         ));*/
 
         //Create new property, persist in database and assign to variable
-       /*Property createdProperty = new Property().create(Map.ofEntries(
+       /*edu.rit.iste330.team7.RentMyPlace.model.Property createdProperty = new edu.rit.iste330.team7.RentMyPlace.model.Property().create(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "2"),
                 Map.entry("locationId", "9"),
@@ -66,7 +61,7 @@ public class Init {
         //System.out.println("deleting property: " + createdProperty.toString() + createdProperty.delete());
 
         //Create new property and persist in database and print the model
-       /* System.out.println(new Property().create(Map.ofEntries(
+       /* System.out.println(new edu.rit.iste330.team7.RentMyPlace.model.Property().create(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "1"),
                 Map.entry("locationId", "2"),
@@ -82,25 +77,25 @@ public class Init {
         //try commenting .select() and you will get all properties instead of selected ones, if orWhere is commented
         //we won't return apartment with size exactly 55. OrderBy can be commented out and we wont get any order.
         //All of these functions can be chained in ANY order and NONE ARE MANDITORY. It can be as simply as
-        //new Property().get() to retrieve all properties from table "properties"
+        //new edu.rit.iste330.team7.RentMyPlace.model.Property().get() to retrieve all properties from table "properties"
         /*System.out.println("\n### SELECT: ");
-        ArrayList<Property> properties_from_labin = new Property()
+        ArrayList<edu.rit.iste330.team7.RentMyPlace.model.Property> properties_from_labin = new edu.rit.iste330.team7.RentMyPlace.model.Property()
                 .select(new String[]{"id", "description", "pricePerNight", "size", "bedrooms"})
                 .where("pricePerNight", "<", "800")
                 .orWhere("propertyTypeId", "=", "1")
                 .orderBy(new String[]{"pricePerNight", "size"}, "ASC")
                 .get();
-        for (Property property : properties_from_labin) {
+        for (edu.rit.iste330.team7.RentMyPlace.model.Property property : properties_from_labin) {
             System.out.println(property.toString());
         }*/
 
         //TESTING DELETE METHOD
         /*System.out.println("\n### SELECT: ");
-        ArrayList<Feature> features_to_delete = new Feature()
+        ArrayList<edu.rit.iste330.team7.RentMyPlace.model.Feature> features_to_delete = new edu.rit.iste330.team7.RentMyPlace.model.Feature()
                 .select(new String[]{"id", "feature"})
                 .where("id", "=", "2")
                 .get();
-        for (Feature feature : features_to_delete) {
+        for (edu.rit.iste330.team7.RentMyPlace.model.Feature feature : features_to_delete) {
             System.out.println("Deleting: " + feature.toString());
             feature.delete();
         }*/
@@ -123,7 +118,7 @@ public class Init {
         )).toString());
 
 
-       //RentMyPlaceController controller = new RentMyPlaceController(new LoginGUI(), new Model());
+       //edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController controller = new edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController(new edu.rit.iste330.team7.RentMyPlace.view.LoginGUI(), new edu.rit.iste330.team7.RentMyPlace.model.Model());
 
     }
 }

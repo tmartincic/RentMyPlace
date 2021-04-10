@@ -1,7 +1,9 @@
+package edu.rit.iste330.team7.RentMyPlace.view;
+
 public class GUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form GUI
+     * Creates new form edu.rit.iste330.team7.RentMyPlace.view.GUI
      */
     public GUI() {
         initComponents();
@@ -20,7 +22,7 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Main GUI");
+        jLabel1.setText("Main edu.rit.iste330.team7.RentMyPlace.view.GUI");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

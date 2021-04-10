@@ -1,12 +1,13 @@
+package edu.rit.iste330.team7.RentMyPlace.model;
+
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /*
     Class model represents a model, a table in the database.
-    Each class extending Model should set constant table_name to it's table name
+    Each class extending edu.rit.iste330.team7.RentMyPlace.model.Model should set constant table_name to it's table name
     and should start every constructor with super(table_name);
 
     Also, each class should @Override get() method and set attributes as their own
@@ -191,7 +192,7 @@ public class Model<T> {
     }
 
     /*
-        This method should be overriden in EACH class extending Model
+        This method should be overriden in EACH class extending edu.rit.iste330.team7.RentMyPlace.model.Model
         Exact structure is below, and should be used only as documented.
         Each class that extends model should @Override and copy this method,
         and refactor it as described below. This is due to SELECT statements being unpredictable and
@@ -200,15 +201,15 @@ public class Model<T> {
 
         NOTE: THIS METHOD SHOULD BE COPIED AND USED IN FOLLOWING MANNER:
         CHECKLIST TO IMPLEMENT METHOD:
-        If adding this to model Property, be sure to change ArrayList<THIS_CLASS> to ArrayList<Property>
-        If adding this to model Property, make sure method returns ArrayList<Property> as in "public function ArrayList<Property> get() {}"
-        If adding this to model Property, make sure you instantiate new Property() in first for loop
-        If adding this to model Property, make sure you set all attributes inside switch(): NOTE: ATTRIBUTE NAMES ARE COLUMN NAMES IN DATABASE eg. case "column1" : thisClass.setColumn1()
+        If adding this to model edu.rit.iste330.team7.RentMyPlace.model.Property, be sure to change ArrayList<THIS_CLASS> to ArrayList<edu.rit.iste330.team7.RentMyPlace.model.Property>
+        If adding this to model edu.rit.iste330.team7.RentMyPlace.model.Property, make sure method returns ArrayList<edu.rit.iste330.team7.RentMyPlace.model.Property> as in "public function ArrayList<edu.rit.iste330.team7.RentMyPlace.model.Property> get() {}"
+        If adding this to model edu.rit.iste330.team7.RentMyPlace.model.Property, make sure you instantiate new edu.rit.iste330.team7.RentMyPlace.model.Property() in first for loop
+        If adding this to model edu.rit.iste330.team7.RentMyPlace.model.Property, make sure you set all attributes inside switch(): NOTE: ATTRIBUTE NAMES ARE COLUMN NAMES IN DATABASE eg. case "column1" : thisClass.setColumn1()
         Once you added appropriate column to case, make sure to call appropriate setter and parse the input correctly
         row.get(attribute) piece of code is always the same and does not change
         Make sure you add break; to end of each case.
 
-        It's best to check how Property class has @Overridden this method and repeat
+        It's best to check how edu.rit.iste330.team7.RentMyPlace.model.Property class has @Overridden this method and repeat
      */
 
     public ArrayList<T> get() {

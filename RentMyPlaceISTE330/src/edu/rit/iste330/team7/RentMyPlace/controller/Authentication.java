@@ -1,3 +1,5 @@
+package edu.rit.iste330.team7.RentMyPlace.controller;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

@@ -1,10 +1,13 @@
-import javax.swing.*;
+package edu.rit.iste330.team7.RentMyPlace.controller;
+
+import edu.rit.iste330.team7.RentMyPlace.model.User;
+
 import java.util.ArrayList;
 
 public class RentMyPlaceController {
-    /*LoginGUI gui;
-    Model model;
-    public RentMyPlaceController(LoginGUI gui, Model model){
+    /*edu.rit.iste330.team7.RentMyPlace.view.LoginGUI gui;
+    edu.rit.iste330.team7.RentMyPlace.model.Model model;
+    public edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController(edu.rit.iste330.team7.RentMyPlace.view.LoginGUI gui, edu.rit.iste330.team7.RentMyPlace.model.Model model){
         this.gui = gui;
         this.model = model;
     }*/
@@ -18,7 +21,7 @@ public class RentMyPlaceController {
                 .get();
         for (User user : all_users) {
             if(user.authenticate(userName, password)) {
-                System.out.println("User found: " + user.toString());
+                System.out.println("edu.rit.iste330.team7.RentMyPlace.model.User found: " + user.toString());
                 authenticated = true;
                 break;
             }

@@ -1,10 +1,13 @@
+package edu.rit.iste330.team7.RentMyPlace.view;
+
+import edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController;
+
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class LoginGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form LoginGUI
+     * Creates new form edu.rit.iste330.team7.RentMyPlace.view.LoginGUI
      */
     public LoginGUI() {
         initComponents();
@@ -113,16 +116,16 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         boolean authenticated = false;
-        /*ArrayList<User> all_users = new User()
+        /*ArrayList<edu.rit.iste330.team7.RentMyPlace.model.User> all_users = new edu.rit.iste330.team7.RentMyPlace.model.User()
                 .select(new String[]{"id", "username", "password"})
                 .get();
-        for (User user : all_users) {
+        for (edu.rit.iste330.team7.RentMyPlace.model.User user : all_users) {
             if(user.authenticate(jTextField1.getText(), jPasswordField1.getText())) {
-                System.out.println("User found: " + user.toString());
+                System.out.println("edu.rit.iste330.team7.RentMyPlace.model.User found: " + user.toString());
                 JOptionPane jopMessage = new JOptionPane();
                 jopMessage.showMessageDialog(this, "Log in successful.");
                 authenticated = true;
-                GUI gui = new GUI();
+                edu.rit.iste330.team7.RentMyPlace.view.GUI gui = new edu.rit.iste330.team7.RentMyPlace.view.GUI();
                 gui.setVisible(true);
                 this.dispose();
                 break;
