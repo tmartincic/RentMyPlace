@@ -40,7 +40,7 @@ public class FeatureProperty extends Model
     @Override
     public String toString() {
         return "FeatureProperty{" +
-                ", propertyId=" + propertyId +
+                "propertyId=" + propertyId +
                 ", featureId=" + featureId +
                 '}';
     }
