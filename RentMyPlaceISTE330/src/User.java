@@ -127,4 +127,25 @@ public class User extends Model
         this.assign(row);
         return this;
     }
+
+    /**
+     * Updates User table, calls super updateModel() to perform needed task
+     *               <column, value>
+     * @param row Map<String, String>
+     * @return User
+     */
+    public User update(Map<String, String> row){
+        super.updateModel(row, this.id);
+        this.assign(row);
+        return this;
+    }
+
+    /**
+     * Deletes a User instance based on the id, calls super deleteModel() to perform needed task
+     * @return User
+     */
+    public User delete(){
+        super.deleteModel(this.id);
+        return this;
+    }
 }

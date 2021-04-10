@@ -8,7 +8,7 @@ public class Init {
     public static void main(String[] args){
 
         //Create new property and persist in database
-        new Property().create(Map.ofEntries(
+       /* new Property().create(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "1"),
                 Map.entry("locationId", "5"),
@@ -18,21 +18,21 @@ public class Init {
                 Map.entry("bedrooms", "15"),
                 Map.entry("size", "500"),
                 Map.entry("pricePerNight", "1099")
-        ));
+        ));*/
 
         //Create new property, persist in database and assign to variable
         Property createdProperty = new Property().create(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "2"),
-                Map.entry("locationId", "8"),
-                Map.entry("description", "Panorama Hotel, center of Zagreb, big glass wall building."),
+                Map.entry("locationId", "9"),
+                Map.entry("description", "A hotel."),
                 Map.entry("propertyTypeId", "2"),
                 Map.entry("imagePath", "https://picsum.photos/200/500.jpg"),
                 Map.entry("bedrooms", "150"),
                 Map.entry("size", "5000"),
                 Map.entry("pricePerNight", "799.99")
         ));
-        System.out.println(createdProperty.updateModel(Map.ofEntries(
+        /*System.out.println(createdProperty.updateModel(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "3"),
                 Map.entry("locationId", "9"),
@@ -42,10 +42,26 @@ public class Init {
                 Map.entry("bedrooms", "150"),
                 Map.entry("size", "5000"),
                 Map.entry("pricePerNight", "799.99")
-        ), createdProperty.getId()));
+        ), createdProperty.getId()));*/
+
+        System.out.println(createdProperty.update(Map.ofEntries(
+                //Map.entry(KEY, VALUE), //both key and value are String
+                Map.entry("userId", "3"),
+                Map.entry("locationId", "7"),
+                Map.entry("description", "A hotel updated."),
+                Map.entry("propertyTypeId", "5"),
+                Map.entry("imagePath", "https://picsum.photos/200/500.jpg"),
+                Map.entry("bedrooms", "150"),
+                Map.entry("size", "5000"),
+                Map.entry("pricePerNight", "799.99")
+        )));
+        createdProperty.delete();
+        //System.out.println("Updated property id: " + createdProperty.getId() + ", new description is " + createdProperty.getDescription());
+
+        //System.out.println("deleting property: " + createdProperty.toString() + createdProperty.delete());
 
         //Create new property and persist in database and print the model
-        System.out.println(new Property().create(Map.ofEntries(
+       /* System.out.println(new Property().create(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "1"),
                 Map.entry("locationId", "2"),
@@ -56,13 +72,13 @@ public class Init {
                 Map.entry("size", "250"),
                 Map.entry("pricePerNight", "599.99")
         )).toString());
-
+*/
         //Each query line can be comented out (EXCEPT get(), get() is manditory) and the query will still perform,
         //try commenting .select() and you will get all properties instead of selected ones, if orWhere is commented
         //we won't return apartment with size exactly 55. OrderBy can be commented out and we wont get any order.
         //All of these functions can be chained in ANY order and NONE ARE MANDITORY. It can be as simply as
         //new Property().get() to retrieve all properties from table "properties"
-        System.out.println("\n### SELECT: ");
+        /*System.out.println("\n### SELECT: ");
         ArrayList<Property> properties_from_labin = new Property()
                 .select(new String[]{"id", "description", "pricePerNight", "size", "bedrooms"})
                 .where("pricePerNight", "<", "800")
@@ -71,6 +87,17 @@ public class Init {
                 .get();
         for (Property property : properties_from_labin) {
             System.out.println(property.toString());
+        }*/
+
+
+        System.out.println("\n### SELECT: ");
+        ArrayList<Feature> features_to_delete = new Feature()
+                .select(new String[]{"id", "feature"})
+                .where("id", "=", "5")
+                .get();
+        for (Feature feature : features_to_delete) {
+            System.out.println("Deleting: " + feature.toString());
+            feature.delete();
         }
     }
 }

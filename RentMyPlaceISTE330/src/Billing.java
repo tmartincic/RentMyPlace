@@ -117,4 +117,25 @@ public class Billing extends Model{
         this.assign(row);
         return this;
     }
+
+    /**
+     * Updates Billing table, calls super updateModel() to perform needed task
+     *               <column, value>
+     * @param row Map<String, String>
+     * @return Billing
+     */
+    public Billing update(Map<String, String> row){
+        super.updateModel(row, this.id);
+        this.assign(row);
+        return this;
+    }
+
+    /**
+     * Deletes a Billing instance based on the id, calls super deleteModel() to perform needed task
+     * @return Billing
+     */
+    public Billing delete(){
+        super.deleteModel(this.id);
+        return this;
+    }
 }

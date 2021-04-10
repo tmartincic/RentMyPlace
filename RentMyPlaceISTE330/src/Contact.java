@@ -115,4 +115,25 @@ public class Contact extends Model
         this.assign(row);
         return this;
     }
+
+    /**
+     * Updates Contact table, calls super updateModel() to perform needed task
+     *               <column, value>
+     * @param row Map<String, String>
+     * @return Contact
+     */
+    public Contact update(Map<String, String> row){
+        super.updateModel(row, this.id);
+        this.assign(row);
+        return this;
+    }
+
+    /**
+     * Deletes a Contact instance based on the id, calls super deleteModel() to perform needed task
+     * @return Contact
+     */
+    public Contact delete(){
+        super.deleteModel(this.id);
+        return this;
+    }
 }

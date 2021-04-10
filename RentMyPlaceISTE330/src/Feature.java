@@ -49,8 +49,8 @@ public class Feature extends Model
     public Feature assign(Map<String, String> row) {
         for (String attribute: row.keySet()) {
             switch (attribute) {
-                case "id" -> this.setId(Integer.parseInt(row.get(attribute)));
-                case "feature" -> this.setFeature(row.get(attribute));
+                case "id" : this.setId(Integer.parseInt(row.get(attribute))); break;
+                case "feature" : this.setFeature(row.get(attribute)); break;
             }
         }
         return this;
@@ -72,6 +72,27 @@ public class Feature extends Model
         int id = super.createModel(row);
         setId(id);
         this.assign(row);
+        return this;
+    }
+
+    /**
+     * Updates Feature table, calls super updateModel() to perform needed task
+     *               <column, value>
+     * @param row Map<String, String>
+     * @return Feature
+     */
+    public Feature update(Map<String, String> row){
+        super.updateModel(row, this.id);
+        this.assign(row);
+        return this;
+    }
+
+    /**
+     * Deletes a Feature instance based on the id, calls super deleteModel() to perform needed task
+     * @return Feature
+     */
+    public Feature delete(){
+        super.deleteModel(this.id);
         return this;
     }
 }

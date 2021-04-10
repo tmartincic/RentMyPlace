@@ -167,4 +167,25 @@ public class Property extends Model
         this.assign(row);
         return this;
     }
+
+    /**
+     * Updates Property table, calls super updateModel() to perform needed task
+     *               <column, value>
+     * @param row Map<String, String>
+     * @return Property
+     */
+    public Property update(Map<String, String> row){
+        super.updateModel(row, this.id);
+        this.assign(row);
+        return this;
+    }
+
+    /**
+     * Deletes a Property instance based on the id, calls super deleteModel() to perform needed task
+     * @return Property
+     */
+    public Property delete(){
+        super.deleteModel(this.id);
+        return this;
+    }
 }

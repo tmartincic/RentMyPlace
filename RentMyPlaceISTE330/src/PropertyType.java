@@ -73,4 +73,25 @@ public class PropertyType extends Model
         this.assign(row);
         return this;
     }
+
+    /**
+     * Updates PropertyType table, calls super updateModel() to perform needed task
+     *               <column, value>
+     * @param row Map<String, String>
+     * @return PropertyType
+     */
+    public PropertyType update(Map<String, String> row){
+        super.updateModel(row, this.id);
+        this.assign(row);
+        return this;
+    }
+
+    /**
+     * Deletes a PropertyType instance based on the id, calls super deleteModel() to perform needed task
+     * @return PropertyType
+     */
+    public PropertyType delete(){
+        super.deleteModel(this.id);
+        return this;
+    }
 }

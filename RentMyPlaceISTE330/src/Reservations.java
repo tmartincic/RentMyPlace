@@ -5,6 +5,7 @@ public class Reservations extends Model
 {
    private static String table_name = "reservations";    
 
+   public int id;
    public int userId;
    public int propertyId;
    public java.sql.Date arrivalDate;
@@ -13,6 +14,7 @@ public class Reservations extends Model
 
    public Reservations() {
       super(table_name);
+      this.id = -1;
       this.userId = -1;
       this.propertyId = -1;
       this.arrivalDate = null;
@@ -20,8 +22,9 @@ public class Reservations extends Model
       this.price = -1;
    }
 
-   public Reservations(int userId, int propertyId, Date arrivalDate, Date departureDate, double price) {
+   public Reservations(int id, int userId, int propertyId, Date arrivalDate, Date departureDate, double price) {
       super(table_name);
+      this.id = id;
       this.userId = userId;
       this.propertyId = propertyId;
       this.arrivalDate = arrivalDate;
@@ -32,12 +35,21 @@ public class Reservations extends Model
    @Override
    public String toString() {
       return "Reservations{" +
+              "id=" + id +
               ", userId=" + userId +
               ", propertyId=" + propertyId +
               ", arrivalDate=" + arrivalDate +
               ", departureDate=" + departureDate +
               ", price=" + price +
               '}';
+   }
+
+   public int getId() {
+      return id;
+   }
+
+   public void setId(int id) {
+      this.id = id;
    }
 
    public int getUserId() {
@@ -83,6 +95,7 @@ public class Reservations extends Model
    public Reservations assign(Map<String, String> row) {
       for (String attribute: row.keySet()) {
          switch (attribute) {
+            case "id" -> this.setId(Integer.parseInt(row.get(attribute)));
             case "userId" -> this.setUserId(Integer.parseInt(row.get(attribute)));
             case "propertyId" -> this.setPropertyId(Integer.parseInt(row.get(attribute)));
             case "arrivalDate" -> this.setarrivalDate(Date.valueOf(row.get(attribute)));
@@ -113,4 +126,24 @@ public class Reservations extends Model
       return this;
    }
 
+   /**
+    * Updates Reservations table, calls super updateModel() to perform needed task
+    *               <column, value>
+    * @param row Map<String, String>
+    * @return Reservations
+    */
+   public Reservations update(Map<String, String> row){
+      super.updateModel(row, this.id);
+      this.assign(row);
+      return this;
+   }
+
+   /**
+    * Deletes a Reservations instance based on the id, calls super deleteModel() to perform needed task
+    * @return Reservations
+    */
+   public Reservations delete(){
+      super.deleteModel(this.id);
+      return this;
+   }
 }

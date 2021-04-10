@@ -99,4 +99,25 @@ public class Location extends Model
         this.assign(row);
         return this;
     }
+
+    /**
+     * Updates Location table, calls super updateModel() to perform needed task
+     *               <column, value>
+     * @param row Map<String, String>
+     * @return Location
+     */
+    public Location update(Map<String, String> row){
+        super.updateModel(row, this.id);
+        this.assign(row);
+        return this;
+    }
+
+    /**
+     * Deletes a Location instance based on the id, calls super deleteModel() to perform needed task
+     * @return Location
+     */
+    public Location delete(){
+        super.deleteModel(this.id);
+        return this;
+    }
 }
