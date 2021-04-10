@@ -41,7 +41,7 @@ public class Feature extends Model
     @Override
     public String toString() {
         return "Feature{" +
-                ", id=" + id +
+                "id=" + id +
                 ", feature='" + feature + '\'' +
                 '}';
     }

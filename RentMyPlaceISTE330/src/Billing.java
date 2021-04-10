@@ -35,6 +35,18 @@ public class Billing extends Model{
         this.ownerName = ownerName;
     }
 
+    @Override
+    public String toString(){
+        return "Favorite{" +
+                "id=" + id +
+                ", billingAddress='" + billingAddress + '\'' +
+                ", creditCardNum=" + creditCardNum +
+                ", CVC=" + CVC +
+                ", expireDate=" + expireDate +
+                ", ownerName='" + ownerName + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
@@ -97,7 +109,6 @@ public class Billing extends Model{
         return this;
     }
 
-    //TODO
     @Override
     public ArrayList<Billing> get(){
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();

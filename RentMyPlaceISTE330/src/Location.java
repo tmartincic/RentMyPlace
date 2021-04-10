@@ -62,7 +62,7 @@ public class Location extends Model
     @Override
     public String toString() {
         return "Location{" +
-                ", id=" + id +
+                "id=" + id +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", zip=" + zip +

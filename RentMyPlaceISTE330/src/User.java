@@ -86,7 +86,7 @@ public class User extends Model
     @Override
     public String toString() {
         return "User{" +
-                ", id=" + id +
+                "id=" + id +
                 ", username=" + username +
                 ", password=" + password +
                 ", userType=" + userType +

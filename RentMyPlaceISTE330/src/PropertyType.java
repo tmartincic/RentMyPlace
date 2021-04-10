@@ -40,7 +40,7 @@ public class PropertyType extends Model
     @Override
     public String toString() {
         return "PropertyType{" +
-                ", id=" + id +
+                "id=" + id +
                 ", type='" + type + '\'' +
                 '}';
     }
