@@ -136,8 +136,8 @@ public class LoginGUI extends javax.swing.JFrame {
         if(authenticated){
             JOptionPane jopMessage = new JOptionPane();
             jopMessage.showMessageDialog(this, "Log in successful.");
-            GUI gui = new GUI();
-            gui.setVisible(true);
+            /*GUI gui = new GUI();
+            gui.setVisible(true);*/
             this.dispose();
         }
         else{

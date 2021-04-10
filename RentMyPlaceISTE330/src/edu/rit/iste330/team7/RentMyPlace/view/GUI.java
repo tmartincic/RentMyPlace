@@ -1,5 +1,7 @@
 package edu.rit.iste330.team7.RentMyPlace.view;
 
+import javax.swing.*;
+
 public class GUI extends javax.swing.JFrame {
 
     /**
@@ -286,6 +288,9 @@ public class GUI extends javax.swing.JFrame {
         });
     }
 
+    public JTabbedPane getjTabbedPane2() {
+        return jTabbedPane2;
+    }
     // Variables declaration - do not modify
     private javax.swing.JPanel favoritesPanel;
     private javax.swing.JButton jButton1;
