@@ -17,7 +17,17 @@ public class DatabaseConnection {
 //    Username: sql11405004
 //    Password: zabN2sdjHZ
 //    Port: 3306
+    //ONLINE DATABASE CONNECTION
+    private static String url = "";
+    private static String host = "sql11.freemysqlhosting.net";
+    private static String port = "3306";
+    private static String database = "sql11405004";
+    private static String user = "sql11405004";
+    private static String password = "zabN2sdjHZ";
+    private Connection con;
 
+    // LOCAL DATABASE CONNECTION
+    /*
     private static String url = "";
     private static String host = "localhost";
     private static String port = "3306";
@@ -25,7 +35,7 @@ public class DatabaseConnection {
     private static String user = "root";
     private static String password = "";
     private Connection con;
-
+*/
     public DatabaseConnection() { generateUrl(); }
 
     /*
