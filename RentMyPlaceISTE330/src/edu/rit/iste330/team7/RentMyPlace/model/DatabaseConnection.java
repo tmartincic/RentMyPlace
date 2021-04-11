@@ -62,7 +62,6 @@ public class DatabaseConnection {
             if(!values.isEmpty()){
                 for(int i=0; i<values.size(); i++) stmt.setObject((i+1), values.get(i));
             }
-            System.out.println(stmt);
             stmt.execute();
             ResultSet rs = stmt.getGeneratedKeys();
             if(rs.next()) {
