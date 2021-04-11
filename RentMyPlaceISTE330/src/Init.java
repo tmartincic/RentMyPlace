@@ -4,38 +4,56 @@ import edu.rit.iste330.team7.RentMyPlace.model.Model;
 import edu.rit.iste330.team7.RentMyPlace.model.User;
 import edu.rit.iste330.team7.RentMyPlace.view.LoginGUI;
 
-import java.util.Map;
+import java.util.*;
 import java.util.Scanner;
 
 public class Init {
     public static void main(String[] args){
 
         //Create new property and persist in database
-       /* new edu.rit.iste330.team7.RentMyPlace.model.Property().create(Map.ofEntries(
-                //Map.entry(KEY, VALUE), //both key and value are String
-                Map.entry("userId", "1"),
-                Map.entry("locationId", "5"),
-                Map.entry("description", "Kumlerovi dvori, just above Zagreb."),
-                Map.entry("propertyTypeId", "5"),
-                Map.entry("imagePath", "https://picsum.photos/200/300.jpg"),
-                Map.entry("bedrooms", "15"),
-                Map.entry("size", "500"),
-                Map.entry("pricePerNight", "1099")
-        ));*/
+//        new edu.rit.iste330.team7.RentMyPlace.model.Property().create(Map.ofEntries(
+//                //Map.entry(KEY, VALUE), //both key and value are String
+//                Map.entry("userId", "1"),
+//                Map.entry("locationId", "5"),
+//                Map.entry("description", "Kumlerovi dvori, just above Zagreb."),
+//                Map.entry("propertyTypeId", "5"),
+//                Map.entry("imagePath", "https://picsum.photos/200/300.jpg"),
+//                Map.entry("bedrooms", "15"),
+//                Map.entry("size", "500"),
+//                Map.entry("pricePerNight", "1099")
+//        ));
+//
+//        //Create new property, persist in database and assign to variable
+//       edu.rit.iste330.team7.RentMyPlace.model.Property createdProperty = new edu.rit.iste330.team7.RentMyPlace.model.Property().create(Map.ofEntries(
+//                //Map.entry(KEY, VALUE), //both key and value are String
+//                Map.entry("userId", "2"),
+//                Map.entry("locationId", "9"),
+//                Map.entry("description", "A hotel. '; DROP TABLE user; --"),
+//                Map.entry("propertyTypeId", "2"),
+//                Map.entry("imagePath", "https://picsum.photos/200/500.jpg"),
+//                Map.entry("bedrooms", "150"),
+//                Map.entry("size", "5000"),
+//                Map.entry("pricePerNight", "799.99")
+//        ));
+//
+//        System.out.println("\n### SELECT: ");
+        ArrayList<edu.rit.iste330.team7.RentMyPlace.model.Property> properties_from_labin = new edu.rit.iste330.team7.RentMyPlace.model.Property()
+                .where("id", "<", "25")
+                .get();
 
-        //Create new property, persist in database and assign to variable
-       /*edu.rit.iste330.team7.RentMyPlace.model.Property createdProperty = new edu.rit.iste330.team7.RentMyPlace.model.Property().create(Map.ofEntries(
-                //Map.entry(KEY, VALUE), //both key and value are String
+        properties_from_labin.get(1).update(Map.ofEntries(
                 Map.entry("userId", "2"),
                 Map.entry("locationId", "9"),
-                Map.entry("description", "A hotel."),
+                Map.entry("description", "A TEEEHEEEEEEEEEEE"),
                 Map.entry("propertyTypeId", "2"),
-                Map.entry("imagePath", "https://picsum.photos/200/500.jpg"),
-                Map.entry("bedrooms", "150"),
-                Map.entry("size", "5000"),
-                Map.entry("pricePerNight", "799.99")
-        ));*/
-        /*System.out.println(createdProperty.updateModel(Map.ofEntries(
+                Map.entry("imagePath", "https://picsum.photos/250/500.jpg"),
+                Map.entry("bedrooms", "20"),
+                Map.entry("size", "500"),
+                Map.entry("pricePerNight", "123")
+        ));
+        properties_from_labin.get(0).delete();
+
+       /*System.out.println(createdProperty.updateModel(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
                 Map.entry("userId", "3"),
                 Map.entry("locationId", "9"),
@@ -81,16 +99,7 @@ public class Init {
         //we won't return apartment with size exactly 55. OrderBy can be commented out and we wont get any order.
         //All of these functions can be chained in ANY order and NONE ARE MANDITORY. It can be as simply as
         //new edu.rit.iste330.team7.RentMyPlace.model.Property().get() to retrieve all properties from table "properties"
-        /*System.out.println("\n### SELECT: ");
-        ArrayList<edu.rit.iste330.team7.RentMyPlace.model.Property> properties_from_labin = new edu.rit.iste330.team7.RentMyPlace.model.Property()
-                .select(new String[]{"id", "description", "pricePerNight", "size", "bedrooms"})
-                .where("pricePerNight", "<", "800")
-                .orWhere("propertyTypeId", "=", "1")
-                .orderBy(new String[]{"pricePerNight", "size"}, "ASC")
-                .get();
-        for (edu.rit.iste330.team7.RentMyPlace.model.Property property : properties_from_labin) {
-            System.out.println(property.toString());
-        }*/
+
 
         //TESTING DELETE METHOD
         /*System.out.println("\n### SELECT: ");
@@ -121,6 +130,5 @@ public class Init {
         )).toString());*/
 
         RentMyPlaceController controller = new RentMyPlaceController(new LoginGUI(), new Model("user"));
-
     }
 }

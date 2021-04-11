@@ -152,12 +152,18 @@ public class Property extends Model
         ArrayList<HashMap<String,String>> list_of_rows = super.getData();
         ArrayList<Property> properties = new ArrayList<Property>();
 
-        for (HashMap<String, String> row: list_of_rows) {
-            Property property = new Property();
-            property.assign(row);
-            properties.add(property);
+        try{
+            for (HashMap<String, String> row: list_of_rows) {
+                Property property = new Property();
+                property.assign(row);
+                properties.add(property);
+            }
+            return properties;
         }
-        return properties;
+        catch (NullPointerException npe) {
+            System.out.println("0 rows retrieved from the database: "+sqlToString());
+        }
+        return null;
     }
 
     //persist to database, assign variables (without performing another select query)

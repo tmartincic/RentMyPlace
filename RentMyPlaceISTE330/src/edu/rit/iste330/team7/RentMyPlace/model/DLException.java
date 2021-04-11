@@ -32,6 +32,10 @@ public class DLException extends Exception{
      */
     public void log(SQLSyntaxErrorException sqlException, String stmt){
         String exceptionOutput = "Query: " + stmt + "\nSQL state code: " + sqlException.getSQLState() + "\nError code: " + sqlException.getErrorCode() + "\nCause: " + sqlException.getCause() + "\nMessage: " + sqlException.getMessage() + "\n";
+        StackTraceElement item = sqlException.getStackTrace()[0];
+        exceptionOutput += "CLASS: "+item.getClassName()+"\n";
+        exceptionOutput += "LINE: "+item.getLineNumber()+"\n";
+
 
         this.write(exceptionOutput);
     }
@@ -42,6 +46,10 @@ public class DLException extends Exception{
      */
     public void log(SQLException sqlException){
         String exceptionOutput = "SQL state code: " + sqlException.getSQLState() + "\nError code: " + sqlException.getErrorCode() + "\nCause: " + sqlException.getCause() + "\nMessage: " + sqlException.getMessage() + "\n";
+        StackTraceElement item = sqlException.getStackTrace()[0];
+        exceptionOutput += "CLASS: "+item.getClassName()+"\n";
+        exceptionOutput += "LINE: "+item.getLineNumber()+"\n";
+
 
         this.write(exceptionOutput);
     }
@@ -51,7 +59,10 @@ public class DLException extends Exception{
      * @param exception Exception
      */
     public void log(Exception exception){
-        String exceptionOutput = "Cause: " + exception.getCause() + " \nMessage: " + exception.getMessage() + "\n";
+        String exceptionOutput = "Cause: " + exception.getCause() + " \nMessage: " + exception.getMessage() + " \nMessage: " + exception.getStackTrace()+"\n";
+        StackTraceElement item = exception.getStackTrace()[0];
+        exceptionOutput += "CLASS: "+item.getClassName()+"\n";
+        exceptionOutput += "LINE: "+item.getLineNumber()+"\n";
 
         this.write(exceptionOutput);
     }

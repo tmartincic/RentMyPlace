@@ -2,6 +2,8 @@ package edu.rit.iste330.team7.RentMyPlace.model;
 
 import java.sql.*;
 import com.mysql.cj.jdbc.Driver;
+
+import javax.lang.model.type.PrimitiveType;
 import java.util.*;
 
 public class DatabaseConnection {
@@ -9,6 +11,13 @@ public class DatabaseConnection {
     /*
         DATABASE CREDENTIAL CONSTANTS
      */
+// Online database credentials
+//    Host: sql11.freemysqlhosting.net
+//    Database: sql11405004
+//    Username: sql11405004
+//    Password: zabN2sdjHZ
+//    Port: 3306
+
     private static String url = "";
     private static String host = "localhost";
     private static String port = "3306";
@@ -22,14 +31,17 @@ public class DatabaseConnection {
     /*
         Execute SQL Querry and return resultSet or null
      */
-    public ResultSet getResultSet(String sql) throws DLException {
+    public ResultSet getResultSet(String sql, ArrayList<Object> values) throws DLException {
 
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet rs = null;
-
         try{
-            stmt = (Statement) this.getCon().createStatement();
-            return stmt.executeQuery(sql);
+            stmt = (PreparedStatement) this.getCon().prepareStatement(sql);
+            if(!values.isEmpty()){
+                for(int i=0; i<values.size(); i++) stmt.setObject((i+1), values.get(i));
+            }
+
+            return stmt.executeQuery();
         }
         catch (SQLSyntaxErrorException sqlse) {
             throw new DLException(sqlse, sql);
@@ -43,9 +55,14 @@ public class DatabaseConnection {
         Execute SQL Query
         Returns ID of inserted column
      */
-    public int executeQuery(String sql) throws DLException {
+    public int executeQuery(String sql, ArrayList<Object> values) throws DLException {
         try{
             PreparedStatement stmt = (PreparedStatement) this.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            if(!values.isEmpty()){
+                for(int i=0; i<values.size(); i++) stmt.setObject((i+1), values.get(i));
+            }
+            System.out.println(stmt);
             stmt.execute();
             ResultSet rs = stmt.getGeneratedKeys();
             if(rs.next()) {
