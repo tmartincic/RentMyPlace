@@ -149,7 +149,8 @@ public class LoginGUI extends javax.swing.JFrame {
                                 .addComponent(jButton2)
                                 .addGap(35, 35, 35))
         );
-
+        setPreferredSize(new java.awt.Dimension(635, 543));
+        setResizable(false);
         pack();
     }// </editor-fold>                        
 
