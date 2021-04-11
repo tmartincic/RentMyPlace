@@ -177,6 +177,10 @@ public class LoginGUI extends javax.swing.JFrame {
         jButton1.addActionListener(ae);
     }
 
+    public void addRegisterListener(ActionListener ae){
+        jButton2.addActionListener(ae);
+    }
+
     public void addGuestListener(ActionListener ae) {
         jButton3.addActionListener(ae);
     }
