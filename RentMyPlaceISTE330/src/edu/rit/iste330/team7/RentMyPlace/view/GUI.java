@@ -3,6 +3,7 @@ package edu.rit.iste330.team7.RentMyPlace.view;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -122,11 +123,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel11.setText("<price>");
 
         jButton3.setText("See more details...");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         jLabel12.setBackground(new java.awt.Color(153, 153, 153));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -188,11 +184,6 @@ public class GUI extends javax.swing.JFrame {
         jButton1.setText("PREV");
 
         jButton2.setText("NEXT");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout rentPanelLayout = new javax.swing.GroupLayout(rentPanel);
         rentPanel.setLayout(rentPanelLayout);
@@ -342,7 +333,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Search by location:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Price (ascending)", "Price (descending)" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Price (ascending)", "Price (descending)"}));
 
         jButton5.setText(">");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -418,7 +409,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel7.setText("FAVORITES CONTAINER");
         favoritesPanel.add(jLabel7, java.awt.BorderLayout.PAGE_START);
 
-        jTabbedPane2.addTab(tabStyle1 + "FAVORITES" + tabStyle2, bufferImageIcon(this.createURL("https://cdn.onlinewebfonts.com/svg/img_35707.png"), 25, 25),  favoritesPanel);
+        jTabbedPane2.addTab(tabStyle1 + "FAVORITES" + tabStyle2, bufferImageIcon(this.createURL("https://cdn.onlinewebfonts.com/svg/img_35707.png"), 25, 25), favoritesPanel);
 
         settingsPanel.setBackground(new java.awt.Color(188, 205, 213));
 
@@ -665,12 +656,12 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    public void addjButton2EventListener(ActionListener ae) {
+        this.getjButton2().addActionListener(ae);
     }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    public void addjButton1EventListener(ActionListener ae) {
+        this.getjButton1().addActionListener(ae);
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -745,14 +736,24 @@ public class GUI extends javax.swing.JFrame {
         return jLabel9;
     }
 
+    public JButton getjButton1() {
+        return jButton1;
+    }
+
+    public JButton getjButton2() {
+        return jButton2;
+    }
+
+    public JButton getjButton3() {
+        return jButton3;
+    }
     /*THINK ABOUT RELOCATION OF THESE METHODS*/
 
     /**
-     *
      * @param link
      * @return
      */
-    public URL createURL(String link){
+    public URL createURL(String link) {
         URL url = null;
         try {
             url = new URL(link);
@@ -763,13 +764,12 @@ public class GUI extends javax.swing.JFrame {
     }
 
     /**
-     *
      * @param url
      * @param width
      * @param height
      * @return
      */
-    public ImageIcon bufferImageIcon(URL url, int width, int height){
+    public ImageIcon bufferImageIcon(URL url, int width, int height) {
         BufferedImage image = null;
         try {
             image = ImageIO.read(this.createURL(url.toString()));
