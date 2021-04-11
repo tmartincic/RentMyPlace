@@ -42,12 +42,10 @@ public class GUI extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        /////
         searchScrollPane = new javax.swing.JScrollPane();
         searchPanel = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        ////
         jLabel23 = new javax.swing.JLabel();
         jLabelSearchInputName = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -64,7 +62,6 @@ public class GUI extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         myRentalsScrollPane = new javax.swing.JScrollPane();
         myRentalsPanel = new javax.swing.JPanel();
-        ////////
         jLabel33 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -115,7 +112,6 @@ public class GUI extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         favoritesScrollPane = new javax.swing.JScrollPane();
         favoritesPanel = new javax.swing.JPanel();
-        ///
         jLabel49 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
