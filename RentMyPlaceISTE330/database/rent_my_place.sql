@@ -218,9 +218,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `password`, `userType`, `contactId`, `billingId`) VALUES
 (1, 'ime', '8aa87050051efe26091a13dbfdf901c6', 'a', 1, 1),
-(2, 'user123', '827ccb0eea8a706c4c34a16891f84e7b', 'g', 2, 2),
+(2, 'user123', '827ccb0eea8a706c4c34a16891f84e7b', 'u', 2, 2),
 (3, 'someUser', '32250170a0dca92d53ec9624f336ca24', 'u', 3, 3),
-(4, 'anotherUser', '4f351e69c91975f5532533db26492bd7', 'g', 4, 4),
+(4, 'anotherUser', '4f351e69c91975f5532533db26492bd7', 'a', 4, 4),
 (5, 'aUser', 'c54a16ca8fa833f9d23dbba08f617243', 'u', 5, 5);
 
 --

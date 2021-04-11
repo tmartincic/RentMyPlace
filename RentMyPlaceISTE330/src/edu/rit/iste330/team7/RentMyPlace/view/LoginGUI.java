@@ -177,6 +177,10 @@ public class LoginGUI extends javax.swing.JFrame {
         jButton1.addActionListener(ae);
     }
 
+    public void addGuestListener(ActionListener ae) {
+        jButton3.addActionListener(ae);
+    }
+
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

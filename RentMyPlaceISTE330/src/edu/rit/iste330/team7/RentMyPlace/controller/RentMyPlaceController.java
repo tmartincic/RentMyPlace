@@ -20,6 +20,7 @@ public class RentMyPlaceController {
 
         gui.setVisible(true);
         gui.addLoginListener(new LoginListener());
+        gui.addGuestListener(new GuestUserListener());
     }
 
     public RentMyPlaceController(){}
@@ -41,14 +42,7 @@ public class RentMyPlaceController {
     }
 
     public boolean autorization(User user){
-        if(user.getUserType().equals("g")){
-            System.out.println("Guest");
-
-            mainGui.getjTabbedPane2().setEnabledAt(2,false);
-            mainGui.getjTabbedPane2().setEnabledAt(3,false);
-            mainGui.getjTabbedPane2().setEnabledAt(4,false);
-        }
-        else if(user.getUserType().equals("u")){
+        if(user.getUserType().equals("u")){
             System.out.println("User");
         }
         else if(user.getUserType().equals("a")){
@@ -73,6 +67,19 @@ public class RentMyPlaceController {
                 JOptionPane jopMessage = new JOptionPane();
                 jopMessage.showMessageDialog(gui, "Try again.");
             }
+        }
+    }
+
+    class GuestUserListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+        System.out.println("Guest");
+        gui.dispose();
+        mainGui.setVisible(true);
+
+        mainGui.getjTabbedPane2().setEnabledAt(2,false);
+        mainGui.getjTabbedPane2().setEnabledAt(3,false);
+        mainGui.getjTabbedPane2().setEnabledAt(4,false);
         }
     }
 }

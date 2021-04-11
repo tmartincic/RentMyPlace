@@ -133,7 +133,7 @@ public class Model<T> {
         columns in the same manner, and we only have to override the declaration of retrieved attributes, check the get() method.
      */
     public ArrayList<Map<String, String>>getData() {
-        ArrayList<Property> properties = new ArrayList<Property>();
+        //ArrayList<Property> properties = new ArrayList<Property>();
         DatabaseConnection con = new DatabaseConnection();
         try {
             con.connect();
