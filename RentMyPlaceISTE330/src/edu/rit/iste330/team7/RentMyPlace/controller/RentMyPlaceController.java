@@ -6,6 +6,8 @@ import edu.rit.iste330.team7.RentMyPlace.model.User;
 import edu.rit.iste330.team7.RentMyPlace.view.GUI;
 import edu.rit.iste330.team7.RentMyPlace.model.Model;
 import edu.rit.iste330.team7.RentMyPlace.view.LoginGUI;
+import edu.rit.iste330.team7.RentMyPlace.view.RegisterGUI;
+
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -16,13 +18,21 @@ public class RentMyPlaceController {
     LoginGUI gui;
     Model model;
     GUI mainGui = new GUI();
+    RegisterGUI registerGUI = new RegisterGUI();
+
     public RentMyPlaceController(LoginGUI gui, Model model){
         this.gui = gui;
         this.model = model;
 
         gui.setVisible(true);
         gui.addLoginListener(new LoginListener());
+        gui.addRegisterListener(new RegisterListener());
         gui.addGuestListener(new GuestUserListener());
+
+        registerGUI.addRegisterListener(new AddUserListener());
+        registerGUI.addReturnToLoginListener(new ReturnLoginListener());
+        registerGUI.addGuestListener(new GuestUserListener());
+
         this.getProperty();
     }
 
@@ -64,6 +74,7 @@ public class RentMyPlaceController {
                 JOptionPane jopMessage = new JOptionPane();
                 jopMessage.showMessageDialog(gui, "Log in successful.");
                 gui.dispose();
+                registerGUI.dispose();
                 mainGui.setVisible(true);
             }
             else{
@@ -73,10 +84,38 @@ public class RentMyPlaceController {
         }
     }
 
+    class RegisterListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            gui.setVisible(false); //dispose only if guest or user signed/logged in
+            registerGUI.setVisible(true);
+        }
+    }
+
+    class AddUserListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //TODO:
+            // Get info from password and username textFields
+            // create new user in DB
+            // dispose login and register gui --- gui.dispose(); registerGUI.dispose();
+            // open mainGUI when done
+        }
+    }
+
+    class ReturnLoginListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            registerGUI.setVisible(false); //dispose only if guest or user signed/logged in
+            gui.setVisible(true);
+        }
+    }
+
     class GuestUserListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae) {
         System.out.println("Guest");
+        registerGUI.dispose();
         gui.dispose();
         mainGui.setVisible(true);
 
