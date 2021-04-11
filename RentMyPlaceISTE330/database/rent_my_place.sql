@@ -212,8 +212,8 @@ CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `userType` varchar(1) NOT NULL,
-  `contactId` int(255) NOT NULL,
-  `billingId` int(255) NOT NULL
+  `contactId` int(255) NULLABLE,
+  `billingId` int(255) NULLABLE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `user` (`id`, `username`, `password`, `userType`, `contactId`, `billingId`) VALUES

@@ -13,6 +13,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class RentMyPlaceController {
     User currentUser = null;
@@ -48,7 +49,7 @@ public class RentMyPlaceController {
     public boolean checkUser(String userName, String password) {
         boolean authenticated = false;
         ArrayList<User> user = new User()
-                .select(new String[]{"id", "username", "password", "userType", "contactId", "billingId"})
+                .select(new String[]{"id", "username", "password", "userType"})
                 .where("username", "LIKE", userName)
                 .get();
         if(user.isEmpty()){
@@ -63,6 +64,16 @@ public class RentMyPlaceController {
             }
         }
         return authenticated;
+    }
+
+    public boolean checkUsername(String userName) {
+        ArrayList<User> user = new User()
+                .where("username", "LIKE", userName)
+                .get();
+        if(user.isEmpty()){
+            return true;
+        }
+        return false;
     }
 
     public boolean autorization(User user) {
@@ -104,11 +115,35 @@ public class RentMyPlaceController {
     class AddUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //TODO:
-            // Get info from password and username textFields
-            // create new user in DB
-            // dispose login and register gui --- gui.dispose(); registerGUI.dispose();
-            // open mainGUI when done
+
+            boolean authenticated = false;
+
+            if(!registerGUI.getPassField().getText().equals("") && !registerGUI.getUsernameField().getText().equals("")){
+                authenticated = checkUsername(registerGUI.getUsernameField().getText());
+                if(authenticated){
+                    //create default user object
+                    User newUser = new User();
+
+                    //convert pass
+                    String convPass = Authentication.convert(registerGUI.getPassField().getText());
+
+                    //set user attributes
+                    newUser.setUsername(registerGUI.getUsernameField().getText());
+                    newUser.setPassword(convPass);
+                    newUser.setUserType("u");
+
+                    //add to DB
+                    newUser.create(Map.ofEntries(
+                            Map.entry("username", newUser.getUsername()),
+                            Map.entry("password", newUser.getPassword()),
+                            Map.entry("userType", newUser.getUserType())
+                    ));
+
+                    gui.dispose();
+                    registerGUI.dispose();
+                    mainGui.setVisible(true);
+                }
+            }
         }
     }
 
