@@ -729,6 +729,22 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
+    public JLabel getjLabel11() {
+        return jLabel11;
+    }
+
+    public JLabel getjLabel12() {
+        return jLabel12;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public JLabel getjLabel9() {
+        return jLabel9;
+    }
+
     /*THINK ABOUT RELOCATION OF THESE METHODS*/
 
     /**
