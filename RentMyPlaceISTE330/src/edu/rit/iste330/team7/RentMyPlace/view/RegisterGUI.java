@@ -1,5 +1,6 @@
 package edu.rit.iste330.team7.RentMyPlace.view;
 
+import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class RegisterGUI extends javax.swing.JFrame {
@@ -140,6 +141,14 @@ public class RegisterGUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    }
+
+    public JTextArea getUsernameField() {
+        return jTextArea1;
+    }
+
+    public JTextArea getPassField() {
+        return jTextArea2;
     }
 
     public void addRegisterListener(ActionListener ae){
