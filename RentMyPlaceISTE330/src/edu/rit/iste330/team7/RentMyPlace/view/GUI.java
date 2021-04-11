@@ -1,7 +1,5 @@
 package edu.rit.iste330.team7.RentMyPlace.view;
 
-import edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -729,22 +727,6 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }
-
-
-    public JLabel getjLabel11() {
-        return jLabel11;
-    }
-
-    public JLabel getjLabel2() {
-        return jLabel2;
-    }
-
-    public JLabel getjLabel9() {
-        return jLabel9;
-    }
-    public JLabel getjLabel12() {
-        return jLabel12;
     }
 
     /*THINK ABOUT RELOCATION OF THESE METHODS*/
