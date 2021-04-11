@@ -1,6 +1,12 @@
 package edu.rit.iste330.team7.RentMyPlace.view;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class GUI extends javax.swing.JFrame {
 
@@ -83,7 +89,8 @@ public class GUI extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1048, 609));
+        setPreferredSize(new java.awt.Dimension(1120, 670));
+        setResizable(false);
 
         jTabbedPane2.setBackground(new java.awt.Color(188, 205, 213));
         jTabbedPane2.setTabPlacement(javax.swing.JTabbedPane.LEFT);
@@ -218,7 +225,8 @@ public class GUI extends javax.swing.JFrame {
         //css styling tabs
         String tabStyle1 = "<html><body style = 'padding: 10px'>";
         String tabStyle2 = "</body><html>";
-        jTabbedPane2.addTab(tabStyle1 + "RENT" + tabStyle2, rentPanel);
+
+        jTabbedPane2.addTab(tabStyle1 + "RENT" + tabStyle2, bufferImageIcon(this.createURL("https://img.icons8.com/ios/452/sell-property--v2.png"), 25, 25), rentPanel);
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -389,7 +397,7 @@ public class GUI extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(searchPanel);
 
-        jTabbedPane2.addTab(tabStyle1 + "SEARCH" + tabStyle2, jScrollPane1);
+        jTabbedPane2.addTab(tabStyle1 + "SEARCH" + tabStyle2, bufferImageIcon(this.createURL("https://img.icons8.com/pastel-glyph/2x/search--v3.png"), 25, 25), jScrollPane1);
 
 
         myRentalsPanel.setBackground(new java.awt.Color(188, 205, 213));
@@ -400,7 +408,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel6.setText("MY RENTALS CONTAINER");
         myRentalsPanel.add(jLabel6, java.awt.BorderLayout.PAGE_START);
 
-        jTabbedPane2.addTab(tabStyle1 + "MY RENTALS" + tabStyle2, myRentalsPanel);
+        jTabbedPane2.addTab(tabStyle1 + "MY RENTALS" + tabStyle2, bufferImageIcon(this.createURL("https://img.icons8.com/pastel-glyph/2x/key-exchange.png"), 25, 25), myRentalsPanel);
 
         favoritesPanel.setBackground(new java.awt.Color(188, 205, 213));
         favoritesPanel.setLayout(new java.awt.BorderLayout());
@@ -410,7 +418,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel7.setText("FAVORITES CONTAINER");
         favoritesPanel.add(jLabel7, java.awt.BorderLayout.PAGE_START);
 
-        jTabbedPane2.addTab(tabStyle1 + "FAVORITES" + tabStyle2, favoritesPanel);
+        jTabbedPane2.addTab(tabStyle1 + "FAVORITES" + tabStyle2, bufferImageIcon(this.createURL("https://cdn.onlinewebfonts.com/svg/img_35707.png"), 25, 25),  favoritesPanel);
 
         settingsPanel.setBackground(new java.awt.Color(188, 205, 213));
 
@@ -650,7 +658,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab(tabStyle1 + "SETTINGS" + tabStyle2, settingsPanel);
+        jTabbedPane2.addTab(tabStyle1 + "SETTINGS" + tabStyle2, bufferImageIcon(this.createURL("https://img.icons8.com/fluent-systems-regular/452/services--v1.png"), 25, 25), settingsPanel);
 
         getContentPane().add(jTabbedPane2, java.awt.BorderLayout.CENTER);
 
@@ -719,6 +727,43 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    }
+
+    /*THINK ABOUT RELOCATION OF THESE METHODS*/
+
+    /**
+     *
+     * @param link
+     * @return
+     */
+    public URL createURL(String link){
+        URL url = null;
+        try {
+            url = new URL(link);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
+    /**
+     *
+     * @param url
+     * @param width
+     * @param height
+     * @return
+     */
+    public ImageIcon bufferImageIcon(URL url, int width, int height){
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(this.createURL(url.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert image != null;
+        Image newImg = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+        return new ImageIcon(newImg);
     }
 
     /**
