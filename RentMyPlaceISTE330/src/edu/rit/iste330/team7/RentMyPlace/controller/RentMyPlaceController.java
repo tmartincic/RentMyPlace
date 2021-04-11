@@ -1,5 +1,7 @@
 package edu.rit.iste330.team7.RentMyPlace.controller;
 
+import edu.rit.iste330.team7.RentMyPlace.model.Location;
+import edu.rit.iste330.team7.RentMyPlace.model.Property;
 import edu.rit.iste330.team7.RentMyPlace.model.User;
 import edu.rit.iste330.team7.RentMyPlace.view.GUI;
 import edu.rit.iste330.team7.RentMyPlace.model.Model;
@@ -21,6 +23,7 @@ public class RentMyPlaceController {
         gui.setVisible(true);
         gui.addLoginListener(new LoginListener());
         gui.addGuestListener(new GuestUserListener());
+        this.getProperty();
     }
 
     public RentMyPlaceController(){}
@@ -81,5 +84,25 @@ public class RentMyPlaceController {
         mainGui.getjTabbedPane2().setEnabledAt(3,false);
         mainGui.getjTabbedPane2().setEnabledAt(4,false);
         }
+    }
+
+    public Property getProperty() {
+        ArrayList<Property> properties = new Property()
+                .select(new String[]{"id", "description", "pricePerNight", "imagePath"})
+                .get();
+
+        ArrayList<Location> locations = new Location()
+                .select(new String[]{"id", "city"})
+                .get();
+
+        mainGui.getjLabel2().setText(properties.get(0).getDescription());
+
+        mainGui.getjLabel9().setText(locations.get(0).getCity());
+
+        mainGui.getjLabel11().setText(String.valueOf(properties.get(0).getPricePerNight()));
+
+        mainGui.getjLabel12().setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(0).getImagePath()), 600, 450));
+
+        return properties.get(0);
     }
 }

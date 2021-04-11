@@ -159,7 +159,7 @@ CREATE TABLE `property` (
 --
 
 INSERT INTO `property` (`id`, `userId`, `locationId`, `description`, `propertyTypeId`, `imagePath`, `bedrooms`, `size`, `pricePerNight`) VALUES
-(1, 1, 1, 'Bundek Office, just accross Bundek park.', 5, 'https://unsplash.com/photos/VWcPlbHglYc', 10, 600, 1100.00),
+(1, 1, 1, 'Bundek Office, just accross Bundek park.', 5, 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 10, 600, 1100.00),
 (2, 2, 7, 'A beautiful place to get some rest in the nature.', 6, 'https://unsplash.com/photos/_DUC_K6taUc', 2, 100, 199.99),
 (3, 1, 8, 'Exclusive property for a very low price.', 2, 'https://unsplash.com/photos/gREquCUXQLI', 10, 500, 599.99),
 (4, 1, 2, 'Beautiful property with a view to the sea.', 3, 'https://unsplash.com/photos/MXbM1NrRqtI', 5, 200, 300.00),
