@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class RentMyPlaceController {
     int currentIndex = 0;
+    ArrayList<Property> properties = null;
     LoginGUI gui;
     Model model;
     GUI mainGui = new GUI();
@@ -132,8 +133,10 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae) {
             currentIndex++;
+            if (currentIndex >= properties.size()) {
+                currentIndex = 0;
+            }
             getProperty(currentIndex);
-            System.out.println("next " + currentIndex);
 
         }
     }
@@ -142,28 +145,21 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae) {
             currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = properties.size() - 1;
+            }
             getProperty(currentIndex);
-            System.out.println("prev " + currentIndex);
-
         }
     }
 
     public Property getProperty(int currentIndex) {
-        ArrayList<Property> properties = new Property()
+        properties = new Property()
                 .select(new String[]{"id", "description", "pricePerNight", "imagePath", "locationId"})
                 .get();
 
         ArrayList<Location> locations = new Location()
                 .select(new String[]{"id", "city"})
                 .get();
-
-        if (currentIndex >= properties.size() - 1) {
-            this.currentIndex = 0;
-        } else if (this.currentIndex < 0) {
-            this.currentIndex = properties.size() - 1;
-        }
-        System.out.println(currentIndex);
-
 
         mainGui.getjLabel2().setText(properties.get(currentIndex).getDescription());
 
