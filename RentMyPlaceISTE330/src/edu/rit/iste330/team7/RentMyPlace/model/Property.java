@@ -11,6 +11,7 @@ public class Property extends Model
     public int id;
     public int userId;
     public int locationId;
+    public String propertyName;
     public String description;
     public int propertyTypeId;
     public String imagePath;
@@ -23,6 +24,7 @@ public class Property extends Model
         this.id = -1;
         this.userId = -1;
         this.locationId = -1;
+        this.propertyName = null;
         this.description = null;
         this.propertyTypeId = -1;
         this.imagePath =  null;
@@ -31,12 +33,13 @@ public class Property extends Model
         this.pricePerNight = -1;
     }
 
-    public Property(int id, int userId, int locationId, String description, int propertyTypeId, String imagePath, int bedrooms, int size, double pricePerNight) {
+    public Property(int id, int userId, int locationId, String propertyName, String description, int propertyTypeId, String imagePath, int bedrooms, int size, double pricePerNight) {
         super(table_name);
         this.id = id;
         this.userId = userId;
         this.locationId = locationId;
         this.description = description;
+        this.propertyName = propertyName;
         this.propertyTypeId = propertyTypeId;
         this.imagePath = imagePath;
         this.bedrooms = bedrooms;
@@ -51,6 +54,7 @@ public class Property extends Model
                 ", userId=" + userId +
                 ", locationId=" + locationId +
                 ", description='" + description + '\'' +
+                ", propertyName='" + propertyName + '\'' +
                 ", propertyTypeId=" + propertyTypeId +
                 ", imagePath='" + imagePath + '\'' +
                 ", bedrooms=" + bedrooms +
@@ -82,6 +86,10 @@ public class Property extends Model
     public void setLocationId(int locationId) {
         this.locationId = locationId;
     }
+
+    public String getPropertyName(){ return propertyName; }
+
+    public void setPropertyName(String propertyName){ this.propertyName = propertyName; }
 
     public String getDescription() {
         return description;
@@ -137,6 +145,7 @@ public class Property extends Model
                 case "id": this.setId(Integer.parseInt(row.get(attribute))); break;
                 case "userId": this.setUserId(Integer.parseInt(row.get(attribute))); break;
                 case "locationId": this.setLocationId(Integer.parseInt(row.get(attribute))); break;
+                case "propertyName": this.setPropertyName(row.get(attribute)); break;
                 case "description": this.setDescription(row.get(attribute)); break;
                 case "propertyTypeId": this.setPropertyTypeId(Integer.parseInt(row.get(attribute))); break;
                 case "imagePath": this.setImagePath(row.get(attribute)); break;

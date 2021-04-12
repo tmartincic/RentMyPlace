@@ -1379,6 +1379,10 @@ public class GUI extends javax.swing.JFrame {
         this.getjButton1().addActionListener(ae);
     }
 
+    public void addjButton3EventListener(ActionListener ae) {
+        this.getjButton3().addActionListener(ae);
+    }
+
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }

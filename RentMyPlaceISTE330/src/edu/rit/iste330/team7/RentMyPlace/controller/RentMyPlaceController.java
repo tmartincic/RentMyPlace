@@ -1,10 +1,7 @@
 package edu.rit.iste330.team7.RentMyPlace.controller;
 
-import edu.rit.iste330.team7.RentMyPlace.model.Location;
-import edu.rit.iste330.team7.RentMyPlace.model.Property;
-import edu.rit.iste330.team7.RentMyPlace.model.User;
+import edu.rit.iste330.team7.RentMyPlace.model.*;
 import edu.rit.iste330.team7.RentMyPlace.view.GUI;
-import edu.rit.iste330.team7.RentMyPlace.model.Model;
 import edu.rit.iste330.team7.RentMyPlace.view.LoginGUI;
 import edu.rit.iste330.team7.RentMyPlace.view.RegisterGUI;
 
@@ -19,6 +16,7 @@ public class RentMyPlaceController {
     User currentUser = null;
     int currentIndex = 0;
     ArrayList<Property> properties = null;
+    ArrayList<PropertyType> propertyTypes = null;
     LoginGUI gui;
     Model model;
     GUI mainGui = new GUI();
@@ -35,6 +33,7 @@ public class RentMyPlaceController {
 
         mainGui.addjButton2EventListener(new NextPropertyActionListener());
         mainGui.addjButton1EventListener(new PreviousPropertyActionListener());
+        mainGui.addjButton3EventListener(new MorePropertyDetailsActionListener());
 
         registerGUI.addRegisterListener(new AddUserListener());
         registerGUI.addReturnToLoginListener(new ReturnLoginListener());
@@ -52,10 +51,9 @@ public class RentMyPlaceController {
                 .select(new String[]{"id", "username", "password", "userType"})
                 .where("username", "LIKE", userName)
                 .get();
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             authenticated = false;
-        }
-        else if(user != null) {
+        } else if (user != null) {
             currentUser = user.get(0);
             if (currentUser.authenticate(userName, password)) {
                 System.out.println("User found: " + currentUser.toString());
@@ -70,7 +68,7 @@ public class RentMyPlaceController {
         ArrayList<User> user = new User()
                 .where("username", "LIKE", userName)
                 .get();
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             return true;
         }
         return false;
@@ -118,9 +116,9 @@ public class RentMyPlaceController {
 
             boolean authenticated = false;
 
-            if(!registerGUI.getPassField().getText().equals("") && !registerGUI.getUsernameField().getText().equals("")){
+            if (!registerGUI.getPassField().getText().equals("") && !registerGUI.getUsernameField().getText().equals("")) {
                 authenticated = checkUsername(registerGUI.getUsernameField().getText());
-                if(authenticated){
+                if (authenticated) {
                     //create default user object
                     User newUser = new User();
 
@@ -192,16 +190,34 @@ public class RentMyPlaceController {
         }
     }
 
+    class MorePropertyDetailsActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            getProperty(currentIndex);
+            JOptionPane jopMessage = new JOptionPane();
+            jopMessage.showMessageDialog(mainGui,
+                    "Property type: " + propertyTypes.get(properties.get(currentIndex).getPropertyTypeId() - 1).getType()
+                            + "\nDescription: " + properties.get(currentIndex).getDescription()
+                            + "\nBedrooms: " + properties.get(currentIndex).getBedrooms()
+                            + "\nSize: " + properties.get(currentIndex).getSize(),
+                    "Property information", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
     public Property getProperty(int currentIndex) {
         properties = new Property()
-                .select(new String[]{"id", "description", "pricePerNight", "imagePath", "locationId"})
+                .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId", "propertyTypeId", "bedrooms", "size"})
+                .get();
+
+        propertyTypes = new PropertyType()
+                .select(new String[]{"id", "type"})
                 .get();
 
         ArrayList<Location> locations = new Location()
                 .select(new String[]{"id", "city"})
                 .get();
 
-        mainGui.getjLabel2().setText(properties.get(currentIndex).getDescription());
+        mainGui.getjLabel2().setText(properties.get(currentIndex).getPropertyName());
 
         mainGui.getjLabel9().setText(locations.get(properties.get(currentIndex).getLocationId() - 1).getCity());
 

@@ -146,6 +146,7 @@ CREATE TABLE `property` (
   `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `locationId` int(11) NOT NULL,
+  `propertyName` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `propertyTypeId` int(11) NOT NULL,
   `imagePath` varchar(255) NOT NULL,
@@ -158,17 +159,17 @@ CREATE TABLE `property` (
 -- Dumping data for table `property`
 --
 
-INSERT INTO `property` (`id`, `userId`, `locationId`, `description`, `propertyTypeId`, `imagePath`, `bedrooms`, `size`, `pricePerNight`) VALUES
-(1, 1, 1, 'Bundek Office, just accross Bundek park.', 5, 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 10, 600, 1100.00),
-(2, 2, 7, 'A beautiful place to get some rest in the nature.', 6, 'https://images.unsplash.com/photo-1599601482482-93c2cd0460d5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80', 2, 100, 199.99),
-(3, 1, 8, 'Exclusive property for a very low price.', 2, 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 10, 500, 599.99),
-(4, 1, 2, 'Beautiful property with a view to the sea.', 3, 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80', 5, 200, 300.00),
-(5, 3, 5, 'Gorgeous property by the sea side, ideal for vacation.', 1, 'https://images.unsplash.com/photo-1575517111478-7f6afd0973db?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 9, 400, 799.99),
-(6, 4, 9, 'Cozy rental property ideal for families.', 1, 'https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 3, 150, 180.99),
-(7, 1, 3, 'Luxury property ideal for vacation.', 3, 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 8, 500, 1099.00),
-(8, 5, 4, 'Enjoy by the sea in this extraordinary property.', 6, 'https://images.unsplash.com/photo-1613912836585-0f5a284738f6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 6, 220, 799.99),
-(9, 3, 6, 'Gorgeous office ideal for big companies.', 5, 'https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=967&q=80', 100, 2000, 2299.99),
-(10, 4, 10, 'Find a place to park in crowded Zagreb.', 4, 'https://images.unsplash.com/photo-1614704181758-fe7e61c75375?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 1, 10, 120.00);
+INSERT INTO `property` (`id`, `userId`, `locationId`, `propertyName`,`description`, `propertyTypeId`, `imagePath`, `bedrooms`, `size`, `pricePerNight`) VALUES
+(1, 1, 1, 'BUNDEK OFFICE d.o.o.', 'Bundek Office, just accross Bundek park.', 5, 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 10, 600, 1100.00),
+(2, 2, 7, 'Kapela Estate','A beautiful place to get some rest in the nature.', 6, 'https://images.unsplash.com/photo-1599601482482-93c2cd0460d5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80', 2, 100, 199.99),
+(3, 1, 8, 'Agrotourism Vinia','Exclusive property for a very low price.', 2, 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 10, 500, 599.99),
+(4, 1, 2, 'Villa Maria','Beautiful property with a view to the sea.', 3, 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80', 5, 200, 300.00),
+(5, 3, 5, 'Banjo at sea','Gorgeous property by the sea side, ideal for vacation.', 1, 'https://images.unsplash.com/photo-1575517111478-7f6afd0973db?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 9, 400, 799.99),
+(6, 4, 9, 'For the soul','Cozy rental property ideal for families.', 1, 'https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 3, 150, 180.99),
+(7, 1, 3, 'Villa Phasiana','Luxury property ideal for vacation.', 3, 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 8, 500, 1099.00),
+(8, 5, 4, 'Ma Makarska','Enjoy by the sea in this extraordinary property.', 6, 'https://images.unsplash.com/photo-1613912836585-0f5a284738f6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 6, 220, 799.99),
+(9, 3, 6, 'Campbell Offices','Gorgeous office ideal for big companies.', 5, 'https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=967&q=80', 100, 2000, 2299.99),
+(10, 4, 10, 'Tesla Garage','Find a place to park in crowded Zagreb.', 4, 'https://images.unsplash.com/photo-1614704181758-fe7e61c75375?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80', 1, 10, 120.00);
 
 --
 -- Table structure for table `propertytype`

@@ -37,21 +37,21 @@ public class Init {
 //        ));
 //
 //        System.out.println("\n### SELECT: ");
-        ArrayList<edu.rit.iste330.team7.RentMyPlace.model.Property> properties_from_labin = new edu.rit.iste330.team7.RentMyPlace.model.Property()
-                .where("id", "<", "25")
-                .get();
-
-        properties_from_labin.get(1).update(Map.ofEntries(
-                Map.entry("userId", "2"),
-                Map.entry("locationId", "9"),
-                Map.entry("description", "A TEEEHEEEEEEEEEEE"),
-                Map.entry("propertyTypeId", "2"),
-                Map.entry("imagePath", "https://picsum.photos/250/500.jpg"),
-                Map.entry("bedrooms", "20"),
-                Map.entry("size", "500"),
-                Map.entry("pricePerNight", "123")
-        ));
-        properties_from_labin.get(0).delete();
+//        ArrayList<edu.rit.iste330.team7.RentMyPlace.model.Property> properties_from_labin = new edu.rit.iste330.team7.RentMyPlace.model.Property()
+//                .where("id", "<", "25")
+//                .get();
+//
+//        properties_from_labin.get(1).update(Map.ofEntries(
+//                Map.entry("userId", "2"),
+//                Map.entry("locationId", "9"),
+//                Map.entry("description", "A TEEEHEEEEEEEEEEE"),
+//                Map.entry("propertyTypeId", "2"),
+//                Map.entry("imagePath", "https://picsum.photos/250/500.jpg"),
+//                Map.entry("bedrooms", "20"),
+//                Map.entry("size", "500"),
+//                Map.entry("pricePerNight", "123")
+//        ));
+//        properties_from_labin.get(0).delete();
 
        /*System.out.println(createdProperty.updateModel(Map.ofEntries(
                 //Map.entry(KEY, VALUE), //both key and value are String
