@@ -11,23 +11,6 @@ public class DatabaseConnection {
     /*
         DATABASE CREDENTIAL CONSTANTS
      */
-// Online database credentials
-//    Host: sql11.freemysqlhosting.net
-//    Database: sql11405004
-//    Username: sql11405004
-//    Password: zabN2sdjHZ
-//    Port: 3306
-    //ONLINE DATABASE CONNECTION
-    private static String url = "";
-    private static String host = "sql11.freemysqlhosting.net";
-    private static String port = "3306";
-    private static String database = "sql11405004";
-    private static String user = "sql11405004";
-    private static String password = "zabN2sdjHZ";
-    private Connection con;
-
-    // LOCAL DATABASE CONNECTION
-    /*
     private static String url = "";
     private static String host = DBCredentials.getDbHost();
     private static String port = DBCredentials.getDbPort();
@@ -35,7 +18,7 @@ public class DatabaseConnection {
     private static String user = DBCredentials.getDbUsername();
     private static String password = DBCredentials.getDbPassword();
     private Connection con;
-*/
+
     public DatabaseConnection() { generateUrl(); }
 
     /*
