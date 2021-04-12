@@ -19,11 +19,11 @@ public class DatabaseConnection {
 //    Port: 3306
 
     private static String url = "";
-    private static String host = "localhost";
-    private static String port = "3306";
-    private static String database = "rent_my_place";
-    private static String user = "root";
-    private static String password = "";
+    private static String host = DBCredentials.getDbHost();
+    private static String port = DBCredentials.getDbPort();
+    private static String database = DBCredentials.getDbDatabase();
+    private static String user = DBCredentials.getDbUsername();
+    private static String password = DBCredentials.getDbPassword();
     private Connection con;
 
     public DatabaseConnection() { generateUrl(); }
