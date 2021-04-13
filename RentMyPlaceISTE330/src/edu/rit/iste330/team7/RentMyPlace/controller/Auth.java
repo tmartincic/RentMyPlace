@@ -20,25 +20,25 @@ public class Auth implements ActionListener {
     public Auth() { }
 
     public static boolean checkPermission(String button) {
-        if(Auth.userFromToken()) {
+        if(Auth.getUser() != null) {
             //check for permission on a button
         }
         return false;
     }
 
-    public static boolean userFromToken() {
+    public static User getUser() {
         Auth a = new Auth();
         if(a.tokenExists()) {
             a.user = User.findUser(a.readToken());
             if(a.user == null) a.inputUserCredentials();
             else {
                 System.out.println("User with this token exists in the database!");
-                return true;
+                return a.user;
             }
         }
         else a.inputUserCredentials();
 
-        return false;
+        return null;
     }
 
     public static boolean checkUser(String userName, String password) {

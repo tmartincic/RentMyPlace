@@ -24,7 +24,7 @@ public class RentMyPlaceController {
 
     public RentMyPlaceController(LoginGUI gui, Model model) {
         this.gui = gui;
-        if(Auth.userFromToken()) {
+        if(Auth.getUser() != null) {
             JOptionPane jopMessage = new JOptionPane();
             jopMessage.showMessageDialog(gui, "Token was recognized from last login!");
             mainGui.setVisible(true);
