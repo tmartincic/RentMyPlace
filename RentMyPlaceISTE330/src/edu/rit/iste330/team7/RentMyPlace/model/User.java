@@ -1,6 +1,8 @@
 package edu.rit.iste330.team7.RentMyPlace.model;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,12 +12,13 @@ public class User extends Model
 {
     private static final String table_name = "user";
 
-    public int id;
-    public String username;
-    public String password;
-    public String userType;
-    public int contactId;
-    public int billingId;
+    private int id;
+    private String username;
+    private String password;
+    private String userType;
+    private int contactId;
+    private int billingId;
+    private String token;
 
     public User() {
         super(table_name);
@@ -25,6 +28,7 @@ public class User extends Model
         this.userType = null;
         this.contactId = -1;
         this.billingId = -1;
+        this.token = null;
     }
 
     public User(int id, String username, String password, String userType, int contactId, int billingId) {
@@ -35,6 +39,7 @@ public class User extends Model
         this.userType = userType;
         this.contactId = contactId;
         this.billingId = billingId;
+        this.token = null;
     }
 
 
@@ -107,6 +112,7 @@ public class User extends Model
                 case "userType" -> this.setUserType(row.get(attribute));
                 case "contactId" -> this.setContactId(Integer.parseInt(row.get(attribute)));
                 case "billingId" -> this.setBillingId(Integer.parseInt(row.get(attribute)));
+                case "token" -> this.setToken(row.get(attribute));
             }
         }
         return this;
@@ -153,12 +159,75 @@ public class User extends Model
     }
 
     public boolean authenticate(String givenUsername, String givenPassword){
+        User user = (User) this.where("username", "like", givenUsername).get().get(0);
+        if(user == null) return false;
+
         String convertedPassword = Authentication.convert(givenPassword);
-        if(this.username.equals(givenUsername) && this.password.equals(convertedPassword)){
+        if(user.getPassword().equals(convertedPassword)){
+            setId(user.getId());
+            setUsername(user.getUsername());
+            setPassword(user.getPassword());
+            setContactId(user.getContactId());
+            setBillingId(user.getBillingId());
+            setUserType(user.getUserType());
+            generateToken();
+
+            user.update(Map.ofEntries(
+                    Map.entry("token", getToken())
+            ));
+
             return true;
         }
-        else {
-            return false;
-        }
+
+        return false;
+    }
+
+    public static String getTable_name() {
+        return table_name;
+    }
+
+    public String getToken() {
+        return token;
+    }
+    /*
+        Generates a random token for the user
+     */
+    public void generateToken() {
+        final SecureRandom secureRandom = new SecureRandom();
+        final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
+
+        byte[] randomBytes = new byte[72];
+        secureRandom.nextBytes(randomBytes);
+        String token = base64Encoder.encodeToString(randomBytes);
+        setToken(token);
+        update(Map.ofEntries(
+                Map.entry("token", token)
+        ));
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public static User findUser(String token){
+        ArrayList<User> u = new User().where("token", "like", token).get();
+        if(u.isEmpty()) return null;
+        return u.get(0);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

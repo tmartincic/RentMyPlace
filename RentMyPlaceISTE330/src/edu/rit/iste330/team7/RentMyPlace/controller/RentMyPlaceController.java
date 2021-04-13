@@ -24,9 +24,14 @@ public class RentMyPlaceController {
 
     public RentMyPlaceController(LoginGUI gui, Model model) {
         this.gui = gui;
+        if(Auth.userFromToken()) {
+            JOptionPane jopMessage = new JOptionPane();
+            jopMessage.showMessageDialog(gui, "Token was recognized from last login!");
+            mainGui.setVisible(true);
+        }
+        else gui.setVisible(true);
         this.model = model;
 
-        gui.setVisible(true);
         gui.addLoginListener(new LoginListener());
         gui.addRegisterListener(new RegisterListener());
         gui.addGuestListener(new GuestUserListener());
@@ -43,25 +48,6 @@ public class RentMyPlaceController {
     }
 
     public RentMyPlaceController() {
-    }
-
-    public boolean checkUser(String userName, String password) {
-        boolean authenticated = false;
-        ArrayList<User> user = new User()
-                .select(new String[]{"id", "username", "password", "userType"})
-                .where("username", "LIKE", userName)
-                .get();
-        if (user.isEmpty()) {
-            authenticated = false;
-        } else if (user != null) {
-            currentUser = user.get(0);
-            if (currentUser.authenticate(userName, password)) {
-                System.out.println("User found: " + currentUser.toString());
-                authenticated = true;
-                this.autorization(currentUser);
-            }
-        }
-        return authenticated;
     }
 
     public boolean checkUsername(String userName) {
@@ -87,8 +73,11 @@ public class RentMyPlaceController {
     class LoginListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            boolean authenticated = false;
-            authenticated = checkUser(gui.getjTextField1().getText(), gui.getjPasswordField1().getText());
+            String username = gui.getjTextField1().getText();
+            String password = gui.getjPasswordField1().getText();
+
+            boolean authenticated = Auth.checkUser(username, password);
+
             if (authenticated) {
                 JOptionPane jopMessage = new JOptionPane();
                 jopMessage.showMessageDialog(gui, "Log in successful.");

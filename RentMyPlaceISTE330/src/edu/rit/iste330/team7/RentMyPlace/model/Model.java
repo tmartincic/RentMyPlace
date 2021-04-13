@@ -18,7 +18,6 @@ public class Model<T> {
     private boolean is_stored_in_database;
     //private array list of attributes used to prepare the statements, passed to DBConnection class
     private ArrayList<Object> attributes = new ArrayList<>();
-
     private String sql_string, select, from, whereSql, order = "";
     boolean firstWhere = true;
     //quick space and comma references for sql construction
@@ -32,6 +31,7 @@ public class Model<T> {
         this.from = "FROM " + table;
         this.whereSql = "WHERE 1";
     }
+
     /*
         Used to build select part of query
      */
@@ -44,6 +44,9 @@ public class Model<T> {
         return this;
     }
 
+    public void clearAttributes() {
+        this.attributes.clear();
+    }
     /*
         Persists row to the database and
         returns the ID of inserted model
@@ -185,6 +188,7 @@ public class Model<T> {
             System.out.println(e);
         }
         if(column_value_list.size() == 0) System.out.println("No results were found in following query: "+sqlToString());
+        clearAttributes();
         return column_value_list;
     }
 
