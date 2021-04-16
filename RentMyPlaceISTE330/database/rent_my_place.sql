@@ -212,19 +212,39 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `userType` varchar(1) NOT NULL,
+  `userType` enum('admin', 'user', 'guest') NOT NULL,
   `contactId` int(255) DEFAULT NULL,
   `billingId` int(255) DEFAULT NULL,
   `token` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `user` (`id`, `username`, `password`, `userType`, `contactId`, `billingId`) VALUES
-(1, 'ime', '8aa87050051efe26091a13dbfdf901c6', 'a', 1, 1),
-(2, 'user123', '827ccb0eea8a706c4c34a16891f84e7b', 'u', 2, 2),
-(3, 'someUser', '32250170a0dca92d53ec9624f336ca24', 'u', 3, 3),
-(4, 'anotherUser', '4f351e69c91975f5532533db26492bd7', 'a', 4, 4),
-(5, 'aUser', 'c54a16ca8fa833f9d23dbba08f617243', 'u', 5, 5);
+(1, 'ime', '8aa87050051efe26091a13dbfdf901c6', 'admin', 1, 1),
+(2, 'user123', '827ccb0eea8a706c4c34a16891f84e7b', 'user', 2, 2),
+(3, 'someUser', '32250170a0dca92d53ec9624f336ca24', 'user', 3, 3),
+(4, 'anotherUser', '4f351e69c91975f5532533db26492bd7', 'admin', 4, 4),
+(5, 'aUser', 'c54a16ca8fa833f9d23dbba08f617243', 'user', 5, 5);
 
+CREATE TABLE permissions(
+	id int unsigned,
+	route varchar(100) not null,
+	role enum('admin', 'user', 'guest') not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`);
+
+INSERT INTO `permissions` (`id`, `route`, `role`) VALUES
+('1', 'rent_tab', 'admin'),
+('2', 'search_tab', 'admin'),
+('3', 'my_rentals_tab', 'admin'),
+('4', 'favorites_tab', 'admin'),
+('5', 'settings_tab', 'admin'),
+('6', 'rent_tab', 'user'),
+('7', 'rent_next', 'user'),
+('8', 'rent_prev', 'user'),
+('9', 'rent_details', 'user'),
+('10', 'rent_add_fav', 'user');
 --
 -- Indexes for dumped tables
 --

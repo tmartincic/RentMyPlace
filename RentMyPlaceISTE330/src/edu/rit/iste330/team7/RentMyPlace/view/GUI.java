@@ -1372,10 +1372,12 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>
 
     public void addjButton2EventListener(ActionListener ae) {
+        this.getjButton2().setActionCommand("rent_next");
         this.getjButton2().addActionListener(ae);
     }
 
     public void addjButton1EventListener(ActionListener ae) {
+        this.getjButton1().setActionCommand("rent_prev");
         this.getjButton1().addActionListener(ae);
     }
 

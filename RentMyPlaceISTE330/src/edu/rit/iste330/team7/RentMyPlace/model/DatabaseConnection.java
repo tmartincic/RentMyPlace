@@ -45,6 +45,29 @@ public class DatabaseConnection {
     }
 
     /*
+        Execute SQL Querry and returns true if a record is found
+     */
+    public boolean exists(String sql, ArrayList<Object> values) throws DLException {
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try{
+            stmt = (PreparedStatement) this.getCon().prepareStatement(sql);
+            if(!values.isEmpty()){
+                for(int i=0; i<values.size(); i++) stmt.setObject((i+1), values.get(i));
+            }
+
+            return stmt.executeQuery().next();
+        }
+        catch (SQLSyntaxErrorException sqlse) {
+            throw new DLException(sqlse, sql);
+        }
+        catch (Exception e) {
+            throw new DLException(e);
+        }
+    }
+
+    /*
         Execute SQL Query
         Returns ID of inserted column
      */

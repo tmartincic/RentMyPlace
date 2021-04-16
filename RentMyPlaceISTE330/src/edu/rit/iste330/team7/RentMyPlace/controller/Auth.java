@@ -1,5 +1,6 @@
 package edu.rit.iste330.team7.RentMyPlace.controller;
 
+import edu.rit.iste330.team7.RentMyPlace.model.Permission;
 import edu.rit.iste330.team7.RentMyPlace.model.User;
 import edu.rit.iste330.team7.RentMyPlace.view.LoginGUI;
 
@@ -20,10 +21,16 @@ public class Auth implements ActionListener {
     public Auth() { }
 
     public static boolean checkPermission(String button) {
-        if(Auth.getUser() != null) {
-            //check for permission on a button
-        }
-        return false;
+        User user = Auth.getUser();
+        if(user == null) return false;
+
+        boolean permission = new Permission()
+                .where("role", "like", user.getUserType())
+                .where("route", "like", button)
+                .exists();
+
+        System.out.println("User: " + user.getUsername() + " with role of "+user.getUserType() + " \n has permission for button: "+button +": "+permission);
+        return permission;
     }
 
     public static User getUser() {
@@ -32,7 +39,6 @@ public class Auth implements ActionListener {
             a.user = User.findUser(a.readToken());
             if(a.user == null) a.inputUserCredentials();
             else {
-                System.out.println("User with this token exists in the database!");
                 return a.user;
             }
         }

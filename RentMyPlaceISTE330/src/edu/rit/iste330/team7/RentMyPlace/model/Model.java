@@ -126,6 +126,24 @@ public class Model<T> {
         return this;
     }
 
+    public boolean exists(){
+        DatabaseConnection con = new DatabaseConnection();
+        try {
+            con.connect();
+        }
+        catch(DLException e){
+            System.out.println(e);
+        }
+        ResultSet rs = null;
+        try {
+            return con.exists(sqlToString(), attributes);
+        }
+        catch(DLException e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
     /*
         This is generic method used to retrieve data from constructed SQL query,
         it returns ArrayList of rows. Each row is HashMap<String, String> which is

@@ -159,6 +159,9 @@ public class RentMyPlaceController {
     class NextPropertyActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
+
+            if(!Auth.checkPermission(ae.getActionCommand())) return;
+
             currentIndex++;
             if (currentIndex >= properties.size()) {
                 currentIndex = 0;
@@ -171,6 +174,9 @@ public class RentMyPlaceController {
     class PreviousPropertyActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
+
+            if(!Auth.checkPermission(ae.getActionCommand())) return;
+
             currentIndex--;
             if (currentIndex < 0) {
                 currentIndex = properties.size() - 1;
@@ -182,6 +188,9 @@ public class RentMyPlaceController {
     class MorePropertyDetailsActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
+
+            if(!Auth.checkPermission(ae.getActionCommand())) return;
+
             getProperty(currentIndex);
             JOptionPane jopMessage = new JOptionPane();
             jopMessage.showMessageDialog(mainGui,
