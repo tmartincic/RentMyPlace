@@ -16,6 +16,7 @@ public class RentMyPlaceController {
     User currentUser = null;
     int currentIndex = 0;
     ArrayList<Property> properties = null;
+    ArrayList<Location> locations = null;
     ArrayList<PropertyType> propertyTypes = null;
     LoginGUI gui;
     Model model;
@@ -194,11 +195,16 @@ public class RentMyPlaceController {
             getProperty(currentIndex);
             JOptionPane jopMessage = new JOptionPane();
             jopMessage.showMessageDialog(mainGui,
-                    "Property type: " + propertyTypes.get(properties.get(currentIndex).getPropertyTypeId() - 1).getType()
-                            + "\nDescription: " + properties.get(currentIndex).getDescription()
-                            + "\nBedrooms: " + properties.get(currentIndex).getBedrooms()
-                            + "\nSize: " + properties.get(currentIndex).getSize(),
-                    "Property information", JOptionPane.INFORMATION_MESSAGE);
+                    "<html><body>" +
+                            "<p>Name: " + "<b>" + properties.get(currentIndex).getPropertyName() + "</b></p><br><br>" +
+                            "<p>Street: " + locations.get(properties.get(currentIndex).getLocationId() -1).getStreet() + "</p><br>" +
+                            "<p>Location: " + locations.get(properties.get(currentIndex).getLocationId() -1).getCity()  + ", " + locations.get(properties.get(currentIndex).getLocationId() -1).getZip()  +  "</p><br>" +
+                            "<p>PropertyType: " + propertyTypes.get(properties.get(currentIndex).getPropertyTypeId() - 1).getType() + "</p><br>" +
+                            "<p>Description: " +  properties.get(currentIndex).getDescription() + "</p><br>" +
+                            "<p>Bedrooms: " +  properties.get(currentIndex).getBedrooms() + "</p><br>" +
+                            "<p>Size: " +  properties.get(currentIndex).getSize() + "</p>" +
+                            "</body></html>",
+                    "Property information", JOptionPane.INFORMATION_MESSAGE, mainGui.bufferImageIcon(mainGui.createURL(properties.get(currentIndex).getImagePath()), 500, 350));
         }
     }
 
@@ -211,8 +217,8 @@ public class RentMyPlaceController {
                 .select(new String[]{"id", "type"})
                 .get();
 
-        ArrayList<Location> locations = new Location()
-                .select(new String[]{"id", "city"})
+        locations = new Location()
+                .select(new String[]{"id", "city", "zip", "street"})
                 .get();
 
         mainGui.getjLabel2().setText(properties.get(currentIndex).getPropertyName());

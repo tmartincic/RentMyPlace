@@ -1363,8 +1363,12 @@ public class GUI extends javax.swing.JFrame {
                                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(23, Short.MAX_VALUE))
         );
-
+        JPanel logoutPanel = new JPanel();
+        JButton button = new JButton("LOG OUT");
         jTabbedPane2.addTab(tabStyle1 + "SETTINGS" + tabStyle2, bufferImageIcon(this.createURL("https://img.icons8.com/fluent-systems-regular/452/services--v1.png"), 25, 25), settingsPanel);
+
+        jTabbedPane2.addTab(tabStyle1 + "LOG OUT" + tabStyle2, logoutPanel);
+        logoutPanel.add(button);
 
         getContentPane().add(jTabbedPane2, java.awt.BorderLayout.CENTER);
 
@@ -1382,6 +1386,7 @@ public class GUI extends javax.swing.JFrame {
     }
 
     public void addjButton3EventListener(ActionListener ae) {
+        this.getjButton3().setActionCommand("rent_details");
         this.getjButton3().addActionListener(ae);
     }
 

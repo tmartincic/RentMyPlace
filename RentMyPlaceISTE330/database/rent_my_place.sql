@@ -240,11 +240,21 @@ INSERT INTO `permissions` (`id`, `route`, `role`) VALUES
 ('3', 'my_rentals_tab', 'admin'),
 ('4', 'favorites_tab', 'admin'),
 ('5', 'settings_tab', 'admin'),
-('6', 'rent_tab', 'user'),
-('7', 'rent_next', 'user'),
-('8', 'rent_prev', 'user'),
-('9', 'rent_details', 'user'),
-('10', 'rent_add_fav', 'user');
+('6', 'rent_next', 'admin'),
+('7', 'rent_prev', 'admin'),
+('8', 'rent_details', 'admin'),
+
+('9', 'rent_tab', 'user'),
+('2', 'search_tab', 'user'),
+('3', 'my_rentals_tab', 'user'),
+('4', 'favorites_tab', 'user'),
+('5', 'settings_tab', 'user'),
+('10', 'rent_next', 'user'),
+('11', 'rent_prev', 'user'),
+('12', 'rent_details', 'user'),
+('13', 'rent_add_fav', 'user');
+
+
 --
 -- Indexes for dumped tables
 --
