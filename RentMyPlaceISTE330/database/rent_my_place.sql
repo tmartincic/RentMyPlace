@@ -93,7 +93,6 @@ INSERT INTO `feature` (`id`, `feature`) VALUES
 --
 -- Table structure for table `feature_property`
 --
-
 CREATE TABLE `feature_property` (
   `propertyId` int(11) NOT NULL,
   `featureId` int(11) NOT NULL
@@ -101,6 +100,7 @@ CREATE TABLE `feature_property` (
 
 INSERT INTO `feature_property` (`propertyId`, `featureId`) VALUES
 (1, 5),
+(1, 6),
 (2, 3),
 (3, 6),
 (4, 8),
@@ -252,7 +252,10 @@ INSERT INTO `permissions` (`id`, `route`, `role`) VALUES
 ('14', 'rent_next', 'user'),
 ('15', 'rent_prev', 'user'),
 ('16', 'rent_details', 'user'),
-('17', 'rent_add_fav', 'user');
+('17', 'rent_add_fav', 'user'),
+
+('18', 'reserve', 'user'),
+('19', 'reserve', 'admin');
 
 
 --

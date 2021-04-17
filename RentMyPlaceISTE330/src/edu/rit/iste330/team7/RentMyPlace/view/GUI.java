@@ -1397,6 +1397,15 @@ public class GUI extends javax.swing.JFrame {
         this.getjButton3().addActionListener(ae);
     }
 
+    public void addjButton15EventListener(ActionListener ae) {
+        this.getjButton15().setActionCommand("reserve");
+        this.getjButton15().addActionListener(ae);
+    }
+
+    public JButton getjButton15() {
+        return jButton15;
+    }
+
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }

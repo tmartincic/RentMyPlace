@@ -4,6 +4,7 @@ import edu.rit.iste330.team7.RentMyPlace.model.*;
 import edu.rit.iste330.team7.RentMyPlace.view.GUI;
 import edu.rit.iste330.team7.RentMyPlace.view.LoginGUI;
 import edu.rit.iste330.team7.RentMyPlace.view.RegisterGUI;
+import edu.rit.iste330.team7.RentMyPlace.view.ReserveGUI;
 
 import java.awt.event.*;
 
@@ -25,6 +26,8 @@ public class RentMyPlaceController {
     GUI mainGui = new GUI();
     RegisterGUI registerGUI = new RegisterGUI();
 
+    boolean guest = false;
+
     public RentMyPlaceController(LoginGUI gui, Model model) {
         this.gui = gui;
         if(Auth.getUser() != null) {
@@ -42,6 +45,7 @@ public class RentMyPlaceController {
         mainGui.addjButton2EventListener(new NextPropertyActionListener());
         mainGui.addjButton1EventListener(new PreviousPropertyActionListener());
         mainGui.addjButton3EventListener(new MorePropertyDetailsActionListener());
+        mainGui.addjButton15EventListener(new ReserveListener());
 
         registerGUI.addRegisterListener(new AddUserListener());
         registerGUI.addReturnToLoginListener(new ReturnLoginListener());
@@ -148,7 +152,8 @@ public class RentMyPlaceController {
     class GuestUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            System.out.println("Guest");
+            guest = true;
+            System.out.println("Guest" + guest);
             registerGUI.dispose();
             gui.dispose();
             mainGui.setVisible(true);
@@ -163,7 +168,7 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae) {
 
-            if(!Auth.checkPermission(ae.getActionCommand())) return;
+            if(!Auth.checkPermission(ae.getActionCommand()) && guest==false) return;
 
             currentIndex++;
             if (currentIndex >= properties.size()) {
@@ -178,7 +183,7 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae) {
 
-            if(!Auth.checkPermission(ae.getActionCommand())) return;
+            if(!Auth.checkPermission(ae.getActionCommand()) && guest==false) return;
 
             currentIndex--;
             if (currentIndex < 0) {
@@ -192,7 +197,7 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae) {
 
-            if(!Auth.checkPermission(ae.getActionCommand())) return;
+            if(!Auth.checkPermission(ae.getActionCommand()) && guest==false) return;
 
             getProperty(currentIndex);
 
@@ -256,5 +261,16 @@ public class RentMyPlaceController {
         mainGui.getjLabel12().setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(currentIndex).getImagePath()), 600, 450));
 
         return properties.get(currentIndex);
+    }
+
+    class ReserveListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+
+            if(!Auth.checkPermission(ae.getActionCommand())) return;
+
+            ReserveGUI reserveGui = new ReserveGUI();
+            reserveGui.setVisible(true);
+        }
     }
 }
