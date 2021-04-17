@@ -245,14 +245,14 @@ INSERT INTO `permissions` (`id`, `route`, `role`) VALUES
 ('8', 'rent_details', 'admin'),
 
 ('9', 'rent_tab', 'user'),
-('2', 'search_tab', 'user'),
-('3', 'my_rentals_tab', 'user'),
-('4', 'favorites_tab', 'user'),
-('5', 'settings_tab', 'user'),
-('10', 'rent_next', 'user'),
-('11', 'rent_prev', 'user'),
-('12', 'rent_details', 'user'),
-('13', 'rent_add_fav', 'user');
+('10', 'search_tab', 'user'),
+('11', 'my_rentals_tab', 'user'),
+('12', 'favorites_tab', 'user'),
+('13', 'settings_tab', 'user'),
+('14', 'rent_next', 'user'),
+('15', 'rent_prev', 'user'),
+('16', 'rent_details', 'user'),
+('17', 'rent_add_fav', 'user');
 
 
 --
