@@ -1370,17 +1370,24 @@ public class GUI extends javax.swing.JFrame {
                                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(23, Short.MAX_VALUE))
         );
-        JPanel logoutPanel = new JPanel();
-        JButton button = new JButton("LOG OUT");
+        JPanel logoutPanel = new JPanel(new FlowLayout());
+        logOutButton = new JButton("LOG OUT");
+        jLabelLogOutUsername = new JLabel();
+        logoutPanel.add(jLabelLogOutUsername);
         jTabbedPane2.addTab(tabStyle1 + "SETTINGS" + tabStyle2, bufferImageIcon(this.createURL("https://img.icons8.com/fluent-systems-regular/452/services--v1.png"), 25, 25), settingsPanel);
 
         jTabbedPane2.addTab(tabStyle1 + "LOG OUT" + tabStyle2, logoutPanel);
-        logoutPanel.add(button);
+        logoutPanel.add(logOutButton);
 
         getContentPane().add(jTabbedPane2, java.awt.BorderLayout.CENTER);
 
         pack();
+
     }// </editor-fold>
+    public void addLogOutButtonEventListener(ActionListener ae) {
+        this.getLogOutButton().setActionCommand("log_out");
+        this.getLogOutButton().addActionListener(ae);
+    }
 
     public void addjButton2EventListener(ActionListener ae) {
         this.getjButton2().setActionCommand("rent_next");
@@ -1574,6 +1581,10 @@ public class GUI extends javax.swing.JFrame {
         return jLabel9;
     }
 
+    public JLabel getjLabelUsername() {
+        return jLabelLogOutUsername;
+    }
+
     public JButton getjButton1() {
         return jButton1;
     }
@@ -1584,6 +1595,10 @@ public class GUI extends javax.swing.JFrame {
 
     public JButton getjButton3() {
         return jButton3;
+    }
+
+    public JButton getLogOutButton() {
+        return logOutButton;
     }
     /*THINK ABOUT RELOCATION OF THESE METHODS*/
 
@@ -1623,6 +1638,9 @@ public class GUI extends javax.swing.JFrame {
     public JTabbedPane getjTabbedPane2() {
         return jTabbedPane2;
     }
+    public JPanel getjPanelRent() {
+        return rentPanel;
+    }
 
     // Variables declaration - do not modify
     // Variables declaration - do not modify
@@ -1645,6 +1663,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton15;
+    private javax.swing.JButton logOutButton;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -1716,6 +1735,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelLogOutUsername;
     private javax.swing.JLabel jLabelSearchInputName;
     private javax.swing.JLabel jLabelSearchInputName1;
     private javax.swing.JLabel jLabelSearchInputName2;

@@ -51,7 +51,15 @@ public class RentMyPlaceController {
         registerGUI.addReturnToLoginListener(new ReturnLoginListener());
         registerGUI.addGuestListener(new GuestUserListener());
 
+        mainGui.addLogOutButtonEventListener(new LogOutListener());
+
         this.getProperty(currentIndex);
+
+        //set user if token exists
+        if(Auth.tokenExists()) {
+            currentUser = Auth.getUser();
+            mainGui.getjLabelUsername().setText(currentUser.getUsername());
+        }
     }
 
     public RentMyPlaceController() {
@@ -77,6 +85,7 @@ public class RentMyPlaceController {
         return true;
     }
 
+
     class LoginListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -90,13 +99,20 @@ public class RentMyPlaceController {
                 jopMessage.showMessageDialog(gui, "Log in successful.");
                 gui.dispose();
                 registerGUI.dispose();
+//                gui.setVisible(false);
+//                registerGUI.setVisible(false);
                 mainGui.setVisible(true);
+                //reset user
+                currentUser = Auth.getUser();
+                mainGui.getjLabelUsername().setText(currentUser.getUsername());
+
             } else {
                 JOptionPane jopMessage = new JOptionPane();
                 jopMessage.showMessageDialog(gui, "Try again.");
             }
         }
     }
+
 
     class RegisterListener implements ActionListener {
         @Override
@@ -136,10 +152,32 @@ public class RentMyPlaceController {
                     gui.dispose();
                     registerGUI.dispose();
                     mainGui.setVisible(true);
+
+                    currentUser = Auth.getUser();
+                    mainGui.getjLabelUsername().setText(currentUser.getUsername());
                 }
             }
         }
     }
+
+    class LogOutListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if(!Auth.checkPermission(ae.getActionCommand())) return;
+
+            gui.setVisible(true);
+            mainGui.dispose();
+
+            mainGui.getjTabbedPane2().setSelectedComponent(mainGui.getjPanelRent());
+
+            gui.getjPasswordField1().setText("");
+            gui.getjTextField1().setText("");
+
+            currentUser = Auth.getUser();
+            mainGui.getjLabelUsername().setText(currentUser.getUsername());
+        }
+    }
+
 
     class ReturnLoginListener implements ActionListener {
         @Override
@@ -153,6 +191,7 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae) {
             guest = true;
+            Auth.logToken("");
             System.out.println("Guest" + guest);
             registerGUI.dispose();
             gui.dispose();
@@ -161,6 +200,7 @@ public class RentMyPlaceController {
             mainGui.getjTabbedPane2().setEnabledAt(2, false);
             mainGui.getjTabbedPane2().setEnabledAt(3, false);
             mainGui.getjTabbedPane2().setEnabledAt(4, false);
+            mainGui.getjTabbedPane2().setEnabledAt(5, false);
         }
     }
 

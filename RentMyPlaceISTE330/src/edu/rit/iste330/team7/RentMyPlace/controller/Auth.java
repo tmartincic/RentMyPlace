@@ -61,7 +61,7 @@ public class Auth implements ActionListener {
         return false;
     }
 
-    public String readToken() {
+    public static String readToken() {
         Path path = Paths.get(filename);
         byte[] bytes = null;
 
@@ -77,7 +77,7 @@ public class Auth implements ActionListener {
      *  If token file exists and it's not an empty file, return true
      * @return boolean
      */
-    public boolean tokenExists() {
+    public static boolean tokenExists() {
         File token = new File(filename);
         if(!token.exists() || !token.isFile() || (token.length() == 0)) return false;
         return true;
@@ -88,7 +88,7 @@ public class Auth implements ActionListener {
         //will be overridden in classes extending this class
     }
 
-    public void logToken(String token) {
+    public static void logToken(String token) {
         Path path = Paths.get(filename);
         byte[] bytes = token.getBytes(StandardCharsets.UTF_8);
 
