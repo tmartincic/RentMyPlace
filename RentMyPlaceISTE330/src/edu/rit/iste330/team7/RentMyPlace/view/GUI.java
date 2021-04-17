@@ -42,6 +42,7 @@ public class GUI extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
         searchScrollPane = new javax.swing.JScrollPane();
         searchPanel = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
@@ -187,12 +188,13 @@ public class GUI extends javax.swing.JFrame {
         jLabel11.setText("<price>");
 
         jButton3.setText("See more details...");
+        jButton15.setText("Reserve");
 
         jLabel12.setBackground(new java.awt.Color(153, 153, 153));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("<imageHere>");
 
-        jButton7.setText("Add to favorites");
+        jButton7.setIcon(bufferImageIcon(this.createURL("https://cdn.onlinewebfonts.com/svg/img_35707.png"), 20, 20));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -208,6 +210,9 @@ public class GUI extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(71, 71, 71)
                                                 .addComponent(jButton3))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(95, 95, 95)
+                                                .addComponent(jButton15))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addContainerGap()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -253,6 +258,8 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(jButton7)
                                 .addGap(39, 39, 39)
                                 .addComponent(jButton3)
+                                .addGap(38, 38, 38)
+                                .addComponent(jButton15)
                                 .addGap(38, 38, 38))
                         .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -1628,6 +1635,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButton15;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;

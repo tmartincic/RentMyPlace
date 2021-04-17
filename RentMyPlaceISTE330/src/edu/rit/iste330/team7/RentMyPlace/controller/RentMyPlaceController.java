@@ -17,6 +17,8 @@ public class RentMyPlaceController {
     int currentIndex = 0;
     ArrayList<Property> properties = null;
     ArrayList<Location> locations = null;
+    ArrayList<Feature> features = null;
+    ArrayList<FeatureProperty> featureProperty = null;
     ArrayList<PropertyType> propertyTypes = null;
     LoginGUI gui;
     Model model;
@@ -193,6 +195,12 @@ public class RentMyPlaceController {
             if(!Auth.checkPermission(ae.getActionCommand())) return;
 
             getProperty(currentIndex);
+
+            String propertyFeatures = "";
+            for(Feature feature : features){
+                propertyFeatures += "<li>" + feature.getFeature() + "</li>";
+            }
+
             JOptionPane jopMessage = new JOptionPane();
             jopMessage.showMessageDialog(mainGui,
                     "<html><body>" +
@@ -203,6 +211,7 @@ public class RentMyPlaceController {
                             "<p>Description: " +  properties.get(currentIndex).getDescription() + "</p><br>" +
                             "<p>Bedrooms: " +  properties.get(currentIndex).getBedrooms() + "</p><br>" +
                             "<p>Size: " +  properties.get(currentIndex).getSize() + "</p>" +
+                            "<p>Features: <ul>" +  propertyFeatures + "</ul></p>" +
                             "</body></html>",
                     "Property information", JOptionPane.INFORMATION_MESSAGE, mainGui.bufferImageIcon(mainGui.createURL(properties.get(currentIndex).getImagePath()), 500, 350));
         }
@@ -220,6 +229,23 @@ public class RentMyPlaceController {
         locations = new Location()
                 .select(new String[]{"id", "city", "zip", "street"})
                 .get();
+
+        featureProperty = new FeatureProperty()
+                        .select(new String[]{"propertyId", "featureId"})
+                        .where("propertyId", "=", String.valueOf(properties.get(currentIndex).getId()))
+                        .get();
+
+        ArrayList<Feature> tempFeatures = new ArrayList<>();
+        features = new ArrayList<>();
+        for(FeatureProperty fProperty : featureProperty) {
+            tempFeatures = new Feature()
+                    .select(new String[]{"id", "feature"})
+                    .where("id", "=", String.valueOf(fProperty.getFeatureId()))
+                    .get();
+
+            features.add(tempFeatures.get(0));
+            tempFeatures.clear();
+        }
 
         mainGui.getjLabel2().setText(properties.get(currentIndex).getPropertyName());
 
