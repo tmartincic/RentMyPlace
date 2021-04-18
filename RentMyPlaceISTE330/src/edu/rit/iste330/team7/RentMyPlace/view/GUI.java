@@ -131,28 +131,28 @@ public class GUI extends javax.swing.JFrame {
         settingsPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldContactEmail = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldContactFullName = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldContactZip = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jTextFieldContactCity = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jTextFieldContactStreet = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        jTextFieldBillingOwnerName = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        jTextFieldBillingCardNumber = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        jTextFieldBillingAddress = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        jTextFieldBillingCVC = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        jTextFieldBillingExpirationDate = new javax.swing.JTextField();
+        saveSettingsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1120, 670));
@@ -1163,18 +1163,18 @@ public class GUI extends javax.swing.JFrame {
         jLabel8.setText("SETTINGS CONTAINER");
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("CONTACT INFO");
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField3.setText("<email>");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldContactEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldContactEmail.setText("<email>");
+        jTextFieldContactEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
             }
         });
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Email:");
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField4.setText("<name>");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldContactFullName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldContactFullName.setText("<name>");
+        jTextFieldContactFullName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
@@ -1183,27 +1183,27 @@ public class GUI extends javax.swing.JFrame {
         jLabel19.setText("Full name:");
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setText("Street:");
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.setText("<zip>");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldContactZip.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldContactZip.setText("<zip>");
+        jTextFieldContactZip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
             }
         });
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setText("City:");
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField6.setText("<name>");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldContactCity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldContactCity.setText("<name>");
+        jTextFieldContactCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
             }
         });
         jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel26.setText("Zip:");
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField7.setText("<street>");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldContactStreet.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldContactStreet.setText("<street>");
+        jTextFieldContactStreet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
             }
@@ -1212,51 +1212,51 @@ public class GUI extends javax.swing.JFrame {
         jLabel17.setText("BILLING INFO");
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel28.setText("Owner name:");
-        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField8.setText("<name>");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldBillingOwnerName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldBillingOwnerName.setText("<name>");
+        jTextFieldBillingOwnerName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField8ActionPerformed(evt);
             }
         });
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel29.setText("Card number:");
-        jTextField9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField9.setText("<card number>");
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldBillingCardNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldBillingCardNumber.setText("<card number>");
+        jTextFieldBillingCardNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField9ActionPerformed(evt);
             }
         });
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel30.setText("Billing address:");
-        jTextField10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField10.setText("<address>");
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldBillingAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldBillingAddress.setText("<address>");
+        jTextFieldBillingAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField10ActionPerformed(evt);
             }
         });
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel31.setText("CVC:");
-        jTextField11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField11.setText("<cvc>");
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldBillingCVC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldBillingCVC.setText("<cvc>");
+        jTextFieldBillingCVC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField11ActionPerformed(evt);
             }
         });
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel32.setText("Expires:");
-        jTextField12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField12.setText("<expiration>");
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldBillingExpirationDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldBillingExpirationDate.setText("<expiration>");
+        jTextFieldBillingExpirationDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField12ActionPerformed(evt);
             }
         });
-        jButton6.setText("SAVE");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        saveSettingsButton.setText("SAVE");
+        saveSettingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
@@ -1280,49 +1280,49 @@ public class GUI extends javax.swing.JFrame {
                                                                         .addGroup(settingsPanelLayout.createSequentialGroup()
                                                                                 .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addGap(18, 18, 18)
-                                                                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                .addComponent(jTextFieldBillingOwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                         .addGroup(settingsPanelLayout.createSequentialGroup()
                                                                                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addGap(18, 18, 18)
-                                                                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                                .addComponent(jTextFieldBillingCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                                 .addGap(72, 72, 72)
                                                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                                         .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                                                                         .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                        .addComponent(jTextField11)
-                                                                        .addComponent(jTextField12, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)))
+                                                                        .addComponent(jTextFieldBillingCVC)
+                                                                        .addComponent(jTextFieldBillingExpirationDate, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)))
                                                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(settingsPanelLayout.createSequentialGroup()
                                                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addGroup(settingsPanelLayout.createSequentialGroup()
                                                                                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addGap(18, 18, 18)
-                                                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                .addComponent(jTextFieldContactFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                         .addGroup(settingsPanelLayout.createSequentialGroup()
                                                                                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addGap(18, 18, 18)
-                                                                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                .addComponent(jTextFieldContactEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                         .addGroup(settingsPanelLayout.createSequentialGroup()
                                                                                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addGap(18, 18, 18)
-                                                                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                                .addComponent(jTextFieldContactStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                                 .addGap(72, 72, 72)
                                                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                                        .addComponent(jTextFieldContactCity, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jTextFieldContactZip, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(settingsPanelLayout.createSequentialGroup()
                                                 .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextFieldBillingAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(saveSettingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(63, 63, 63))))
         );
         settingsPanelLayout.setVerticalGroup(
@@ -1335,38 +1335,38 @@ public class GUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldContactFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextFieldContactCity, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(9, 9, 9)
                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldContactEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextFieldContactZip, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldContactStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(51, 51, 51)
                                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldBillingOwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextFieldBillingCVC, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(9, 9, 9)
                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldBillingCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextFieldBillingExpirationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jTextFieldBillingAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(saveSettingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -1409,8 +1409,17 @@ public class GUI extends javax.swing.JFrame {
         this.getjButton15().addActionListener(ae);
     }
 
+    public void addjButton6EventListener(ActionListener ae){
+        this.getSaveSettingsButton().setActionCommand("save_settings");
+        this.getSaveSettingsButton().addActionListener(ae);
+    }
+
     public JButton getjButton15() {
         return jButton15;
+    }
+
+    public JButton getSaveSettingsButton() {
+        return saveSettingsButton;
     }
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1600,6 +1609,47 @@ public class GUI extends javax.swing.JFrame {
     public JButton getLogOutButton() {
         return logOutButton;
     }
+
+    public JTextField getjTextFieldContactFullName() {
+        return jTextFieldContactFullName;
+    }
+
+    public JTextField getjTextFieldBillingAddress() {
+        return jTextFieldBillingAddress;
+    }
+
+    public JTextField getjTextFieldContactEmail() {
+        return jTextFieldContactEmail;
+    }
+
+    public JTextField getjTextFieldContactStreet() {
+        return jTextFieldContactStreet;
+    }
+
+    public JTextField getjTextFieldBillingOwnerName() {
+        return jTextFieldBillingOwnerName;
+    }
+
+    public JTextField getjTextFieldBillingCardNumber() {
+        return jTextFieldBillingCardNumber;
+    }
+
+    public JTextField getjTextFieldContactCity() {
+        return jTextFieldContactCity;
+    }
+
+    public JTextField getjTextFieldContactZip() {
+        return jTextFieldContactZip;
+    }
+
+    public JTextField getjTextFieldBillingCVC() {
+        return jTextFieldBillingCVC;
+    }
+
+    public JTextField getjTextFieldBillingExpirationDate() {
+        return jTextFieldBillingExpirationDate;
+    }
+
     /*THINK ABOUT RELOCATION OF THESE METHODS*/
 
     /**
@@ -1658,7 +1708,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton saveSettingsButton;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -1764,9 +1814,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextFieldBillingAddress;
+    private javax.swing.JTextField jTextFieldBillingCVC;
+    private javax.swing.JTextField jTextFieldBillingExpirationDate;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
@@ -1777,13 +1827,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextFieldContactEmail;
+    private javax.swing.JTextField jTextFieldContactFullName;
+    private javax.swing.JTextField jTextFieldContactZip;
+    private javax.swing.JTextField jTextFieldContactCity;
+    private javax.swing.JTextField jTextFieldContactStreet;
+    private javax.swing.JTextField jTextFieldBillingOwnerName;
+    private javax.swing.JTextField jTextFieldBillingCardNumber;
     private javax.swing.JPanel myRentalsPanel;
     private javax.swing.JScrollPane myRentalsScrollPane;
     private javax.swing.JPanel rentPanel;

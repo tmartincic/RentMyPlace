@@ -30,12 +30,11 @@ public class RentMyPlaceController {
 
     public RentMyPlaceController(LoginGUI gui, Model model) {
         this.gui = gui;
-        if(Auth.getUser() != null) {
+        if (Auth.getUser() != null) {
             JOptionPane jopMessage = new JOptionPane();
             jopMessage.showMessageDialog(gui, "Token was recognized from last login!");
             mainGui.setVisible(true);
-        }
-        else gui.setVisible(true);
+        } else gui.setVisible(true);
         this.model = model;
 
         gui.addLoginListener(new LoginListener());
@@ -46,6 +45,7 @@ public class RentMyPlaceController {
         mainGui.addjButton1EventListener(new PreviousPropertyActionListener());
         mainGui.addjButton3EventListener(new MorePropertyDetailsActionListener());
         mainGui.addjButton15EventListener(new ReserveListener());
+        mainGui.addjButton6EventListener(new SaveSettingsListener());
 
         registerGUI.addRegisterListener(new AddUserListener());
         registerGUI.addReturnToLoginListener(new ReturnLoginListener());
@@ -56,11 +56,11 @@ public class RentMyPlaceController {
         this.getProperty(currentIndex);
 
         //set user if token exists
-        if(Auth.tokenExists()) {
+        if (Auth.tokenExists()) {
             currentUser = Auth.getUser();
             try {
                 mainGui.getjLabelUsername().setText(currentUser.getUsername());
-            } catch(NullPointerException npe){
+            } catch (NullPointerException npe) {
                 mainGui.getjLabelUsername().setText("");
             }
         }
@@ -167,7 +167,7 @@ public class RentMyPlaceController {
     class LogOutListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            if(!Auth.checkPermission(ae.getActionCommand())) return;
+            if (!Auth.checkPermission(ae.getActionCommand())) return;
 
             gui.setVisible(true);
             mainGui.dispose();
@@ -212,7 +212,7 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae) {
 
-            if(!Auth.checkPermission(ae.getActionCommand()) && guest==false) return;
+            if (!Auth.checkPermission(ae.getActionCommand()) && guest == false) return;
 
             currentIndex++;
             if (currentIndex >= properties.size()) {
@@ -227,7 +227,7 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae) {
 
-            if(!Auth.checkPermission(ae.getActionCommand()) && guest==false) return;
+            if (!Auth.checkPermission(ae.getActionCommand()) && guest == false) return;
 
             currentIndex--;
             if (currentIndex < 0) {
@@ -241,12 +241,12 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae) {
 
-            if(!Auth.checkPermission(ae.getActionCommand()) && guest==false) return;
+            if (!Auth.checkPermission(ae.getActionCommand()) && guest == false) return;
 
             getProperty(currentIndex);
 
             String propertyFeatures = "";
-            for(Feature feature : features){
+            for (Feature feature : features) {
                 propertyFeatures += "<li>" + feature.getFeature() + "</li>";
             }
 
@@ -254,13 +254,13 @@ public class RentMyPlaceController {
             jopMessage.showMessageDialog(mainGui,
                     "<html><body>" +
                             "<p>Name: " + "<b>" + properties.get(currentIndex).getPropertyName() + "</b></p><br><br>" +
-                            "<p>Street: " + locations.get(properties.get(currentIndex).getLocationId() -1).getStreet() + "</p><br>" +
-                            "<p>Location: " + locations.get(properties.get(currentIndex).getLocationId() -1).getCity()  + ", " + locations.get(properties.get(currentIndex).getLocationId() -1).getZip()  +  "</p><br>" +
+                            "<p>Street: " + locations.get(properties.get(currentIndex).getLocationId() - 1).getStreet() + "</p><br>" +
+                            "<p>Location: " + locations.get(properties.get(currentIndex).getLocationId() - 1).getCity() + ", " + locations.get(properties.get(currentIndex).getLocationId() - 1).getZip() + "</p><br>" +
                             "<p>PropertyType: " + propertyTypes.get(properties.get(currentIndex).getPropertyTypeId() - 1).getType() + "</p><br>" +
-                            "<p>Description: " +  properties.get(currentIndex).getDescription() + "</p><br>" +
-                            "<p>Bedrooms: " +  properties.get(currentIndex).getBedrooms() + "</p><br>" +
-                            "<p>Size: " +  properties.get(currentIndex).getSize() + "</p>" +
-                            "<p>Features: <ul>" +  propertyFeatures + "</ul></p>" +
+                            "<p>Description: " + properties.get(currentIndex).getDescription() + "</p><br>" +
+                            "<p>Bedrooms: " + properties.get(currentIndex).getBedrooms() + "</p><br>" +
+                            "<p>Size: " + properties.get(currentIndex).getSize() + "</p>" +
+                            "<p>Features: <ul>" + propertyFeatures + "</ul></p>" +
                             "</body></html>",
                     "Property information", JOptionPane.INFORMATION_MESSAGE, mainGui.bufferImageIcon(mainGui.createURL(properties.get(currentIndex).getImagePath()), 500, 350));
         }
@@ -280,13 +280,13 @@ public class RentMyPlaceController {
                 .get();
 
         featureProperty = new FeatureProperty()
-                        .select(new String[]{"propertyId", "featureId"})
-                        .where("propertyId", "=", String.valueOf(properties.get(currentIndex).getId()))
-                        .get();
+                .select(new String[]{"propertyId", "featureId"})
+                .where("propertyId", "=", String.valueOf(properties.get(currentIndex).getId()))
+                .get();
 
         ArrayList<Feature> tempFeatures = new ArrayList<>();
         features = new ArrayList<>();
-        for(FeatureProperty fProperty : featureProperty) {
+        for (FeatureProperty fProperty : featureProperty) {
             tempFeatures = new Feature()
                     .select(new String[]{"id", "feature"})
                     .where("id", "=", String.valueOf(fProperty.getFeatureId()))
@@ -305,6 +305,20 @@ public class RentMyPlaceController {
         mainGui.getjLabel12().setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(currentIndex).getImagePath()), 600, 450));
 
         return properties.get(currentIndex);
+    }
+
+    class SaveSettingsListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            ArrayList<Contact> contacts = new Contact()
+                    .select(new String[]{"id", "fullName", "email", "phone", "locationId"})
+                    .get();
+
+            /**
+             * FINISH
+             */
+
+        }
     }
 
     class ReserveListener implements ActionListener {
