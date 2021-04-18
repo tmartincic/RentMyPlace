@@ -58,7 +58,11 @@ public class RentMyPlaceController {
         //set user if token exists
         if(Auth.tokenExists()) {
             currentUser = Auth.getUser();
-            mainGui.getjLabelUsername().setText(currentUser.getUsername());
+            try {
+                mainGui.getjLabelUsername().setText(currentUser.getUsername());
+            } catch(NullPointerException npe){
+                mainGui.getjLabelUsername().setText("");
+            }
         }
     }
 
