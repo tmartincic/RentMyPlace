@@ -13,6 +13,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 public class RentMyPlaceController {
@@ -374,9 +375,14 @@ public class RentMyPlaceController {
                 System.out.println("No such property");
             }
 
+            //Order by doesn't work here due to multiple queries combined to single list
+            if(orderBy.equals("ASC"))Collections.sort(properties);
+            else Collections.sort(properties, Collections.reverseOrder());
+
             for(Property property:properties){
-                System.out.println(property.toString());
+                System.out.println(property.getPricePerNight());
             }
+
         }
     }
 

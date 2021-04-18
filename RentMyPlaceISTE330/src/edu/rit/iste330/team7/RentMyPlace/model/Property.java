@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Property extends Model
+public class Property extends Model implements Comparable
 {
     private static String table_name = "property";
 
@@ -203,5 +203,14 @@ public class Property extends Model
     public Property delete(){
         super.deleteModel(this.id);
         return this;
+    }
+
+    @Override
+    public int compareTo(Object comparedTo) {
+        double diff = 0;
+        Property prop = null;
+        if(comparedTo instanceof Property) prop = (Property)comparedTo;
+        if(prop != null) diff = getPricePerNight() - prop.getPricePerNight();
+        return (int) Math.floor(diff);
     }
 }
