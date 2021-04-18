@@ -25,6 +25,7 @@ public class RentMyPlaceController {
     ArrayList<FeatureProperty> featureProperty = null;
     ArrayList<PropertyType> propertyTypes = null;
     ArrayList<Contact> contacts = null;
+    ArrayList<Billing> billings = null;
     ArrayList<User> users = null;
     ArrayList<Favorite> favorites = null;
     LoginGUI gui;
@@ -56,6 +57,7 @@ public class RentMyPlaceController {
 
         mainGui.getjTabbedPane2().addChangeListener(new FavoritesListener());
         mainGui.getjTabbedPane2().addChangeListener(new MyRentalsListener());
+        mainGui.getjTabbedPane2().addChangeListener(new SettingListener());
 
         mainGui.addAddPropertyEventListener(new AddPropertyListener());
 
@@ -76,22 +78,6 @@ public class RentMyPlaceController {
                 mainGui.getjLabelUsername().setText("");
             }
         }
-
-        // NOT WORKING, WILL BE USED TO UPDATE TEXTFIELD
-        int userId = Auth.getUser().getId();
-
-
-        contacts = new Contact()
-                .select(new String[]{"id", "fullName", "email", "phone", "locationId"})
-                .where("id", "=", String.valueOf(userId))
-                .get();
-
-        mainGui.getjTextFieldContactFullName().setText(contacts.get(0).getFullName());
-        mainGui.getjTextFieldContactEmail().setText(contacts.get(0).getEmail());
-        mainGui.getjTextFieldContactStreet().setText(locations.get(0).getStreet());
-        mainGui.getjTextFieldContactCity().setText(locations.get(0).getCity());
-        mainGui.getjTextFieldContactZip().setText(String.valueOf(locations.get(0).getZip()));
-
     }
 
     public RentMyPlaceController() {
@@ -324,6 +310,44 @@ public class RentMyPlaceController {
         mainGui.getjLabel12().setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(currentIndex).getImagePath()), 600, 450));
 
         return properties.get(currentIndex);
+    }
+
+    class SettingListener implements ChangeListener{
+
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            if (!Auth.checkPermission(String.valueOf(mainGui.getjTabbedPane2().getSelectedIndex()))) return;
+
+            if (mainGui.getjTabbedPane2().getSelectedIndex() == 4) {
+                int userId = Auth.getUser().getId();
+
+                int contactId = Auth.getUser().getContactId();
+
+                contacts = new Contact()
+                        .select(new String[]{"id", "fullName", "email", "phone", "locationId"})
+                        .where("id", "=", String.valueOf(contactId))
+                        .get();
+
+                int billingId = Auth.getUser().getBillingId();
+
+                billings = new Billing()
+                        .select(new String[]{"id", "billingAddress", "creditCardNum", "CVC", "expireDate", "ownerName"})
+                        .where("id" ,"=", String.valueOf(billingId))
+                        .get();
+
+                mainGui.getjTextFieldContactFullName().setText(contacts.get(0).getFullName());
+                mainGui.getjTextFieldContactEmail().setText(contacts.get(0).getEmail());
+                mainGui.getjTextFieldContactStreet().setText(locations.get(0).getStreet());
+                mainGui.getjTextFieldContactCity().setText(locations.get(0).getCity());
+                mainGui.getjTextFieldContactZip().setText(String.valueOf(locations.get(0).getZip()));
+
+                mainGui.getjTextFieldBillingOwnerName().setText(billings.get(0).getOwnerName());
+                mainGui.getjTextFieldBillingCardNumber().setText(billings.get(0).getCreditCardNum());
+                mainGui.getjTextFieldBillingAddress().setText(billings.get(0).getBillingAddress());
+                mainGui.getjTextFieldBillingCVC().setText(billings.get(0).getCVC());
+                mainGui.getjTextFieldBillingExpirationDate().setText(String.valueOf(billings.get(0).getExpireDate()));
+            }
+        }
     }
 
     class SaveSettingsListener implements ActionListener {
