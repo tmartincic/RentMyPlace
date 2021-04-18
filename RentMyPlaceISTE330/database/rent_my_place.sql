@@ -243,9 +243,9 @@ INSERT INTO `permissions` (`id`, `route`, `role`) VALUES
 ('6', 'rent_next', 'admin'),
 ('7', 'rent_prev', 'admin'),
 ('8', 'rent_details', 'admin'),
-('0', '5', 'admin'),
+('0', 'log_out', 'admin'),
 
-('10', '5', 'user'),
+('10', 'log_out', 'user'),
 ('11', '0', 'user'),
 ('12', '1', 'user'),
 ('13', '2', 'user'),

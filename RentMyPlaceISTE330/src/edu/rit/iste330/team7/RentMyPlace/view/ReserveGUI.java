@@ -1,5 +1,7 @@
 package edu.rit.iste330.team7.RentMyPlace.view;
 
+import javax.swing.*;
+
 public class ReserveGUI extends javax.swing.JFrame {
 
     /**
@@ -58,7 +60,7 @@ public class ReserveGUI extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("RESERVATION");
