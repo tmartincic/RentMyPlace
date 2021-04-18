@@ -55,7 +55,9 @@ public class RentMyPlaceController {
         mainGui.addjButton5EventListener(new SearchListener());
 
         mainGui.getjTabbedPane2().addChangeListener(new FavoritesListener());
+        mainGui.getjTabbedPane2().addChangeListener(new MyRentalsListener());
 
+        mainGui.addAddPropertyEventListener(new AddPropertyListener());
 
         registerGUI.addRegisterListener(new AddUserListener());
         registerGUI.addReturnToLoginListener(new ReturnLoginListener());
@@ -428,20 +430,95 @@ public class RentMyPlaceController {
         }
     }
 
-    class MyRentalsListener implements ActionListener{
+    class AddPropertyListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(!Auth.checkPermission(e.getActionCommand())) return;
 
-            int userId = Auth.getUser().getId();
+            ArrayList<JRadioButton> radioButtons = mainGui.getJRadioButtons();
+            String propertyType = "";
+            for(JRadioButton btn : radioButtons){
+                if(btn.isSelected()){
+                    propertyType = btn.getText().toLowerCase();
+                }
+            }
 
-            properties = new Property()
-                    .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId", "propertyTypeId", "bedrooms", "size"})
-                    .where("userId", "=", String.valueOf(userId))
+            ArrayList<PropertyType> propertyTypes = new PropertyType()
+                    .select(new String[]{"id"})
+                    .where("type","=", propertyType)
                     .get();
 
-            for(Property property : properties){
-                System.out.println(property.toString());
+            String propertyTypeId = String.valueOf(propertyTypes.get(0).getId());
+
+            String propertyName = mainGui.getjTextField13().getText();
+            String street = mainGui.getjTextField14().getText();
+            String numOfBedrooms = mainGui.getjTextField15().getText();
+            String cityName = mainGui.getjTextField16().getText();
+            String zip = mainGui.getjTextField17().getText();
+            String pricePerNight = mainGui.getjTextField18().getText();
+            String size = mainGui.getjTextField19().getText();
+            String description = mainGui.getjTextField20().getText();
+            String imageUrl = mainGui.getjTextField21().getText();
+
+             Location location = new Location().create(Map.ofEntries(
+                    Map.entry("street", street),
+                    Map.entry("city", cityName),
+                    Map.entry("zip", zip)
+            ));
+
+             String id = String.valueOf(Auth.getUser().getId());
+            Property property = new Property().create(Map.ofEntries(
+                  Map.entry("userId", id),
+                  Map.entry("locationId", String.valueOf(location.getId())),
+                    Map.entry("propertyName", propertyName),
+                  Map.entry("propertyTypeId", propertyTypeId),
+                  Map.entry("description", description),
+                  Map.entry("imagePath", imageUrl),
+                  Map.entry("bedrooms", numOfBedrooms),
+                  Map.entry("size", size),
+                  Map.entry("pricePerNight", pricePerNight)
+            ));
+
+            ArrayList<JCheckBox> checkBoxes = mainGui.getCheckBoxes();
+            ArrayList<String> checkedFeatures = new ArrayList<>();
+            for(JCheckBox box : checkBoxes){
+                if(box.isSelected()){
+                    checkedFeatures.add(box.getText());
+                }
+            }
+
+            ArrayList<Feature> features = new ArrayList<>();
+
+            for(String feature : checkedFeatures) {
+                features.add((Feature) new Feature().select(new String[]{"id"}).where("feature", "LIKE", feature).get().get(0));
+            }
+
+            for(Feature feature : features) {
+                new FeatureProperty().create(Map.ofEntries(
+                        Map.entry("propertyId", String.valueOf(property.getId())),
+                        Map.entry("featureId", String.valueOf(feature.getId()))
+                ));
+            }
+
+        }
+    }
+
+    class MyRentalsListener implements ChangeListener{
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            if(!Auth.checkPermission(String.valueOf(mainGui.getjTabbedPane2().getSelectedIndex()))) return;
+
+            if(mainGui.getjTabbedPane2().getSelectedIndex() == 2) {
+                int userId = Auth.getUser().getId();
+                properties.clear();
+                properties = new Property()
+                        .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId", "propertyTypeId", "bedrooms", "size"})
+                        .where("userId", "=", String.valueOf(userId))
+                        .get();
+
+                for (Property property : properties) {
+                    System.out.println(property.toString());
+                }
             }
         }
     }
@@ -450,13 +527,10 @@ public class RentMyPlaceController {
         @Override
         public void stateChanged(ChangeEvent e) {
             if (!Auth.checkPermission(String.valueOf(mainGui.getjTabbedPane2().getSelectedIndex())))  return;
-            System.out.println(mainGui.getjTabbedPane2().getSelectedIndex());
 
             int id = Auth.getUser().getId();
 
-            System.out.println("USER ID " + id);
             if (mainGui.getjTabbedPane2().getSelectedIndex() == 3) {
-                // favorites = new ArrayList<>();
                 favorites = new Favorite()
                         .select(new String[]{"id", "userId", "propertyId"})
                         .where("userId", "=", String.valueOf(id))

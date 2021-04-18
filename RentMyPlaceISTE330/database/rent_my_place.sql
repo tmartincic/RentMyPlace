@@ -260,7 +260,10 @@ INSERT INTO `permissions` (`id`, `route`, `role`) VALUES
 ('21', 'reserve', 'admin'),
 
 ('22', 'search', 'admin'),
-('23', 'search', 'admin');
+('23', 'search', 'admin'),
+
+('24', 'add_property', 'admin'),
+('25', 'add_property', 'user');
 
 
 --

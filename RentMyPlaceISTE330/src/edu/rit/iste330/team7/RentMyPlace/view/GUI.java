@@ -6,8 +6,10 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class GUI extends javax.swing.JFrame {
 
@@ -153,6 +155,8 @@ public class GUI extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jTextFieldBillingExpirationDate = new javax.swing.JTextField();
         saveSettingsButton = new javax.swing.JButton();
+
+        buttonGroup = new ButtonGroup();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1120, 670));
@@ -650,7 +654,7 @@ public class GUI extends javax.swing.JFrame {
         });
 
         jTextField18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField18.setText("<name>");
+        jTextField18.setText("<Price per night>");
         jTextField18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField18ActionPerformed(evt);
@@ -1379,6 +1383,15 @@ public class GUI extends javax.swing.JFrame {
         jTabbedPane2.addTab(tabStyle1 + "LOG OUT" + tabStyle2, logoutPanel);
         logoutPanel.add(logOutButton);
 
+        buttonGroup.add(jRadioButton1);
+        buttonGroup.add(jRadioButton2);
+        buttonGroup.add(jRadioButton3);
+        buttonGroup.add(jRadioButton4);
+        buttonGroup.add(jRadioButton5);
+
+        System.out.println(buttonGroup);
+
+
         getContentPane().add(jTabbedPane2, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -1417,6 +1430,40 @@ public class GUI extends javax.swing.JFrame {
     public void addjButton5EventListener(ActionListener ae){
         this.getjButton5().setActionCommand("search");
         this.getjButton5().addActionListener(ae);
+    }
+
+    public void addAddPropertyEventListener(ActionListener ae) {
+        this.getjButton9().setActionCommand("add_property");
+        this.getjButton9().addActionListener(ae);
+    }
+
+    public JButton getjButton9() {
+        return jButton9;
+    }
+
+    public ArrayList<JRadioButton> getJRadioButtons(){
+        ArrayList<JRadioButton> radioButtons = new ArrayList<>();
+        radioButtons.add(jRadioButton1);
+        radioButtons.add(jRadioButton2);
+        radioButtons.add(jRadioButton3);
+        radioButtons.add(jRadioButton4);
+        radioButtons.add(jRadioButton5);
+        return radioButtons;
+    }
+
+    public ArrayList<JCheckBox> getCheckBoxes(){
+        ArrayList<JCheckBox> checkBoxes = new ArrayList<>();
+
+        checkBoxes.add(jCheckBox1);
+        checkBoxes.add(jCheckBox2);
+        checkBoxes.add(jCheckBox3);
+        checkBoxes.add(jCheckBox4);
+        checkBoxes.add(jCheckBox5);
+        checkBoxes.add(jCheckBox6);
+        checkBoxes.add(jCheckBox7);
+        checkBoxes.add(jCheckBox8);
+
+        return checkBoxes;
     }
 
     public JButton getjButton5() {
@@ -1589,6 +1636,46 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton14jButton10ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    }
+
+    public ButtonGroup getButtonGroup() {
+        return buttonGroup;
+    }
+
+    public JTextField getjTextField13() {
+        return jTextField13;
+    }
+
+    public JTextField getjTextField14() {
+        return jTextField14;
+    }
+
+    public JTextField getjTextField15() {
+        return jTextField15;
+    }
+
+    public JTextField getjTextField16() {
+        return jTextField16;
+    }
+
+    public JTextField getjTextField17() {
+        return jTextField17;
+    }
+
+    public JTextField getjTextField18() {
+        return jTextField18;
+    }
+
+    public JTextField getjTextField19() {
+        return jTextField19;
+    }
+
+    public JTextField getjTextField20() {
+        return jTextField20;
+    }
+
+    public JTextField getjTextField21() {
+        return jTextField21;
     }
 
     public JLabel getjLabel11() {
@@ -1857,5 +1944,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel searchPanel;
     private javax.swing.JScrollPane searchScrollPane;
     private javax.swing.JPanel settingsPanel;
+
+    private ButtonGroup buttonGroup;
     // End of variables declaration
 }
