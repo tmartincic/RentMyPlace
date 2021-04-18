@@ -227,9 +227,11 @@ public class Model<T> {
             con.connect();
             con.executeQuery(query, attributes);
             con.close();
+            clearAttributes();
         }
         catch(DLException e){
             System.out.println(e);
+            clearAttributes();
             return false;
         }
         return true;
@@ -258,11 +260,14 @@ public class Model<T> {
             con.connect();
             con.executeQuery(query, attributes);
             con.close();
+            clearAttributes();
         }
         catch(DLException e){
             System.out.println(e);
+            clearAttributes();
             return false;
         }
+        clearAttributes();
         return true;
     }
 }

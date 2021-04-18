@@ -76,14 +76,12 @@ public class RentMyPlaceController {
     public RentMyPlaceController() {
     }
 
-    public boolean checkUsername(String userName) {
+    public boolean usernameExists(String userName) {
         ArrayList<User> user = new User()
                 .where("username", "LIKE", userName)
                 .get();
-        if (user.isEmpty()) {
-            return true;
-        }
-        return false;
+        if (user.isEmpty()) return false;
+        return true;
     }
 
     public boolean autorization(User user) {
@@ -137,35 +135,31 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            boolean authenticated = false;
-
             if (!registerGUI.getPassField().getText().equals("") && !registerGUI.getUsernameField().getText().equals("")) {
-                authenticated = checkUsername(registerGUI.getUsernameField().getText());
-                if (authenticated) {
-                    //create default user object
-                    User newUser = new User();
+                String username = registerGUI.getUsernameField().getText();
+                if (!usernameExists(username)) {
 
                     //convert pass
                     String convPass = Authentication.convert(registerGUI.getPassField().getText());
-
-                    //set user attributes
-                    newUser.setUsername(registerGUI.getUsernameField().getText());
-                    newUser.setPassword(convPass);
-                    newUser.setUserType("u");
+                    String userType = "user";
 
                     //add to DB
-                    newUser.create(Map.ofEntries(
-                            Map.entry("username", newUser.getUsername()),
-                            Map.entry("password", newUser.getPassword()),
-                            Map.entry("userType", newUser.getUserType())
+                    User newUser = new User().create(Map.ofEntries(
+                            Map.entry("username", username),
+                            Map.entry("password", convPass),
+                            Map.entry("userType", userType)
                     ));
 
+                    Auth.checkUser(username, convPass);
                     gui.dispose();
                     registerGUI.dispose();
                     mainGui.setVisible(true);
 
-                    currentUser = Auth.getUser();
-                    mainGui.getjLabelUsername().setText(currentUser.getUsername());
+                    mainGui.getjLabelUsername().setText(newUser.getUsername());
+                }
+                else {
+                    JOptionPane jopMessage = new JOptionPane();
+                    jopMessage.showMessageDialog(gui, "This username already exists!\nTry something else.");
                 }
             }
         }
@@ -174,8 +168,6 @@ public class RentMyPlaceController {
     class LogOutListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            if (!Auth.checkPermission(ae.getActionCommand())) return;
-
             gui.setVisible(true);
             mainGui.dispose();
 
@@ -184,8 +176,7 @@ public class RentMyPlaceController {
             gui.getjPasswordField1().setText("");
             gui.getjTextField1().setText("");
 
-            currentUser = Auth.getUser();
-            mainGui.getjLabelUsername().setText(currentUser.getUsername());
+            Auth.logToken("");
         }
     }
 

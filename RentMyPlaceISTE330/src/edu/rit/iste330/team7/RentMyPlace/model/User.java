@@ -105,6 +105,7 @@ public class User extends Model
 
     public User assign(Map<String, String> row) {
         for (String attribute: row.keySet()) {
+            if(row.get(attribute) == null) continue;
             switch (attribute) {
                 case "id" -> this.setId(Integer.parseInt(row.get(attribute)));
                 case "username" -> this.setUsername(row.get(attribute));
@@ -192,7 +193,7 @@ public class User extends Model
     /*
         Generates a random token for the user
      */
-    public void generateToken() {
+    public String generateToken() {
         final SecureRandom secureRandom = new SecureRandom();
         final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
@@ -203,6 +204,7 @@ public class User extends Model
         update(Map.ofEntries(
                 Map.entry("token", token)
         ));
+        return token;
     }
 
     public void setToken(String token) {

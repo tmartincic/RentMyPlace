@@ -1374,7 +1374,7 @@ public class GUI extends javax.swing.JFrame {
         logOutButton = new JButton("LOG OUT");
         jLabelLogOutUsername = new JLabel();
         logoutPanel.add(jLabelLogOutUsername);
-        jTabbedPane2.addTab(tabStyle1 + "SETTINGS" + tabStyle2, bufferImageIcon(this.createURL("https://img.icons8.com/fluent-systems-regular/452/services--v1.png"), 25, 25), settingsPanel);
+        jTabbedPane2.addTab(tabStyle1 + "SETTINGS" + tabStyle2, bufferImageIcon(this.createURL("https://www.pngrepo.com/png/105815/180/favorite.png"), 25, 25), settingsPanel);
 
         jTabbedPane2.addTab(tabStyle1 + "LOG OUT" + tabStyle2, logoutPanel);
         logoutPanel.add(logOutButton);

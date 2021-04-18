@@ -12,17 +12,20 @@ public class DLException extends Exception{
     public DLException(SQLException sqlException){
         super("The operation can not be completed. Please contact the administrator.");
         this.log(sqlException);
+        sqlException.printStackTrace();
     }
 
     public DLException(SQLSyntaxErrorException sqlException, String stmt){
         super("The operation can not be completed. Please contact the administrator.");
         this.log(sqlException, stmt);
+        sqlException.printStackTrace();
     }
 
     //constructor
     public DLException(Exception exception){
         super("The operation can not be completed. Please contact the administrator.");
         this.log(exception);
+        exception.printStackTrace();
     }
 
     /**
