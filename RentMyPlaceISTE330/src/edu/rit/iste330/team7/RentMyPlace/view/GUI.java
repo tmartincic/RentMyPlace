@@ -194,7 +194,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("<imageHere>");
 
-        jButton7.setIcon(bufferImageIcon(this.createURL("https://cdn.onlinewebfonts.com/svg/img_35707.png"), 20, 20));
+        jButton7.setIcon(bufferImageIcon(this.createURL("https://www.pngrepo.com/png/105815/180/favorite.png"), 20, 20));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -1155,7 +1155,7 @@ public class GUI extends javax.swing.JFrame {
         );
 
         favoritesScrollPane.setViewportView(favoritesPanel);
-        jTabbedPane2.addTab(tabStyle1 + "FAVORITES" + tabStyle2, bufferImageIcon(this.createURL("https://cdn.onlinewebfonts.com/svg/img_35707.png"), 25, 25),  favoritesScrollPane);
+        jTabbedPane2.addTab(tabStyle1 + "FAVORITES" + tabStyle2, bufferImageIcon(this.createURL("https://www.pngrepo.com/png/105815/180/favorite.png"), 25, 25),  favoritesScrollPane);
         settingsPanel.setBackground(new java.awt.Color(188, 205, 213));
 
         jLabel8.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
@@ -1414,12 +1414,29 @@ public class GUI extends javax.swing.JFrame {
         this.getSaveSettingsButton().addActionListener(ae);
     }
 
+    public void addjButton5EventListener(ActionListener ae){
+        this.getjButton5().setActionCommand("search");
+        this.getjButton5().addActionListener(ae);
+    }
+
+    public JButton getjButton5() {
+        return jButton5;
+    }
+
     public JButton getjButton15() {
         return jButton15;
     }
 
     public JButton getSaveSettingsButton() {
         return saveSettingsButton;
+    }
+
+    public JComboBox<String> getjComboBox1() {
+        return jComboBox1;
+    }
+
+    public JTextField getjTextField2() {
+        return jTextField2;
     }
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {

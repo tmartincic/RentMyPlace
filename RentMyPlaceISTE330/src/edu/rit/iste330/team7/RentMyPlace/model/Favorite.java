@@ -62,9 +62,9 @@ public class Favorite extends Model
     public Favorite assign(Map<String, String> row){
         for(String attribute : row.keySet()) {
             switch(attribute) {
-                case "id" -> setId(Integer.parseInt(attribute));
-                case "userId" -> setUserId(Integer.parseInt(attribute));
-                case "propertyId" -> setPropertyId(Integer.parseInt(attribute));
+                case "id" : this.setId(Integer.parseInt(row.get(attribute))); break;
+                case "userId" : this.setUserId(Integer.parseInt(row.get(attribute))); break;
+                case "propertyId" : this.setPropertyId(Integer.parseInt(row.get(attribute))); break;
             }
         }
         return this;
@@ -74,12 +74,22 @@ public class Favorite extends Model
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();
         ArrayList<Favorite> favorites = new ArrayList<>();
 
-        for(HashMap< String, String> row : list_of_rows){
-            Favorite favorite = new Favorite();
-            favorite.assign(row);
-            favorites.add(favorite);
+        try {
+            for (HashMap<String, String> row : list_of_rows) {
+                Favorite favorite = new Favorite();
+                favorite.assign(row);
+                favorites.add(favorite);
+            }
+            return favorites;
         }
-        return favorites;
+        catch(NullPointerException e){
+            System.out.println("0 rows retrieved from the database: "+sqlToString());
+        }
+        catch(NumberFormatException e){
+            System.out.println(e);
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Favorite create(Map<String, String> row) {

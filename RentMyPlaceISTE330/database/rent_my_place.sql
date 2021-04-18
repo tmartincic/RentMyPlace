@@ -235,29 +235,32 @@ ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`);
 
 INSERT INTO `permissions` (`id`, `route`, `role`) VALUES
-('1', 'rent_tab', 'admin'),
-('2', 'search_tab', 'admin'),
-('3', 'my_rentals_tab', 'admin'),
-('4', 'favorites_tab', 'admin'),
-('5', 'settings_tab', 'admin'),
+('1', '0', 'admin'),
+('2', '1', 'admin'),
+('3', '2', 'admin'),
+('4', '3', 'admin'),
+('5', '4', 'admin'),
 ('6', 'rent_next', 'admin'),
 ('7', 'rent_prev', 'admin'),
 ('8', 'rent_details', 'admin'),
-('0', 'log_out', 'admin'),
+('0', '5', 'admin'),
 
-('10', 'log_out', 'user'),
-('11', 'rent_tab', 'user'),
-('12', 'search_tab', 'user'),
-('13', 'my_rentals_tab', 'user'),
-('14', 'favorites_tab', 'user'),
-('15', 'settings_tab', 'user'),
+('10', '5', 'user'),
+('11', '0', 'user'),
+('12', '1', 'user'),
+('13', '2', 'user'),
+('14', '3', 'user'),
+('15', '4', 'user'),
 ('16', 'rent_next', 'user'),
 ('17', 'rent_prev', 'user'),
 ('18', 'rent_details', 'user'),
 ('19', 'rent_add_fav', 'user'),
 
 ('20', 'reserve', 'user'),
-('21', 'reserve', 'admin');
+('21', 'reserve', 'admin'),
+
+('22', 'search', 'admin'),
+('23', 'search', 'admin');
 
 
 --

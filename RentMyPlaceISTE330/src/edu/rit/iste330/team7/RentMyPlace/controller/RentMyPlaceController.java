@@ -9,6 +9,8 @@ import edu.rit.iste330.team7.RentMyPlace.view.ReserveGUI;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Map;
@@ -21,6 +23,7 @@ public class RentMyPlaceController {
     ArrayList<Feature> features = null;
     ArrayList<FeatureProperty> featureProperty = null;
     ArrayList<PropertyType> propertyTypes = null;
+    ArrayList<Favorite> favorites = null;
     LoginGUI gui;
     Model model;
     GUI mainGui = new GUI();
@@ -46,6 +49,10 @@ public class RentMyPlaceController {
         mainGui.addjButton3EventListener(new MorePropertyDetailsActionListener());
         mainGui.addjButton15EventListener(new ReserveListener());
         mainGui.addjButton6EventListener(new SaveSettingsListener());
+        mainGui.addjButton5EventListener(new SearchListener());
+
+        mainGui.getjTabbedPane2().addChangeListener(new FavoritesListener());
+
 
         registerGUI.addRegisterListener(new AddUserListener());
         registerGUI.addReturnToLoginListener(new ReturnLoginListener());
@@ -329,6 +336,108 @@ public class RentMyPlaceController {
 
             ReserveGUI reserveGui = new ReserveGUI();
             reserveGui.setVisible(true);
+        }
+    }
+
+    class SearchListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(!Auth.checkPermission(e.getActionCommand()) && guest==false) return;
+
+            String givenPropertyLocation = mainGui.getjTextField2().getText();
+            System.out.println(givenPropertyLocation);
+
+            String priceAscDesc = mainGui.getjComboBox1().getSelectedItem().toString();
+            String orderBy = "";
+
+            if(priceAscDesc.equals("Price (ascending)")){
+                orderBy = "ASC";
+            }else{
+                orderBy = "DESC";
+            }
+            System.out.println(priceAscDesc);
+
+            locations = new Location()
+                    .select(new String[]{"id", "city", "zip", "street"})
+                    .where("city", "=", givenPropertyLocation)
+                    .get();
+
+            if(locations.isEmpty()){
+                System.out.println("No such property");
+            }
+
+            properties.clear();
+            ArrayList<Property> tempProperty = new ArrayList<>();
+            for(Location location : locations) {
+                tempProperty = new Property()
+                        .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId", "propertyTypeId", "bedrooms", "size"})
+                        .where("locationId", "=", String.valueOf(location.getId()))
+                        //.orderBy(new String[]{"pricePerNight"}, orderBy)
+                        .get();
+
+                properties.add((Property) tempProperty.get(0));
+                tempProperty.clear();
+            }
+
+            if(properties.isEmpty()){
+                System.out.println("No such property");
+            }
+
+            for(Property property:properties){
+                System.out.println(property.toString());
+            }
+        }
+    }
+
+    class MyRentalsListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(!Auth.checkPermission(e.getActionCommand())) return;
+
+            int userId = Auth.getUser().getId();
+
+            properties = new Property()
+                    .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId", "propertyTypeId", "bedrooms", "size"})
+                    .where("userId", "=", String.valueOf(userId))
+                    .get();
+
+            for(Property property : properties){
+                System.out.println(property.toString());
+            }
+        }
+    }
+
+    class FavoritesListener implements ChangeListener {
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            if (!Auth.checkPermission(String.valueOf(mainGui.getjTabbedPane2().getSelectedIndex())))  return;
+            System.out.println(mainGui.getjTabbedPane2().getSelectedIndex());
+
+            int id = Auth.getUser().getId();
+
+            System.out.println("USER ID " + id);
+            if (mainGui.getjTabbedPane2().getSelectedIndex() == 3) {
+                // favorites = new ArrayList<>();
+                favorites = new Favorite()
+                        .select(new String[]{"id", "userId", "propertyId"})
+                        .where("userId", "=", String.valueOf(id))
+                        .get();
+
+                ArrayList<Property> tempProperties = new ArrayList<>();
+                properties.clear();
+                for(Favorite favorite : favorites) {
+                    tempProperties = new Property()
+                            .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId", "propertyTypeId", "bedrooms", "size"})
+                            .where("id", "=", String.valueOf(favorite.getPropertyId()))
+                            .get();
+                    properties.add(tempProperties.get(0));
+                    tempProperties.clear();
+                }
+
+                for(Property property : properties){
+                    System.out.println(property.toString());
+                }
+            }
         }
     }
 }
