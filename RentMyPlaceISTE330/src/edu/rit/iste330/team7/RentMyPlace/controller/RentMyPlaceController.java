@@ -24,6 +24,8 @@ public class RentMyPlaceController {
     ArrayList<Feature> features = null;
     ArrayList<FeatureProperty> featureProperty = null;
     ArrayList<PropertyType> propertyTypes = null;
+    ArrayList<Contact> contacts = null;
+    ArrayList<User> users = null;
     ArrayList<Favorite> favorites = null;
     LoginGUI gui;
     Model model;
@@ -72,6 +74,22 @@ public class RentMyPlaceController {
                 mainGui.getjLabelUsername().setText("");
             }
         }
+
+        // NOT WORKING, WILL BE USED TO UPDATE TEXTFIELD
+        int userId = Auth.getUser().getId();
+
+
+        contacts = new Contact()
+                .select(new String[]{"id", "fullName", "email", "phone", "locationId"})
+                .where("id", "=", String.valueOf(userId))
+                .get();
+
+        mainGui.getjTextFieldContactFullName().setText(contacts.get(0).getFullName());
+        mainGui.getjTextFieldContactEmail().setText(contacts.get(0).getEmail());
+        mainGui.getjTextFieldContactStreet().setText(locations.get(0).getStreet());
+        mainGui.getjTextFieldContactCity().setText(locations.get(0).getCity());
+        mainGui.getjTextFieldContactZip().setText(String.valueOf(locations.get(0).getZip()));
+
     }
 
     public RentMyPlaceController() {
@@ -309,14 +327,38 @@ public class RentMyPlaceController {
     class SaveSettingsListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae){
-            ArrayList<Contact> contacts = new Contact()
-                    .select(new String[]{"id", "fullName", "email", "phone", "locationId"})
-                    .get();
 
-            /**
-             * FINISH
-             */
+           int contactId = Auth.getUser().getContactId();
+           int billingId = Auth.getUser().getBillingId();
 
+            Contact newContact = (Contact) new Contact()
+                    .where("id", "=", String.valueOf(contactId))
+                    .get()
+                    .get(0);
+            Location newLocation = (Location) new Location()
+                    .where("id", "=", String.valueOf(billingId))
+                    .get()
+                    .get(0);
+
+
+//            //set contact attributes
+            newContact.setFullName(mainGui.getjTextFieldContactFullName().getText());
+            newContact.setEmail(mainGui.getjTextFieldContactEmail().getText());
+
+            newLocation.setCity(mainGui.getjTextFieldContactCity().getText());
+            newLocation.setStreet(mainGui.getjTextFieldContactStreet().getText());
+            newLocation.setZip(Integer.parseInt(mainGui.getjTextFieldContactZip().getText()));
+
+            newLocation.update(Map.ofEntries(
+                    Map.entry("city", mainGui.getjTextFieldContactCity().getText()),
+                    Map.entry("street", mainGui.getjTextFieldContactStreet().getText()),
+                    Map.entry("zip", String.valueOf(mainGui.getjTextFieldContactZip().getText())
+                    )));
+
+            newContact.update(Map.ofEntries(
+                    Map.entry("fullName", mainGui.getjTextFieldContactFullName().getText()),
+                    Map.entry("email", mainGui.getjTextFieldContactEmail().getText())
+            ));
         }
     }
 
