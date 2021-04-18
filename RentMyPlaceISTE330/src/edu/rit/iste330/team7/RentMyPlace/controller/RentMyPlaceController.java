@@ -448,6 +448,7 @@ public class RentMyPlaceController {
             else Collections.sort(properties, Collections.reverseOrder());
 
             for(Property property:properties){
+                System.out.println(property.toString());
                 System.out.println(property.getPricePerNight());
             }
 
