@@ -194,7 +194,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("<imageHere>");
 
-        jButton7.setIcon(bufferImageIcon(this.createURL("https://cdn.onlinewebfonts.com/svg/img_35707.png"), 20, 20));
+        jButton7.setIcon(bufferImageIcon(this.createURL("https://www.pngrepo.com/png/105815/180/favorite.png"), 20, 20));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -419,13 +419,8 @@ public class GUI extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Price (ascending)", "Price (descending)"}));
 
         jButton5.setText(">");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
 
-        javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
+        searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
         searchPanel.setLayout(searchPanelLayout);
         searchPanelLayout.setHorizontalGroup(
                 searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1155,7 +1150,7 @@ public class GUI extends javax.swing.JFrame {
         );
 
         favoritesScrollPane.setViewportView(favoritesPanel);
-        jTabbedPane2.addTab(tabStyle1 + "FAVORITES" + tabStyle2, bufferImageIcon(this.createURL("https://cdn.onlinewebfonts.com/svg/img_35707.png"), 25, 25),  favoritesScrollPane);
+        jTabbedPane2.addTab(tabStyle1 + "FAVORITES" + tabStyle2, bufferImageIcon(this.createURL("https://www.pngrepo.com/png/105815/180/favorite.png"), 25, 25),  favoritesScrollPane);
         settingsPanel.setBackground(new java.awt.Color(188, 205, 213));
 
         jLabel8.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
@@ -1409,8 +1404,33 @@ public class GUI extends javax.swing.JFrame {
         this.getjButton15().addActionListener(ae);
     }
 
+    public void addjButton5EventListener(ActionListener ae) {
+        this.getjButton5().setActionCommand("search");
+        this.getjButton5().addActionListener(ae);
+    }
+
+    //ENTER PROPERTY LOCATION TEXTFIELD
+    public JTextField getjTextField2() {
+        return jTextField2;
+    }
+
+    public JButton getjButton5() {
+        return jButton5;
+    }
+
+    //COMBOBOX FOR PRICE ASC/DESC
+    public JComboBox<String> getjComboBox1() {
+        return jComboBox1;
+    }
+
+
+    //RESERVE BUTTON
     public JButton getjButton15() {
         return jButton15;
+    }
+
+    public GroupLayout getSearchPanelLayout() {
+        return searchPanelLayout;
     }
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1790,5 +1810,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel searchPanel;
     private javax.swing.JScrollPane searchScrollPane;
     private javax.swing.JPanel settingsPanel;
+    private javax.swing.GroupLayout searchPanelLayout;
     // End of variables declaration
 }
