@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
@@ -385,6 +386,25 @@ public class RentMyPlaceController {
                     Map.entry("fullName", mainGui.getjTextFieldContactFullName().getText()),
                     Map.entry("email", mainGui.getjTextFieldContactEmail().getText())
             ));
+
+            Billing newBilling = (Billing) new Billing()
+                    .where("id", "=", String.valueOf(billingId))
+                    .get()
+                    .get(0);
+
+            newBilling.setOwnerName(mainGui.getjTextFieldBillingOwnerName().getText());
+            newBilling.setCVC(mainGui.getjTextFieldBillingCVC().getText());
+            newBilling.setCreditCardNum(mainGui.getjTextFieldBillingCardNumber().getText());
+            newBilling.setBillingAddress(mainGui.getjTextFieldBillingAddress().getText());
+            newBilling.setExpireDate(Date.valueOf(mainGui.getjTextFieldBillingExpirationDate().getText()));
+
+            newBilling.update(Map.ofEntries(
+                    Map.entry("ownerName", mainGui.getjTextFieldBillingOwnerName().getText()),
+                    Map.entry("creditCardNum", mainGui.getjTextFieldBillingCardNumber().getText()),
+                    Map.entry("billingAddress", mainGui.getjTextFieldBillingAddress().getText()),
+                    Map.entry("CVC", mainGui.getjTextFieldBillingCVC().getText()),
+                    Map.entry("expireDate", mainGui.getjTextFieldBillingExpirationDate().getText())
+                    ));
         }
     }
 
@@ -399,7 +419,7 @@ public class RentMyPlaceController {
         }
     }
 
-    class SearchListener implements ActionListener{
+    class SearchListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(!Auth.checkPermission(e.getActionCommand()) && guest==false) return;
