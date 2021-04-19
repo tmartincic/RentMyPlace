@@ -403,7 +403,12 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(!Auth.checkPermission(e.getActionCommand()) && guest==false) return;
-
+            int prevSize = 0;
+            if(mainGui.getSearchResultPanels() != null) {
+                prevSize = mainGui.getSearchResultPanels().size(); //2
+//                mainGui.getSearchResultPanels().clear();
+                //mainGui.resetSearchResultPanels();
+            }
             String givenPropertyLocation = mainGui.getjTextField2().getText();
             System.out.println(givenPropertyLocation);
 
@@ -417,6 +422,7 @@ public class RentMyPlaceController {
             }
             System.out.println(priceAscDesc);
 
+            locations.clear();
             locations = new Location()
                     .select(new String[]{"id", "city", "zip", "street"})
                     .where("city", "=", givenPropertyLocation)
@@ -427,6 +433,7 @@ public class RentMyPlaceController {
             }
 
             properties.clear();
+
             ArrayList<Property> tempProperty = new ArrayList<>();
             for(Location location : locations) {
                 tempProperty = new Property()
@@ -443,14 +450,99 @@ public class RentMyPlaceController {
                 System.out.println("No such property");
             }
 
-            //Order by doesn't work here due to multiple queries combined to single list
-            if(orderBy.equals("ASC"))Collections.sort(properties);
-            else Collections.sort(properties, Collections.reverseOrder());
-
             for(Property property:properties){
                 System.out.println(property.toString());
-                System.out.println(property.getPricePerNight());
             }
+
+//////////////////////////////////////////////////////////////////// TEST DYNAMIC RESULT PANELS
+            for(int i = 0; i < properties.size(); i++) {
+
+
+                mainGui.createSearchResultPanel(i);
+                mainGui.getSearchResultPanels().get(i).setVisible(true);
+
+                mainGui.getSearchResultLocationLabel().get(i).setVisible(true);
+                mainGui.getSearchResultNameLabel().get(i).setVisible(true);
+                mainGui.getSearchResultImageLabel().get(i).setVisible(true);
+                mainGui.getSearchResultPriceLabel().get(i).setVisible(true);
+
+                mainGui.getSearchLocationLabel().get(i).setVisible(true);
+                mainGui.getSearchPriceLabel().get(i).setVisible(true);
+                mainGui.getSearchNameLabel().get(i).setVisible(true);
+                mainGui.getSearchAddFavoritesButton().get(i).setVisible(true);
+                mainGui.getSearchMoreDetailsButton().get(i).setVisible(true);
+
+                System.out.println(properties.get(i).getPropertyName());
+                mainGui.getSearchResultNameLabel().get(i).setText(properties.get(i).getPropertyName());
+
+                //mainGui.getSearchResultLocationLabel().get(i).setText(locations.get(properties.get(i).getLocationId() - 1).getCity());
+
+                mainGui.getSearchResultPriceLabel().get(i).setText(String.valueOf(properties.get(i).getPricePerNight()));
+                mainGui.getSearchResultImageLabel().get(i).setText("");
+                mainGui.getSearchResultImageLabel().get(i).setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(i).getImagePath()), 500, 450));
+
+            }
+            int currentSize =  mainGui.getSearchResultPanels().size(); //3
+            if(!properties.isEmpty()) {
+                for (int i = mainGui.getSearchResultPanels().size() - 1; i > currentSize - prevSize - 1; i--) {
+                    mainGui.getSearchResultPanels().remove(i);
+
+                    mainGui.getSearchResultLocationLabel().remove(i);
+                    mainGui.getSearchResultNameLabel().remove(i);
+                    mainGui.getSearchResultImageLabel().remove(i);
+                    mainGui.getSearchResultPriceLabel().remove(i);
+
+                    mainGui.getSearchLocationLabel().remove(i);
+                    mainGui.getSearchPriceLabel().remove(i);
+                    mainGui.getSearchNameLabel().remove(i);
+                    mainGui.getSearchAddFavoritesButton().remove(i);
+                    mainGui.getSearchMoreDetailsButton().remove(i);
+
+
+
+                }
+            }else{
+                for (int i = currentSize - 1; i > -1; i--) {
+                    mainGui.getSearchResultPanels().get(i).setVisible(false);
+
+                    mainGui.getSearchResultLocationLabel().get(i).setVisible(false);
+                    mainGui.getSearchResultNameLabel().get(i).setVisible(false);
+                    mainGui.getSearchResultImageLabel().get(i).setVisible(false);
+                    mainGui.getSearchResultPriceLabel().get(i).setVisible(false);
+
+                    mainGui.getSearchLocationLabel().get(i).setVisible(false);
+                    mainGui.getSearchPriceLabel().get(i).setVisible(false);
+                    mainGui.getSearchNameLabel().get(i).setVisible(false);
+                    mainGui.getSearchAddFavoritesButton().get(i).setVisible(false);
+                    mainGui.getSearchMoreDetailsButton().get(i).setVisible(false);
+
+
+                }
+            }
+
+            javax.swing.GroupLayout newSearchLayout = new javax.swing.GroupLayout(mainGui.getSearchPanelContainer());
+
+            //add all jpanels from search
+            mainGui.getSearchPanelContainer().setLayout(newSearchLayout);
+
+            newSearchLayout.setHorizontalGroup(
+                    newSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainGui.getHorizontalSearchGroup(newSearchLayout))
+
+            );
+
+
+
+            //add all jpanels from search
+            newSearchLayout.setVerticalGroup(
+                    newSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainGui.getVerticalSearchGroup(newSearchLayout))
+
+            );
+
+
+//////////////////////////////////////////////////////////////// END TEST
+
 
         }
     }
@@ -528,6 +620,7 @@ public class RentMyPlaceController {
         }
     }
 
+
     class MyRentalsListener implements ChangeListener{
         @Override
         public void stateChanged(ChangeEvent e) {
@@ -547,6 +640,8 @@ public class RentMyPlaceController {
             }
         }
     }
+
+
 
     class FavoritesListener implements ChangeListener {
         @Override

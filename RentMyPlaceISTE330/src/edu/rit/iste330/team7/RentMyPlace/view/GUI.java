@@ -48,16 +48,16 @@ public class GUI extends javax.swing.JFrame {
         searchScrollPane = new javax.swing.JScrollPane();
         searchPanel = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabelSearchInputName = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabelSearchLocation = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabelSearchPrice = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jLabel22 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+
+//        jLabel23 = new javax.swing.JLabel();
+
+//        jLabel25 = new javax.swing.JLabel();
+
+//        jLabel27 = new javax.swing.JLabel();
+
+//        jButton4 = new javax.swing.JButton();
+
+//        jButton8 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -262,10 +262,12 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(jButton7)
                                 .addGap(39, 39, 39)
                                 .addComponent(jButton3)
-                                .addGap(38, 38, 38)
+                                .addGap(28, 28, 28)
                                 .addComponent(jButton15)
-                                .addGap(38, 38, 38))
+                        .addGap(10, 10, 10))
+                                //.addGap(38, 38, 38))
                         .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+
         );
 /////
         jButton1.setText("PREV");
@@ -315,97 +317,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("SEARCH");
 
-
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel23.setText("Location:");
-
-        jLabelSearchInputName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelSearchInputName.setText("<name>");
-
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel25.setText("Property name:");
-
-        jLabelSearchLocation.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelSearchLocation.setText("<location>");
-
-        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel27.setText("Price per night: ");
-
-        jLabelSearchPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelSearchPrice.setText("<price>");
-
-        jButton4.setText("See more details...");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jLabel22.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setText("<imageHere>");
-
-        jButton8.setText("Add to favorites");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                                .addGap(21, 21, 21)
-                                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                                .addComponent(jLabelSearchInputName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(jLabelSearchLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(jLabelSearchPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                                .addGap(92, 92, 92)
-                                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                                .addGap(73, 73, 73)
-                                                .addComponent(jButton4)))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))
-        );
-
-        jPanel5Layout.setVerticalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabelSearchInputName, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabelSearchLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabelSearchPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(16, 16, 16)
-                                .addComponent(jButton8)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton4)
-                                .addGap(112, 112, 112))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Sort by:");
 
@@ -429,6 +340,22 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        /*
+         * dynamically generate jPanels depending on property search result
+         *  using method createSearchPanel(int)
+         */
+//        ArrayList<String> searchResultData = new ArrayList<>();
+//        searchResultData.add("dsd");
+//        searchResultData.add("dsd");
+//        for(int i = 0; i < searchResultData.size(); i++) {
+//            this.createSearchResultPanel(i);
+//        }
+
+        //empty search result panel container
+        searchPanelContainer = new JPanel();
+        //add layout
+//        javax.swing.GroupLayout newSearchLayout = new javax.swing.GroupLayout(searchPanelContainer);
+
         javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
         searchPanel.setLayout(searchPanelLayout);
         searchPanelLayout.setHorizontalGroup(
@@ -447,13 +374,16 @@ public class GUI extends javax.swing.JFrame {
                                                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
                                                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(searchPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        )
+
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanelLayout.createSequentialGroup()
                                 .addContainerGap(28, Short.MAX_VALUE)
                                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
+
         searchPanelLayout.setVerticalGroup(
                 searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(searchPanelLayout.createSequentialGroup()
@@ -468,11 +398,31 @@ public class GUI extends javax.swing.JFrame {
                                 .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
-                                .addGap(33, 33, 33)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64))
+
+                        .addGap(64, 64, 64)
+                                .addComponent(searchPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+
         );
+
+//        //add all jpanels from search
+//        searchPanelContainer.setLayout(newSearchLayout);
 //
+//        newSearchLayout.setHorizontalGroup(
+//                newSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                        .addGroup(this.getHorizontalSearchGroup(newSearchLayout))
+//
+//        );
+//
+//
+//
+//        //add all jpanels from search
+//        newSearchLayout.setVerticalGroup(
+//                newSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                        .addGroup(this.getVerticalSearchGroup(newSearchLayout))
+//
+//        );
+
         searchScrollPane.setViewportView(searchPanel);
 
         jTabbedPane2.addTab(tabStyle1 + "SEARCH" + tabStyle2, bufferImageIcon(this.createURL("https://img.icons8.com/pastel-glyph/2x/search--v3.png"), 25, 25), searchScrollPane);
@@ -1486,6 +1436,8 @@ public class GUI extends javax.swing.JFrame {
         return jTextField2;
     }
 
+
+
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -1796,6 +1748,184 @@ public class GUI extends javax.swing.JFrame {
         return rentPanel;
     }
 
+    public JPanel createSearchResultPanel(int num){
+        if(searchResultPanels == null) {
+            searchResultPanels = new ArrayList<>();
+            searchResultNameLabel = new ArrayList<>();
+            searchResultLocationLabel = new ArrayList<>();
+            searchResultPriceLabel = new ArrayList<>();
+            searchResultImageLabel = new ArrayList<>();
+
+            searchNameLabel = new ArrayList<>();
+            searchLocationLabel = new ArrayList<>();
+            searchPriceLabel = new ArrayList<>();
+            searchAddFavoritesButton = new ArrayList<>();
+            searchMoreDetailsButton = new ArrayList<>();
+        }
+
+        //dynamic elements
+        searchResultPanels.add(new JPanel());
+
+        JLabel jLabelSearchName = new JLabel();
+        searchResultNameLabel.add(jLabelSearchName);
+
+        JLabel jLabelSearchLocation = new JLabel();
+        searchResultLocationLabel.add(jLabelSearchLocation);
+
+        JLabel jLabelSearchPrice = new JLabel();
+        searchResultPriceLabel.add(jLabelSearchPrice);
+
+        JLabel jLabelSearchImage = new JLabel();
+        searchResultImageLabel.add(jLabelSearchImage);
+
+        //fixed elements
+        JLabel jLabelSearchNameTitle = new JLabel();
+        searchNameLabel.add(jLabelSearchNameTitle);
+
+        JLabel jLabelSearchLocationTitle = new JLabel();
+        searchLocationLabel.add(jLabelSearchLocationTitle);
+
+        JLabel jLabelSearchPriceTitle = new JLabel();
+        searchPriceLabel.add(jLabelSearchPriceTitle);
+
+        JButton jButtonSearchAddFavorites = new JButton();
+        searchAddFavoritesButton.add(jButtonSearchAddFavorites);
+
+        JButton jButtonSearchMoreDetails = new JButton();
+        searchMoreDetailsButton.add(jButtonSearchMoreDetails);
+
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(searchResultPanels.get(num));
+        searchResultPanels.get(num).setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(21, 21, 21)
+                                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(searchLocationLabel.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(searchNameLabel.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(searchPriceLabel.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                                .addComponent(searchResultNameLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(searchResultLocationLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(searchResultPriceLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(92, 92, 92)
+                                                .addComponent(searchAddFavoritesButton.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(73, 73, 73)
+                                                .addComponent(searchMoreDetailsButton.get(num))))
+                                .addGap(18, 18, 18)
+                                .addComponent(searchResultImageLabel.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))
+        );
+
+        jPanel5Layout.setVerticalGroup(
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(searchNameLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(searchResultNameLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(searchLocationLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(searchResultLocationLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(searchPriceLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(searchResultPriceLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(16, 16, 16)
+                                .addComponent(searchAddFavoritesButton.get(num))
+                                .addGap(18, 18, 18)
+                                .addComponent(searchMoreDetailsButton.get(num))
+                                .addGap(112, 112, 112))
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(searchResultImageLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        //searchPanelResults
+        searchLocationLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        searchLocationLabel.get(num).setText("Location:");
+
+        searchResultNameLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        searchResultNameLabel.get(num).setText("<name>");
+
+        searchNameLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        searchNameLabel.get(num).setText("Property name:");
+
+
+            searchResultLocationLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            searchResultLocationLabel.get(num).setText("<location>");
+
+
+        searchPriceLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        searchPriceLabel.get(num).setText("Price per night: ");
+
+
+        searchResultPriceLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        searchResultPriceLabel.get(num).setText("<price>");
+
+
+
+        searchMoreDetailsButton.get(num).setText("See more details...");
+        searchMoreDetailsButton.get(num).addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //jButton4ActionPerformed(evt);
+            }
+        });
+
+
+        searchResultImageLabel.get(num).setBackground(new java.awt.Color(255, 204, 204));
+        searchResultImageLabel.get(num).setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        searchResultImageLabel.get(num).setText("<imageHere>");
+
+        searchAddFavoritesButton.get(num).setText("Add to favorites");
+        searchAddFavoritesButton.get(num).addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jButton8ActionPerformed(evt);
+            }
+        });
+
+
+
+        return  searchResultPanels.get(num);
+    }
+
+    public javax.swing.GroupLayout.Group getVerticalSearchGroup(GroupLayout gl){
+        javax.swing.GroupLayout.Group g = gl.createParallelGroup();
+        if(searchResultPanels!=null) {
+            //javax.swing.GroupLayout.Group g = gl.createParallelGroup();
+            javax.swing.GroupLayout.Group gSequential = gl.createSequentialGroup();
+            for (int i = 0; i < searchResultPanels.size(); i++) {
+                gSequential.addComponent(searchResultPanels.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(24, 24, 24)
+
+                ;
+            }
+            g.addGroup(gSequential);
+        }
+        return g;
+    }
+
+    public javax.swing.GroupLayout.Group getHorizontalSearchGroup(GroupLayout gl){
+        javax.swing.GroupLayout.Group g = gl.createSequentialGroup();
+        if(searchResultPanels!=null) {
+            //javax.swing.GroupLayout.Group g = gl.createSequentialGroup();
+            javax.swing.GroupLayout.Group gSequential = gl.createParallelGroup();
+            for (int i = 0; i < searchResultPanels.size(); i++) {
+
+                gSequential.addComponent(searchResultPanels.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                ;
+            }
+            g.addGroup(gSequential);
+        }
+        return g;
+    }
+
     // Variables declaration - do not modify
     // Variables declaration - do not modify
     private javax.swing.JPanel favoritesPanel;
@@ -1810,11 +1940,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+//    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton saveSettingsButton;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+//    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton logOutButton;
@@ -1843,12 +1973,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
+//    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
+//    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
+//    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -1890,28 +2019,21 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelLogOutUsername;
-    private javax.swing.JLabel jLabelSearchInputName;
-    private javax.swing.JLabel jLabelSearchInputName1;
+
     private javax.swing.JLabel jLabelSearchInputName2;
     private javax.swing.JLabel jLabelSearchInputName3;
     private javax.swing.JLabel jLabelSearchInputName4;
-    private javax.swing.JLabel jLabelSearchLocation;
-    private javax.swing.JLabel jLabelSearchLocation1;
+
+
     private javax.swing.JLabel jLabelSearchLocation2;
     private javax.swing.JLabel jLabelSearchLocation3;
     private javax.swing.JLabel jLabelSearchLocation4;
-    private javax.swing.JLabel jLabelSearchPrice;
-    private javax.swing.JLabel jLabelSearchPrice1;
     private javax.swing.JLabel jLabelSearchPrice2;
-    private javax.swing.JLabel jLabelSearchPrice3;
     private javax.swing.JLabel jLabelSearchPrice4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
@@ -1946,5 +2068,109 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel settingsPanel;
 
     private ButtonGroup buttonGroup;
+
+    public JPanel getSearchPanelContainer() {
+        return searchPanelContainer;
+    }
+
+    public void resetSearchResultPanels() {
+        searchResultPanels = null;
+//        searchResultNameLabel.clear();
+//        searchResultLocationLabel.clear();
+//        searchResultPriceLabel.clear();
+//        searchResultImageLabel.clear();
+        searchResultNameLabel = null;
+        searchResultLocationLabel = null;
+        searchResultPriceLabel = null;
+        searchResultImageLabel = null;
+//
+        searchNameLabel = null;
+        searchLocationLabel= null;
+        searchPriceLabel= null;
+        searchAddFavoritesButton= null;
+        searchMoreDetailsButton= null;
+//        searchNameLabel.clear();
+//        searchLocationLabel.clear();
+//        searchPriceLabel.clear();
+//        searchAddFavoritesButton.clear();
+//        searchMoreDetailsButton.clear();
+
+    }
+
+    private javax.swing.JPanel searchPanelContainer;
+    // search panel dynamic elements
+    private ArrayList<JPanel> searchResultPanels;
+    private ArrayList<JLabel> searchResultNameLabel;
+    private ArrayList<JLabel> searchResultLocationLabel;
+    private ArrayList<JLabel> searchResultPriceLabel;
+    private ArrayList<JLabel> searchResultImageLabel;
+
+    public void setSearchResultPanels(ArrayList<JPanel> searchResultPanels) {
+        this.searchResultPanels = searchResultPanels;
+    }
+
+    public void setSearchResultNameLabel(ArrayList<JLabel> searchResultNameLabel) {
+        this.searchResultNameLabel = searchResultNameLabel;
+    }
+
+    public void setSearchResultLocationLabel(ArrayList<JLabel> searchResultLocationLabel) {
+        this.searchResultLocationLabel = searchResultLocationLabel;
+    }
+
+    public void setSearchResultPriceLabel(ArrayList<JLabel> searchResultPriceLabel) {
+        this.searchResultPriceLabel = searchResultPriceLabel;
+    }
+
+    public void setSearchResultImageLabel(ArrayList<JLabel> searchResultImageLabel) {
+        this.searchResultImageLabel = searchResultImageLabel;
+    }
+
+    public ArrayList<JPanel> getSearchResultPanels() {
+        return searchResultPanels;
+    }
+
+    public ArrayList<JLabel> getSearchResultNameLabel() {
+        return searchResultNameLabel;
+    }
+
+    public ArrayList<JLabel> getSearchResultLocationLabel() {
+        return searchResultLocationLabel;
+    }
+
+    public ArrayList<JLabel> getSearchResultPriceLabel() {
+        return searchResultPriceLabel;
+    }
+
+    public ArrayList<JLabel> getSearchResultImageLabel() {
+        return searchResultImageLabel;
+    }
+
+    //non-dynamic labels and buttons
+    private ArrayList<JLabel> searchNameLabel;
+
+    public ArrayList<JLabel> getSearchNameLabel() {
+        return searchNameLabel;
+    }
+
+    public ArrayList<JLabel> getSearchLocationLabel() {
+        return searchLocationLabel;
+    }
+
+    public ArrayList<JLabel> getSearchPriceLabel() {
+        return searchPriceLabel;
+    }
+
+    public ArrayList<JButton> getSearchAddFavoritesButton() {
+        return searchAddFavoritesButton;
+    }
+
+    public ArrayList<JButton> getSearchMoreDetailsButton() {
+        return searchMoreDetailsButton;
+    }
+
+    private ArrayList<JLabel> searchLocationLabel;
+    private ArrayList<JLabel> searchPriceLabel;
+    private ArrayList<JButton> searchAddFavoritesButton;
+    private ArrayList<JButton> searchMoreDetailsButton;
     // End of variables declaration
 }
