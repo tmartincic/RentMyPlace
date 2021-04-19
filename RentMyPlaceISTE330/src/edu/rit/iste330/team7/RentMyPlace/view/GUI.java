@@ -123,15 +123,15 @@ public class GUI extends javax.swing.JFrame {
         jComboBox3 = new javax.swing.JComboBox<>();
         favoritesPropertiesPanel = new javax.swing.JPanel();
         favoritesPropertyPanel1 = new javax.swing.JPanel();
-        jLabel60 = new javax.swing.JLabel();
-        jLabelSearchInputName4 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
-        jLabelSearchLocation4 = new javax.swing.JLabel();
-        jLabel62 = new javax.swing.JLabel();
-        jLabelSearchPrice4 = new javax.swing.JLabel();
-        jButton13 = new javax.swing.JButton();
-        jLabel63 = new javax.swing.JLabel();
-        jButton14 = new javax.swing.JButton();
+//        jLabel60 = new javax.swing.JLabel();
+//
+//        jLabel61 = new javax.swing.JLabel();
+//        jLabelSearchLocation4 = new javax.swing.JLabel();
+//        jLabel62 = new javax.swing.JLabel();
+//        jLabelSearchPrice4 = new javax.swing.JLabel();
+//        jButton13 = new javax.swing.JButton();
+//        jLabel63 = new javax.swing.JLabel();
+//        jButton14 = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -968,111 +968,111 @@ public class GUI extends javax.swing.JFrame {
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Price (ascending)", "Price (descending)" }));
 
         favoritesPropertiesPanel.setBackground(new java.awt.Color(213, 220, 223));
-
-        jLabel60.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel60.setText("Location:");
-
-        jLabelSearchInputName4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelSearchInputName4.setText("<name>");
-
-        jLabel61.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel61.setText("Property name:");
-
-        jLabelSearchLocation4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelSearchLocation4.setText("<location>");
-
-        jLabel62.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel62.setText("Price per night: ");
-
-        jLabelSearchPrice4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelSearchPrice4.setText("<price>");
-
-        jButton13.setText("See more details...");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
-        jLabel63.setBackground(new java.awt.Color(255, 204, 204));
-        jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel63.setText("<imageHere>");
-
-        jButton14.setText("Remove from fav");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14jButton10ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout favoritesPropertyPanel1Layout = new javax.swing.GroupLayout(favoritesPropertyPanel1);
-        favoritesPropertyPanel1.setLayout(favoritesPropertyPanel1Layout);
-        favoritesPropertyPanel1Layout.setHorizontalGroup(
-                favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
-                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
-                                                .addGap(21, 21, 21)
-                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jLabel62, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                                        .addComponent(jLabel60, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jLabel61, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(jLabelSearchInputName4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(jLabelSearchLocation4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(jLabelSearchPrice4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
-                                                .addGap(61, 61, 61)
-                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                                .addContainerGap())
-        );
-        favoritesPropertyPanel1Layout.setVerticalGroup(
-                favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
-                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabelSearchInputName4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabelSearchLocation4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabelSearchPrice4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                                                .addComponent(jButton14)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton13))
-                                        .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 16, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout favoritesPropertiesPanelLayout = new javax.swing.GroupLayout(favoritesPropertiesPanel);
-        favoritesPropertiesPanel.setLayout(favoritesPropertiesPanelLayout);
-        favoritesPropertiesPanelLayout.setHorizontalGroup(
-                favoritesPropertiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(favoritesPropertiesPanelLayout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(favoritesPropertyPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(38, Short.MAX_VALUE))
-        );
-        favoritesPropertiesPanelLayout.setVerticalGroup(
-                favoritesPropertiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(favoritesPropertiesPanelLayout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(favoritesPropertyPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(24, Short.MAX_VALUE))
-        );
+//
+//        jLabel60.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+//        jLabel60.setText("Location:");
+//
+//        jLabelSearchInputName4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+//        jLabelSearchInputName4.setText("<name>");
+//
+//        jLabel61.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+//        jLabel61.setText("Property name:");
+//
+//        jLabelSearchLocation4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+//        jLabelSearchLocation4.setText("<location>");
+//
+//        jLabel62.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+//        jLabel62.setText("Price per night: ");
+//
+//        jLabelSearchPrice4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+//        jLabelSearchPrice4.setText("<price>");
+//
+//        jButton13.setText("See more details...");
+//        jButton13.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jButton10ActionPerformed(evt);
+//            }
+//        });
+//
+//        jLabel63.setBackground(new java.awt.Color(255, 204, 204));
+//        jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+//        jLabel63.setText("<imageHere>");
+//
+//        jButton14.setText("Remove from fav");
+//        jButton14.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jButton14jButton10ActionPerformed(evt);
+//            }
+//        });
+//
+//        javax.swing.GroupLayout favoritesPropertyPanel1Layout = new javax.swing.GroupLayout(favoritesPropertyPanel1);
+//        favoritesPropertyPanel1.setLayout(favoritesPropertyPanel1Layout);
+//        favoritesPropertyPanel1Layout.setHorizontalGroup(
+//                favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
+//                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
+//                                                .addGap(21, 21, 21)
+//                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+//                                                        .addComponent(jLabel62, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+//                                                        .addComponent(jLabel60, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                                                        .addComponent(jLabel61, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+//                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                                                                .addComponent(jLabelSearchInputName4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                                                                .addComponent(jLabelSearchLocation4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                                                        .addComponent(jLabelSearchPrice4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+//                                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
+//                                                .addGap(61, 61, 61)
+//                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+//                                                        .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                                                        .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+//                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                                .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+//                                .addContainerGap())
+//        );
+//        favoritesPropertyPanel1Layout.setVerticalGroup(
+//                favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
+//                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+//                                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
+//                                                .addContainerGap()
+//                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//                                                        .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                                                        .addComponent(jLabelSearchInputName4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//                                                        .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                                                        .addComponent(jLabelSearchLocation4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//                                                        .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                                                        .addComponent(jLabelSearchPrice4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+//                                                .addComponent(jButton14)
+//                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+//                                                .addComponent(jButton13))
+//                                        .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                                .addGap(0, 16, Short.MAX_VALUE))
+//        );
+//
+//        javax.swing.GroupLayout favoritesPropertiesPanelLayout = new javax.swing.GroupLayout(favoritesPropertiesPanel);
+//        favoritesPropertiesPanel.setLayout(favoritesPropertiesPanelLayout);
+//        favoritesPropertiesPanelLayout.setHorizontalGroup(
+//                favoritesPropertiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                        .addGroup(favoritesPropertiesPanelLayout.createSequentialGroup()
+//                                .addGap(29, 29, 29)
+//                                .addComponent(favoritesPropertyPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                                .addContainerGap(38, Short.MAX_VALUE))
+//        );
+//        favoritesPropertiesPanelLayout.setVerticalGroup(
+//                favoritesPropertiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                        .addGroup(favoritesPropertiesPanelLayout.createSequentialGroup()
+//                                .addGap(29, 29, 29)
+//                                .addComponent(favoritesPropertyPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                                .addContainerGap(24, Short.MAX_VALUE))
+//        );
 
         javax.swing.GroupLayout favoritesPanelLayout = new javax.swing.GroupLayout(favoritesPanel);
         favoritesPanel.setLayout(favoritesPanelLayout);
@@ -1738,6 +1738,28 @@ public class GUI extends javax.swing.JFrame {
 
     public ArrayList<JLabel> getSearchResultImageLabel() { return searchResultImageLabel; }
 
+    //favorites section
+
+    public ArrayList<JPanel> getFavoritesResultPanels() { return favoritesResultPanels; }
+
+    public ArrayList<JLabel> getFavoritesResultNameLabel() { return favoritesResultNameLabel; }
+
+    public ArrayList<JLabel> getFavoritesResultLocationLabel() { return favoritesResultLocationLabel; }
+
+    public ArrayList<JLabel> getFavoritesResultPriceLabel() { return favoritesResultPriceLabel; }
+
+    public ArrayList<JLabel> getFavoritesResultImageLabel() { return favoritesResultImageLabel; }
+
+    public ArrayList<JLabel> getFavoritesNameLabel() { return favoritesNameLabel; }
+
+    public ArrayList<JLabel> getFavoritesLocationLabel() { return favoritesLocationLabel; }
+
+    public ArrayList<JLabel> getFavoritesPriceLabel() { return favoritesPriceLabel; }
+
+    public ArrayList<JButton> getFavoritesRemoveFavoritesButton() { return favoritesRemoveFavoritesButton; }
+
+    public ArrayList<JButton> getFavoritesMoreDetailsButton() { return favoritesMoreDetailsButton; }
+
     /*THINK ABOUT RELOCATION OF THESE METHODS*/
 
     /**
@@ -1771,6 +1793,150 @@ public class GUI extends javax.swing.JFrame {
         Image newImg = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
         return new ImageIcon(newImg);
+    }
+
+    /**
+     * FAVORITES PANELS
+     * @param num
+     */
+    public void createFavoritesResultPanel(int num){
+        //////////////TODO: FAVORITES DYNAMIC
+
+        //attribute LISTS
+        if(favoritesResultPanels == null){
+            favoritesResultPanels = new ArrayList<>();
+
+            favoritesResultNameLabel = new ArrayList<>();
+            favoritesResultLocationLabel = new ArrayList<>();
+            favoritesResultPriceLabel = new ArrayList<>();
+            favoritesResultImageLabel = new ArrayList<>();
+
+            favoritesNameLabel = new ArrayList<>();
+            favoritesLocationLabel = new ArrayList<>();
+            favoritesPriceLabel =  new ArrayList<>();
+            favoritesRemoveFavoritesButton = new ArrayList<>();
+            favoritesMoreDetailsButton = new ArrayList<>();
+        }
+
+        //dynamic elements
+        favoritesResultPanels.add(new JPanel());
+
+        JLabel jLabelFavoritesName = new JLabel();
+        favoritesResultNameLabel.add(jLabelFavoritesName);
+
+        JLabel jLabelFavoritesLocation = new JLabel();
+        favoritesResultLocationLabel.add(jLabelFavoritesLocation);
+
+        JLabel jLabelFavoritesPrice = new JLabel();
+        favoritesResultPriceLabel.add(jLabelFavoritesPrice);
+
+        JLabel jLabelFavoritesImage = new JLabel();
+        favoritesResultImageLabel.add(jLabelFavoritesImage);
+
+        //fixed elements
+        JLabel jLabelFavoritesNameTitle = new JLabel();
+        favoritesNameLabel.add(jLabelFavoritesNameTitle);
+
+        JLabel jLabelFavoritesLocationTitle = new JLabel();
+        favoritesLocationLabel.add(jLabelFavoritesLocationTitle);
+
+        JLabel jLabelFavoritesPriceTitle = new JLabel();
+        favoritesPriceLabel.add(jLabelFavoritesPriceTitle);
+
+        JButton jButtonFavoritesRemoveFavorites = new JButton();
+        favoritesRemoveFavoritesButton.add(jButtonFavoritesRemoveFavorites);
+
+        JButton jButtonFavoritesMoreDetails = new JButton();
+        favoritesMoreDetailsButton.add(jButtonFavoritesMoreDetails);
+
+        ///styling
+        favoritesLocationLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        favoritesLocationLabel.get(num).setText("Location:");
+
+        favoritesResultNameLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        favoritesResultNameLabel.get(num).setText("<name>");
+
+        favoritesNameLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        favoritesNameLabel.get(num).setText("Property name:");
+
+        favoritesResultLocationLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        favoritesResultLocationLabel.get(num).setText("<location>");
+
+        favoritesPriceLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        favoritesPriceLabel.get(num).setText("Price per night: ");
+
+        favoritesResultPriceLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        favoritesResultPriceLabel.get(num).setText("<price>");
+
+        favoritesMoreDetailsButton.get(num).setText("See more details...");
+        favoritesMoreDetailsButton.get(num).addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //jButton10ActionPerformed(evt);
+            }
+        });
+
+        favoritesResultImageLabel.get(num).setBackground(new java.awt.Color(255, 204, 204));
+        favoritesResultImageLabel.get(num).setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        favoritesResultImageLabel.get(num).setText("<imageHere>");
+
+        favoritesRemoveFavoritesButton.get(num).setText("Remove from fav");
+        favoritesRemoveFavoritesButton.get(num).addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //jButton14jButton10ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout favoritesPropertyPanel1Layout = new javax.swing.GroupLayout(favoritesResultPanels.get(num));
+        favoritesResultPanels.get(num).setLayout(favoritesPropertyPanel1Layout);
+        favoritesPropertyPanel1Layout.setHorizontalGroup(
+                favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
+                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
+                                                .addGap(21, 21, 21)
+                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(favoritesPriceLabel.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                                                        .addComponent(favoritesLocationLabel.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(favoritesNameLabel.get(num), javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(favoritesResultNameLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(favoritesResultLocationLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(favoritesResultPriceLabel.get(num), javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
+                                                .addGap(61, 61, 61)
+                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(favoritesMoreDetailsButton.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(favoritesRemoveFavoritesButton.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(favoritesResultImageLabel.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                                .addContainerGap())
+        );
+        favoritesPropertyPanel1Layout.setVerticalGroup(
+                favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
+                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(favoritesNameLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(favoritesResultNameLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(favoritesLocationLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(favoritesResultLocationLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(favoritesPriceLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(favoritesResultPriceLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                                                .addComponent(favoritesRemoveFavoritesButton.get(num))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(favoritesMoreDetailsButton.get(num)))
+                                        .addComponent(favoritesResultImageLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 16, Short.MAX_VALUE))
+        );
     }
 
     /**
@@ -1923,15 +2089,15 @@ public class GUI extends javax.swing.JFrame {
     }
 
     /**
-     * @param gl groupLayout of panel that will hold multiple generated search result panels
+     * @param gl groupLayout of panel that will hold multiple generated search/favorite result panels
      * @return g grouped generated panels vertically, ready to attach to one main panel using attachSearchResultPanels()
      */
-    public javax.swing.GroupLayout.Group getVerticalSearchGroup(GroupLayout gl){
+    public javax.swing.GroupLayout.Group getVerticalSearchGroup(GroupLayout gl, ArrayList<JPanel> resultPanels){
         javax.swing.GroupLayout.Group g = gl.createParallelGroup();
-        if(searchResultPanels!=null) {
+        if(resultPanels!=null) {
             javax.swing.GroupLayout.Group gSequential = gl.createSequentialGroup();
-            for (int i = 0; i < searchResultPanels.size(); i++) {
-                gSequential.addGap(24, 24, 24).addComponent(searchResultPanels.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+            for (int i = 0; i < resultPanels.size(); i++) {
+                gSequential.addGap(24, 24, 24).addComponent(resultPanels.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
 
                 ;
             }
@@ -1941,17 +2107,17 @@ public class GUI extends javax.swing.JFrame {
     }
 
     /**
-     * @param gl groupLayout of panel that will hold multiple generated search result panels
+     * @param gl groupLayout of panel that will hold multiple generated search/favorite result panels
      * @return g grouped generated panels horizontally, ready to attach to one main panel using attachSearchResultPanels()
      */
-    public javax.swing.GroupLayout.Group getHorizontalSearchGroup(GroupLayout gl){
+    public javax.swing.GroupLayout.Group getHorizontalSearchGroup(GroupLayout gl,  ArrayList<JPanel> resultPanels){
         javax.swing.GroupLayout.Group g = gl.createSequentialGroup();
-        if(searchResultPanels!=null) {
+        if(resultPanels!=null) {
             //javax.swing.GroupLayout.Group g = gl.createSequentialGroup();
             javax.swing.GroupLayout.Group gSequential = gl.createParallelGroup();
-            for (int i = 0; i < searchResultPanels.size(); i++) {
+            for (int i = 0; i < resultPanels.size(); i++) {
 
-                gSequential.addComponent(searchResultPanels.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                gSequential.addComponent(resultPanels.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 ;
             }
             g.addGroup(gSequential);
@@ -1998,6 +2164,37 @@ public class GUI extends javax.swing.JFrame {
         getSearchMoreDetailsButton().remove(index);
     }
 
+    public void resetFavoritesResultPanels(int index, boolean toggle) {
+        getFavoritesResultPanels().get(index).setVisible(toggle);
+
+        getFavoritesResultLocationLabel().get(index).setVisible(toggle);
+        getFavoritesResultNameLabel().get(index).setVisible(toggle);
+        getFavoritesResultImageLabel().get(index).setVisible(toggle);
+        getFavoritesResultPriceLabel().get(index).setVisible(toggle);
+
+        getFavoritesLocationLabel().get(index).setVisible(toggle);
+        getFavoritesPriceLabel().get(index).setVisible(toggle);
+        getFavoritesNameLabel().get(index).setVisible(toggle);
+        getFavoritesRemoveFavoritesButton().get(index).setVisible(toggle);
+        getFavoritesMoreDetailsButton().get(index).setVisible(toggle);
+    }
+
+    public void removeFavoritesResultPanels(int index){
+        getFavoritesResultPanels().remove(index);
+
+        getFavoritesResultLocationLabel().remove(index);
+        getFavoritesResultNameLabel().remove(index);
+        getFavoritesResultImageLabel().remove(index);
+        getFavoritesResultPriceLabel().remove(index);
+
+        getFavoritesLocationLabel().remove(index);
+        getFavoritesPriceLabel().remove(index);
+        getFavoritesNameLabel().remove(index);
+        getFavoritesRemoveFavoritesButton().remove(index);
+        getFavoritesMoreDetailsButton().remove(index);
+    }
+
+
     /**
      * create layout, attach generated panels to one searchPanelContainer
      * @use getHorizontalSearchGroup(GroupLayout gl) and getVerticalSearchGroup(GroupLayout gl)
@@ -2010,14 +2207,35 @@ public class GUI extends javax.swing.JFrame {
         //add generated panels horizontal
         newSearchLayout.setHorizontalGroup(
                 newSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(getHorizontalSearchGroup(newSearchLayout))
+                        .addGroup(getHorizontalSearchGroup(newSearchLayout, searchResultPanels))
 
         );
 
         //add generated panels vertical
         newSearchLayout.setVerticalGroup(
                 newSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(getVerticalSearchGroup(newSearchLayout))
+                        .addGroup(getVerticalSearchGroup(newSearchLayout, searchResultPanels))
+
+        );
+        //searchPanelContainer is already in main search searchPanel
+    }
+
+    public void attachFavoritesResultPanels(){
+        //set new layout
+        javax.swing.GroupLayout newFavoritesLayout = new javax.swing.GroupLayout(favoritesPropertiesPanel);
+        favoritesPropertiesPanel.setLayout(newFavoritesLayout);
+
+        //add generated panels horizontal
+        newFavoritesLayout.setHorizontalGroup(
+                newFavoritesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(getHorizontalSearchGroup(newFavoritesLayout, favoritesResultPanels))
+
+        );
+
+        //add generated panels vertical
+        newFavoritesLayout.setVerticalGroup(
+                newFavoritesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(getVerticalSearchGroup(newFavoritesLayout, favoritesResultPanels))
 
         );
         //searchPanelContainer is already in main search searchPanel
@@ -2034,8 +2252,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
+//    private javax.swing.JButton jButton13;
+//    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
@@ -2097,19 +2315,19 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
+//    private javax.swing.JLabel jLabel60;
+//    private javax.swing.JLabel jLabel61;
+//    private javax.swing.JLabel jLabel62;
+//    private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelLogOutUsername;
     private javax.swing.JLabel jLabelSearchInputName2;
-    private javax.swing.JLabel jLabelSearchInputName4;
+//    private javax.swing.JLabel jLabelSearchInputName4;
     private javax.swing.JLabel jLabelSearchLocation2;
-    private javax.swing.JLabel jLabelSearchLocation4;
+//    private javax.swing.JLabel jLabelSearchLocation4;
     private javax.swing.JLabel jLabelSearchPrice2;
-    private javax.swing.JLabel jLabelSearchPrice4;
+//    private javax.swing.JLabel jLabelSearchPrice4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -2152,6 +2370,22 @@ public class GUI extends javax.swing.JFrame {
     public JPanel getSearchPanelContainer() {
         return searchPanelContainer;
     }
+
+    //FAVORITES
+    private ArrayList<JPanel> favoritesResultPanels;
+
+    private ArrayList<JLabel> favoritesResultNameLabel;
+    private ArrayList<JLabel> favoritesResultLocationLabel;
+    private ArrayList<JLabel> favoritesResultPriceLabel;
+    private ArrayList<JLabel> favoritesResultImageLabel;
+
+    private ArrayList<JLabel> favoritesNameLabel;
+    private ArrayList<JLabel> favoritesLocationLabel;
+    private ArrayList<JLabel> favoritesPriceLabel;
+    private ArrayList<JButton> favoritesRemoveFavoritesButton;
+    private ArrayList<JButton> favoritesMoreDetailsButton;
+    //END FAVORITES
+
     private javax.swing.JPanel searchPanelContainer;
     // search panel dynamic elements
     private ArrayList<JPanel> searchResultPanels;

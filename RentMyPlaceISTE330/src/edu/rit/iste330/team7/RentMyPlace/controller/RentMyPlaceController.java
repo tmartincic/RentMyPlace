@@ -480,6 +480,7 @@ public class RentMyPlaceController {
                 //generate panels based on results
                 mainGui.createSearchResultPanel(i);
 
+
                 //make visible
                 mainGui.resetSearchResultPanels(i, true);
 
@@ -617,6 +618,12 @@ public class RentMyPlaceController {
         public void stateChanged(ChangeEvent e) {
             if (!Auth.checkPermission(String.valueOf(mainGui.getjTabbedPane2().getSelectedIndex())))  return;
 
+            //store prev size to remove for next search results
+            int prevSize = 0;
+            if(mainGui.getFavoritesResultPanels() != null) {
+                prevSize = mainGui.getFavoritesResultPanels().size();
+            }
+
             int id = Auth.getUser().getId();
 
             if (mainGui.getjTabbedPane2().getSelectedIndex() == 3) {
@@ -639,6 +646,42 @@ public class RentMyPlaceController {
                 for(Property property : properties){
                     System.out.println(property.toString());
                 }
+//////////////////////////////////////////////////////////////////////
+                for(int i = 0; i < properties.size(); i++) {
+                    //generate panels based on results
+                    mainGui.createFavoritesResultPanel(i);
+
+                    //make visible
+                    mainGui.resetFavoritesResultPanels(i, true);
+
+
+                    //set text and image
+                    mainGui.getFavoritesResultNameLabel().get(i).setText(properties.get(i).getPropertyName());
+                    //mainGui.getSearchResultLocationLabel().get(i).setText(locations.get(properties.get(i).getLocationId() - 1).getCity());
+                    mainGui.getFavoritesResultPriceLabel().get(i).setText(String.valueOf(properties.get(i).getPricePerNight()));
+                    mainGui.getFavoritesResultImageLabel().get(i).setText("");
+                    mainGui.getFavoritesResultImageLabel().get(i).setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(i).getImagePath()), 500, 450));
+
+                }
+                //size with new and previous elements
+                int currentSize =  mainGui.getFavoritesResultPanels().size();
+
+                //remove previous elements if there are results
+                if(!properties.isEmpty()) {
+                    for (int i = mainGui.getFavoritesResultPanels().size() - 1; i > currentSize - prevSize - 1; i--) {
+                        mainGui.removeFavoritesResultPanels(i);
+                    }
+                }else{
+                    for (int i = currentSize - 1; i > -1; i--) {
+                        //toggle invisible
+                        mainGui.resetFavoritesResultPanels(i, false);
+                    }
+                }
+
+                //group and attach generated panels to main search panel
+                mainGui.attachFavoritesResultPanels();
+                ///////////////////////////////////////////
+
             }
         }
     }
