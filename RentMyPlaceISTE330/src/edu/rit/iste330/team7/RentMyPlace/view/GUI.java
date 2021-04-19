@@ -1,5 +1,7 @@
 package edu.rit.iste330.team7.RentMyPlace.view;
 
+import edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -1706,6 +1708,36 @@ public class GUI extends javax.swing.JFrame {
         return jTextFieldBillingExpirationDate;
     }
 
+    public JTabbedPane getjTabbedPane2() {
+        return jTabbedPane2;
+    }
+
+    public JPanel getjPanelRent() {
+        return rentPanel;
+    }
+
+    //search section
+
+    public ArrayList<JLabel> getSearchNameLabel() { return searchNameLabel; }
+
+    public ArrayList<JLabel> getSearchLocationLabel() { return searchLocationLabel; }
+
+    public ArrayList<JLabel> getSearchPriceLabel() { return searchPriceLabel; }
+
+    public ArrayList<JButton> getSearchAddFavoritesButton() { return searchAddFavoritesButton; }
+
+    public ArrayList<JButton> getSearchMoreDetailsButton() { return searchMoreDetailsButton; }
+
+    public ArrayList<JPanel> getSearchResultPanels() { return searchResultPanels; }
+
+    public ArrayList<JLabel> getSearchResultNameLabel() { return searchResultNameLabel; }
+
+    public ArrayList<JLabel> getSearchResultLocationLabel() { return searchResultLocationLabel; }
+
+    public ArrayList<JLabel> getSearchResultPriceLabel() { return searchResultPriceLabel; }
+
+    public ArrayList<JLabel> getSearchResultImageLabel() { return searchResultImageLabel; }
+
     /*THINK ABOUT RELOCATION OF THESE METHODS*/
 
     /**
@@ -1741,14 +1773,13 @@ public class GUI extends javax.swing.JFrame {
         return new ImageIcon(newImg);
     }
 
-    public JTabbedPane getjTabbedPane2() {
-        return jTabbedPane2;
-    }
-    public JPanel getjPanelRent() {
-        return rentPanel;
-    }
-
-    public JPanel createSearchResultPanel(int num){
+    /**
+     * create one search result panel
+     * store all generated elements in lists - set text and image in controller based on results
+     * @use first createSearchResultPanel(int num), next add to main searchPanel .attachSearchResultPanels()
+     * @param num index of element that will be created
+     */
+    public void createSearchResultPanel(int num){
         if(searchResultPanels == null) {
             searchResultPanels = new ArrayList<>();
             searchResultNameLabel = new ArrayList<>();
@@ -1848,7 +1879,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        //searchPanelResults
+        //styling
         searchLocationLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         searchLocationLabel.get(num).setText("Location:");
 
@@ -1859,8 +1890,8 @@ public class GUI extends javax.swing.JFrame {
         searchNameLabel.get(num).setText("Property name:");
 
 
-            searchResultLocationLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-            searchResultLocationLabel.get(num).setText("<location>");
+        searchResultLocationLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        searchResultLocationLabel.get(num).setText("<location>");
 
 
         searchPriceLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1871,6 +1902,10 @@ public class GUI extends javax.swing.JFrame {
         searchResultPriceLabel.get(num).setText("<price>");
 
 
+        searchResultImageLabel.get(num).setBackground(new java.awt.Color(255, 204, 204));
+        searchResultImageLabel.get(num).setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        searchResultImageLabel.get(num).setText("<imageHere>");
+
 
         searchMoreDetailsButton.get(num).setText("See more details...");
         searchMoreDetailsButton.get(num).addActionListener(new java.awt.event.ActionListener() {
@@ -1879,30 +1914,24 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-
-        searchResultImageLabel.get(num).setBackground(new java.awt.Color(255, 204, 204));
-        searchResultImageLabel.get(num).setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        searchResultImageLabel.get(num).setText("<imageHere>");
-
         searchAddFavoritesButton.get(num).setText("Add to favorites");
         searchAddFavoritesButton.get(num).addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 //                jButton8ActionPerformed(evt);
             }
         });
-
-
-
-        return  searchResultPanels.get(num);
     }
 
+    /**
+     * @param gl groupLayout of panel that will hold multiple generated search result panels
+     * @return g grouped generated panels vertically, ready to attach to one main panel using attachSearchResultPanels()
+     */
     public javax.swing.GroupLayout.Group getVerticalSearchGroup(GroupLayout gl){
         javax.swing.GroupLayout.Group g = gl.createParallelGroup();
         if(searchResultPanels!=null) {
-            //javax.swing.GroupLayout.Group g = gl.createParallelGroup();
             javax.swing.GroupLayout.Group gSequential = gl.createSequentialGroup();
             for (int i = 0; i < searchResultPanels.size(); i++) {
-                gSequential.addComponent(searchResultPanels.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(24, 24, 24)
+                gSequential.addGap(24, 24, 24).addComponent(searchResultPanels.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
 
                 ;
             }
@@ -1911,6 +1940,10 @@ public class GUI extends javax.swing.JFrame {
         return g;
     }
 
+    /**
+     * @param gl groupLayout of panel that will hold multiple generated search result panels
+     * @return g grouped generated panels horizontally, ready to attach to one main panel using attachSearchResultPanels()
+     */
     public javax.swing.GroupLayout.Group getHorizontalSearchGroup(GroupLayout gl){
         javax.swing.GroupLayout.Group g = gl.createSequentialGroup();
         if(searchResultPanels!=null) {
@@ -1926,8 +1959,73 @@ public class GUI extends javax.swing.JFrame {
         return g;
     }
 
-    // Variables declaration - do not modify
-    // Variables declaration - do not modify
+    /**
+     * toggle dynamic search result elements visibility
+     * @param index element to hide/show
+     * @param toggle
+     */
+    public void resetSearchResultPanels(int index, boolean toggle) {
+        getSearchResultPanels().get(index).setVisible(toggle);
+
+        getSearchResultLocationLabel().get(index).setVisible(toggle);
+        getSearchResultNameLabel().get(index).setVisible(toggle);
+        getSearchResultImageLabel().get(index).setVisible(toggle);
+        getSearchResultPriceLabel().get(index).setVisible(toggle);
+
+        getSearchLocationLabel().get(index).setVisible(toggle);
+        getSearchPriceLabel().get(index).setVisible(toggle);
+        getSearchNameLabel().get(index).setVisible(toggle);
+        getSearchAddFavoritesButton().get(index).setVisible(toggle);
+        getSearchMoreDetailsButton().get(index).setVisible(toggle);
+    }
+
+    /**
+     * remove element from list, used when switching search results
+     * @param index location of element to remove
+     */
+    public void removeSearchResultPanels(int index){
+        getSearchResultPanels().remove(index);
+
+        getSearchResultLocationLabel().remove(index);
+        getSearchResultNameLabel().remove(index);
+        getSearchResultImageLabel().remove(index);
+        getSearchResultPriceLabel().remove(index);
+
+        getSearchLocationLabel().remove(index);
+        getSearchPriceLabel().remove(index);
+        getSearchNameLabel().remove(index);
+        getSearchAddFavoritesButton().remove(index);
+        getSearchMoreDetailsButton().remove(index);
+    }
+
+    /**
+     * create layout, attach generated panels to one searchPanelContainer
+     * @use getHorizontalSearchGroup(GroupLayout gl) and getVerticalSearchGroup(GroupLayout gl)
+     */
+    public void attachSearchResultPanels(){
+        //set new layout
+        javax.swing.GroupLayout newSearchLayout = new javax.swing.GroupLayout(getSearchPanelContainer());
+        getSearchPanelContainer().setLayout(newSearchLayout);
+
+        //add generated panels horizontal
+        newSearchLayout.setHorizontalGroup(
+                newSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(getHorizontalSearchGroup(newSearchLayout))
+
+        );
+
+        //add generated panels vertical
+        newSearchLayout.setVerticalGroup(
+                newSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(getVerticalSearchGroup(newSearchLayout))
+
+        );
+        //searchPanelContainer is already in main search searchPanel
+    }
+
+    /**
+     *  variable declaration
+     */
     private javax.swing.JPanel favoritesPanel;
     private javax.swing.JPanel favoritesPropertiesPanel;
     private javax.swing.JPanel favoritesPropertyPanel1;
@@ -1940,11 +2038,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-//    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton saveSettingsButton;
     private javax.swing.JButton jButton7;
-//    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton logOutButton;
@@ -1973,11 +2069,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-//    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-//    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-//    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -2002,16 +2095,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
@@ -2019,14 +2104,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelLogOutUsername;
-
     private javax.swing.JLabel jLabelSearchInputName2;
-    private javax.swing.JLabel jLabelSearchInputName3;
     private javax.swing.JLabel jLabelSearchInputName4;
-
-
     private javax.swing.JLabel jLabelSearchLocation2;
-    private javax.swing.JLabel jLabelSearchLocation3;
     private javax.swing.JLabel jLabelSearchLocation4;
     private javax.swing.JLabel jLabelSearchPrice2;
     private javax.swing.JLabel jLabelSearchPrice4;
@@ -2072,31 +2152,6 @@ public class GUI extends javax.swing.JFrame {
     public JPanel getSearchPanelContainer() {
         return searchPanelContainer;
     }
-
-    public void resetSearchResultPanels() {
-        searchResultPanels = null;
-//        searchResultNameLabel.clear();
-//        searchResultLocationLabel.clear();
-//        searchResultPriceLabel.clear();
-//        searchResultImageLabel.clear();
-        searchResultNameLabel = null;
-        searchResultLocationLabel = null;
-        searchResultPriceLabel = null;
-        searchResultImageLabel = null;
-//
-        searchNameLabel = null;
-        searchLocationLabel= null;
-        searchPriceLabel= null;
-        searchAddFavoritesButton= null;
-        searchMoreDetailsButton= null;
-//        searchNameLabel.clear();
-//        searchLocationLabel.clear();
-//        searchPriceLabel.clear();
-//        searchAddFavoritesButton.clear();
-//        searchMoreDetailsButton.clear();
-
-    }
-
     private javax.swing.JPanel searchPanelContainer;
     // search panel dynamic elements
     private ArrayList<JPanel> searchResultPanels;
@@ -2105,72 +2160,13 @@ public class GUI extends javax.swing.JFrame {
     private ArrayList<JLabel> searchResultPriceLabel;
     private ArrayList<JLabel> searchResultImageLabel;
 
-    public void setSearchResultPanels(ArrayList<JPanel> searchResultPanels) {
-        this.searchResultPanels = searchResultPanels;
-    }
-
-    public void setSearchResultNameLabel(ArrayList<JLabel> searchResultNameLabel) {
-        this.searchResultNameLabel = searchResultNameLabel;
-    }
-
-    public void setSearchResultLocationLabel(ArrayList<JLabel> searchResultLocationLabel) {
-        this.searchResultLocationLabel = searchResultLocationLabel;
-    }
-
-    public void setSearchResultPriceLabel(ArrayList<JLabel> searchResultPriceLabel) {
-        this.searchResultPriceLabel = searchResultPriceLabel;
-    }
-
-    public void setSearchResultImageLabel(ArrayList<JLabel> searchResultImageLabel) {
-        this.searchResultImageLabel = searchResultImageLabel;
-    }
-
-    public ArrayList<JPanel> getSearchResultPanels() {
-        return searchResultPanels;
-    }
-
-    public ArrayList<JLabel> getSearchResultNameLabel() {
-        return searchResultNameLabel;
-    }
-
-    public ArrayList<JLabel> getSearchResultLocationLabel() {
-        return searchResultLocationLabel;
-    }
-
-    public ArrayList<JLabel> getSearchResultPriceLabel() {
-        return searchResultPriceLabel;
-    }
-
-    public ArrayList<JLabel> getSearchResultImageLabel() {
-        return searchResultImageLabel;
-    }
-
     //non-dynamic labels and buttons
     private ArrayList<JLabel> searchNameLabel;
-
-    public ArrayList<JLabel> getSearchNameLabel() {
-        return searchNameLabel;
-    }
-
-    public ArrayList<JLabel> getSearchLocationLabel() {
-        return searchLocationLabel;
-    }
-
-    public ArrayList<JLabel> getSearchPriceLabel() {
-        return searchPriceLabel;
-    }
-
-    public ArrayList<JButton> getSearchAddFavoritesButton() {
-        return searchAddFavoritesButton;
-    }
-
-    public ArrayList<JButton> getSearchMoreDetailsButton() {
-        return searchMoreDetailsButton;
-    }
-
     private ArrayList<JLabel> searchLocationLabel;
     private ArrayList<JLabel> searchPriceLabel;
     private ArrayList<JButton> searchAddFavoritesButton;
     private ArrayList<JButton> searchMoreDetailsButton;
+
+
     // End of variables declaration
 }
