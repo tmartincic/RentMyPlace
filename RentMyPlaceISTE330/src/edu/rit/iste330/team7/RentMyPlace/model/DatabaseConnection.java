@@ -1,6 +1,8 @@
 package edu.rit.iste330.team7.RentMyPlace.model;
 
 import java.sql.*;
+
+import com.mysql.cj.exceptions.CJCommunicationsException;
 import com.mysql.cj.jdbc.Driver;
 
 import javax.lang.model.type.PrimitiveType;
@@ -96,12 +98,19 @@ public class DatabaseConnection {
     }
 
     public boolean connect() throws DLException {
+
         try{
             this.con= (Connection) DriverManager.getConnection(this.url, this.user, this.password);
             return true;
         }catch(SQLException sqle) {
-            throw new DLException(sqle);
+            System.out.println("1Connection refused!\nERROR: Database credentials (db_credentials.txt) are not propperly formed. \nDeleting the file will generate new default template.");
+            System.exit(-1);
         }
+        catch (Exception e) {
+            System.out.println("3Connection refused!\nERROR: Database credentials (db_credentials.txt) are not propperly formed.");
+            System.exit(-1);
+        }
+        return false;
     }
 
     public boolean close() throws DLException {
