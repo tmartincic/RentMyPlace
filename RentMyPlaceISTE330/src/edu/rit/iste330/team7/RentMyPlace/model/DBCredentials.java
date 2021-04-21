@@ -62,11 +62,11 @@ public class DBCredentials {
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
                 FileWriter myWriter = new FileWriter(LOCAL_CREDENTIALS);
-                myWriter.write("host=" + DB_HOST);
-                myWriter.write("port=" + DB_PORT);
-                myWriter.write("database=" + DB_DATABASE);
-                myWriter.write("username=" + DB_USERNAME);
-                myWriter.write("password=" + DB_PASSWORD);
+                myWriter.write("host=" + DB_HOST + "\n");
+                myWriter.write("port=" + DB_PORT + "\n");
+                myWriter.write("database=" + DB_DATABASE + "\n");
+                myWriter.write("username=" + DB_USERNAME + "\n");
+                myWriter.write("password=" + DB_PASSWORD + "\n");
                 myWriter.flush();
                 myWriter.close();
             }

@@ -29,7 +29,6 @@ public class Auth implements ActionListener {
                 .where("route", "like", button)
                 .exists();
 
-        System.out.println("User: " + user.getUsername() + " with role of "+user.getUserType() + " \n has permission for button: "+button +": "+permission);
         return permission;
     }
 

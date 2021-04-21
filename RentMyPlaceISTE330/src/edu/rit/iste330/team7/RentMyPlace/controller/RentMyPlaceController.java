@@ -645,13 +645,19 @@ public class RentMyPlaceController {
                         propertyType = btn.getText().toLowerCase();
                     }
                 }
+                if(propertyType.isBlank()) {
+                    System.out.println("Please select property type.");
+                    JOptionPane panel = new JOptionPane();
+                    panel.showMessageDialog(mainGui, "Please select property type.");
+                    return;
+                }
 
-                ArrayList<PropertyType> propertyTypes = new PropertyType()
+                PropertyType type = (PropertyType) new PropertyType()
                         .select(new String[]{"id"})
-                        .where("type", "=", propertyType)
-                        .get();
+                        .where("type", "like", propertyType)
+                        .get().get(0);
 
-                String propertyTypeId = String.valueOf(propertyTypes.get(0).getId());
+                String propertyTypeId = String.valueOf(type.getId());
 
                 String propertyName = mainGui.getjTextField13().getText();
                 String street = mainGui.getjTextField14().getText();
@@ -663,25 +669,42 @@ public class RentMyPlaceController {
                 String description = mainGui.getjTextField20().getText();
                 String imageUrl = mainGui.getjTextField21().getText();
 
-                Location location = new Location().create(Map.ofEntries(
-                        Map.entry("street", street),
-                        Map.entry("city", cityName),
-                        Map.entry("zip", zip)
-                ));
+                Location location = null;
+                try{
+                    location = new Location().create(Map.ofEntries(
+                            Map.entry("street", street),
+                            Map.entry("city", cityName),
+                            Map.entry("zip", zip)
+                    ));
+                }
+                catch (NumberFormatException nfe) {
+                    System.out.println("Number incorrectly formed: " + nfe.getMessage());
+                    JOptionPane panel = new JOptionPane();
+                    panel.showMessageDialog(mainGui, "Number incorrectly formed: " + nfe.getMessage());
+                    return;
+                }
 
                 String id = String.valueOf(Auth.getUser().getId());
-                Property property = new Property().create(Map.ofEntries(
-                        Map.entry("userId", id),
-                        Map.entry("locationId", String.valueOf(location.getId())),
-                        Map.entry("propertyName", propertyName),
-                        Map.entry("propertyTypeId", propertyTypeId),
-                        Map.entry("description", description),
-                        Map.entry("imagePath", imageUrl),
-                        Map.entry("bedrooms", numOfBedrooms),
-                        Map.entry("size", size),
-                        Map.entry("pricePerNight", pricePerNight)
-                ));
 
+                Property property = null;
+                try {
+                    property = new Property().create(Map.ofEntries(
+                            Map.entry("userId", id),
+                            Map.entry("locationId", String.valueOf(location.getId())),
+                            Map.entry("propertyName", propertyName),
+                            Map.entry("propertyTypeId", propertyTypeId),
+                            Map.entry("description", description),
+                            Map.entry("imagePath", imageUrl),
+                            Map.entry("bedrooms", numOfBedrooms),
+                            Map.entry("size", size),
+                            Map.entry("pricePerNight", pricePerNight)
+                    ));
+                }catch (NumberFormatException nfe) {
+                    System.out.println("Number incorrectly formed: " + nfe.getMessage());
+                    JOptionPane panel = new JOptionPane();
+                    panel.showMessageDialog(mainGui, "Number incorrectly formed: " + nfe.getMessage());
+                    return;
+                }
                 ArrayList<JCheckBox> checkBoxes = mainGui.getCheckBoxes();
                 ArrayList<String> checkedFeatures = new ArrayList<>();
                 for (JCheckBox box : checkBoxes) {
@@ -693,7 +716,8 @@ public class RentMyPlaceController {
                 ArrayList<Feature> features = new ArrayList<>();
 
                 for (String feature : checkedFeatures) {
-                    features.add((Feature) new Feature().select(new String[]{"id"}).where("feature", "LIKE", feature).get().get(0));
+                    Feature f = (Feature) new Feature().select(new String[]{"id"}).where("feature", "LIKE", feature).get().get(0);
+                    features.add(f);
                 }
 
                 for (Feature feature : features) {
@@ -702,7 +726,8 @@ public class RentMyPlaceController {
                             Map.entry("featureId", String.valueOf(feature.getId()))
                     ));
                 }
-
+                JOptionPane panel = new JOptionPane();
+                panel.showMessageDialog(mainGui, "Property created succesfully!");
             }
         }
 
@@ -753,7 +778,10 @@ public class RentMyPlaceController {
                 mainGui.getjLabelSearchLocation2().setText(location.getCity());
                 mainGui.getjLabelSearchPrice2().setText(String.valueOf(property.getPricePerNight()));
                 mainGui.getjLabel42().setText("");
-                mainGui.getjLabel42().setIcon(mainGui.bufferImageIcon(mainGui.createURL(property.getImagePath()), 500, 450));
+                try{
+                    mainGui.getjLabel42().setIcon(mainGui.bufferImageIcon(mainGui.createURL(property.getImagePath()), 500, 450));
+                }
+                catch (NullPointerException npe) { return; }
             } else return;
         }
 

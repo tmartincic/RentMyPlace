@@ -4,8 +4,10 @@ import java.sql.*;
 
 import com.mysql.cj.exceptions.CJCommunicationsException;
 import com.mysql.cj.jdbc.Driver;
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 
 import javax.lang.model.type.PrimitiveType;
+import javax.swing.*;
 import java.util.*;
 
 public class DatabaseConnection {
@@ -92,6 +94,10 @@ public class DatabaseConnection {
         catch (SQLSyntaxErrorException sqlse) {
             throw new DLException(sqlse, sql);
         }
+        catch (MysqlDataTruncation mdt) {
+            System.out.println("Data incorrectly formed.");
+            return -1;
+        }
         catch (Exception e) {
             throw new DLException(e);
         }
@@ -103,11 +109,11 @@ public class DatabaseConnection {
             this.con= (Connection) DriverManager.getConnection(this.url, this.user, this.password);
             return true;
         }catch(SQLException sqle) {
-            System.out.println("1Connection refused!\nERROR: Database credentials (db_credentials.txt) are not propperly formed. \nDeleting the file will generate new default template.");
+            System.out.println("Connection refused!\nERROR: Database credentials (db_credentials.txt) are not propperly formed. \nDeleting the file will generate new default template.");
             System.exit(-1);
         }
         catch (Exception e) {
-            System.out.println("3Connection refused!\nERROR: Database credentials (db_credentials.txt) are not propperly formed.");
+            System.out.println("Connection refused!\nERROR: Database credentials (db_credentials.txt) are not propperly formed.");
             System.exit(-1);
         }
         return false;
