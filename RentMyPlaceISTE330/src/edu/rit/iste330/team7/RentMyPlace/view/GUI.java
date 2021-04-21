@@ -1,5 +1,6 @@
 package edu.rit.iste330.team7.RentMyPlace.view;
 
+import com.toedter.calendar.JDateChooser;
 import edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController;
 
 import javax.imageio.ImageIO;
@@ -157,6 +158,8 @@ public class GUI extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jTextFieldBillingExpirationDate = new javax.swing.JTextField();
         saveSettingsButton = new javax.swing.JButton();
+        jDateChooserExpirationDate = new com.toedter.calendar.JDateChooser();
+        jDateChooserExpirationDate.setDateFormatString("yyyy-MM-dd");
 
         buttonGroup = new ButtonGroup();
 
@@ -1205,13 +1208,13 @@ public class GUI extends javax.swing.JFrame {
         });
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel32.setText("Expires:");
-        jTextFieldBillingExpirationDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldBillingExpirationDate.setText("<expiration>");
-        jTextFieldBillingExpirationDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
-            }
-        });
+//        jTextFieldBillingExpirationDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+//        jTextFieldBillingExpirationDate.setText("<expiration>");
+//        jTextFieldBillingExpirationDate.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jTextField12ActionPerformed(evt);
+//            }
+//        });
         saveSettingsButton.setText("SAVE");
         saveSettingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1249,7 +1252,7 @@ public class GUI extends javax.swing.JFrame {
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                                         .addComponent(jTextFieldBillingCVC)
-                                                                        .addComponent(jTextFieldBillingExpirationDate, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)))
+                                                                        .addComponent(jDateChooserExpirationDate, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
                                                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(settingsPanelLayout.createSequentialGroup()
                                                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1318,7 +1321,7 @@ public class GUI extends javax.swing.JFrame {
                                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jTextFieldBillingCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextFieldBillingExpirationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jDateChooserExpirationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2277,9 +2280,14 @@ public class GUI extends javax.swing.JFrame {
         //searchPanelContainer is already in main search searchPanel
     }
 
+    public JDateChooser getjDateChooserExpirationDate() {
+        return jDateChooserExpirationDate;
+    }
+
     /**
      *  variable declaration
      */
+    private com.toedter.calendar.JDateChooser jDateChooserExpirationDate;
     private javax.swing.JPanel favoritesPanel;
     private javax.swing.JPanel favoritesPropertiesPanel;
     private javax.swing.JPanel favoritesPropertyPanel1;

@@ -1,5 +1,7 @@
 package edu.rit.iste330.team7.RentMyPlace.view;
 
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
 
 public class ReserveGUI extends javax.swing.JFrame {
@@ -54,11 +56,15 @@ public class ReserveGUI extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonConfirmReservation = new javax.swing.JButton();
         jlFistName = new javax.swing.JLabel();
         jlLastName = new javax.swing.JLabel();
         jlEmail = new javax.swing.JLabel();
         jlLocation = new javax.swing.JLabel();
+        jDateChooserArrival = new com.toedter.calendar.JDateChooser();
+        jDateChooserArrival.setDateFormatString("yyyy-MM-dd");
+        jDateChooserDeparture = new com.toedter.calendar.JDateChooser();
+        jDateChooserDeparture.setDateFormatString("yyyy-MM-dd");
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -77,11 +83,11 @@ public class ReserveGUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("PROPERTY INFORMATION");
 
-        jlPropertyName.setText("<Property name>");
+        jlPropertyName.setText("Property name: ");
 
-        jlPropertyType.setText("<Property type>");
+        jlPropertyType.setText("Property type: ");
 
-        jlPricePerNight.setText("<Price per night>");
+        jlPricePerNight.setText("Price per night: ");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("OTHER INFORMATION");
@@ -90,40 +96,40 @@ public class ReserveGUI extends javax.swing.JFrame {
 
         jLabel12.setText("Departure Date");
 
-        jTextField4.setText("2021");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-
-        jTextField5.setText("04");
-
-        jTextField6.setText("17");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
-        jTextField7.setText("2021");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
-
-        jTextField8.setText("04");
-
-        jTextField9.setText("20");
+//        jTextField4.setText("2021");
+//        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jTextField4ActionPerformed(evt);
+//            }
+//        });
+//
+//        jTextField5.setText("04");
+//
+//        jTextField6.setText("17");
+//        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jTextField6ActionPerformed(evt);
+//            }
+//        });
+//
+//        jTextField7.setText("2021");
+//        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jTextField7ActionPerformed(evt);
+//            }
+//        });
+//
+//        jTextField8.setText("04");
+//
+//        jTextField9.setText("20");
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField9ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Reserve");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConfirmReservation.setText("Reserve");
+        jButtonConfirmReservation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -135,7 +141,7 @@ public class ReserveGUI extends javax.swing.JFrame {
 
         jlEmail.setText("<email>");
 
-        jlLocation.setText("<Location>");
+        jlLocation.setText("Location: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,7 +168,7 @@ public class ReserveGUI extends javax.swing.JFrame {
                                                                 .addComponent(jLabel5))))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(173, 173, 173)
-                                                .addComponent(jButton1))
+                                                .addComponent(jButtonConfirmReservation))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(128, 128, 128)
                                                 .addComponent(jLabel10))
@@ -176,12 +182,9 @@ public class ReserveGUI extends javax.swing.JFrame {
                                                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addComponent(jLabel11)
-                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                        .addComponent(jDateChooserArrival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+
+                                                                )
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addGroup(layout.createSequentialGroup()
                                                                                 .addGap(60, 60, 60)
@@ -192,11 +195,8 @@ public class ReserveGUI extends javax.swing.JFrame {
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                                         .addGroup(layout.createSequentialGroup()
-                                                                                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                                .addComponent(jDateChooserDeparture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                        )
                                                                                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                                 .addGap(26, 26, 26))))
                                                         .addGroup(layout.createSequentialGroup()
@@ -241,18 +241,15 @@ public class ReserveGUI extends javax.swing.JFrame {
                                                 .addComponent(jLabel12)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(jDateChooserDeparture, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                ))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel11)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(jDateChooserArrival, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        ))
                                 .addGap(39, 39, 39)
-                                .addComponent(jButton1)
+                                .addComponent(jButtonConfirmReservation)
                                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -283,22 +280,50 @@ public class ReserveGUI extends javax.swing.JFrame {
      * Getters
      */
 
-    public JLabel getJlFistName() { return jlFistName; }
+    public JLabel getJlFistName() {
+        return jlFistName;
+    }
 
-    public JLabel getJlLastName() { return jlLastName; }
+    public JLabel getJlLastName() {
+        return jlLastName;
+    }
 
-    public JLabel getJlEmail() { return jlEmail; }
+    public JLabel getJlEmail() {
+        return jlEmail;
+    }
 
-    public JLabel getJlLocation() { return jlLocation; }
+    public JLabel getJlLocation() {
+        return jlLocation;
+    }
 
-    public JLabel getJlPropertyName() { return jlPropertyName; }
+    public JLabel getJlPropertyName() {
+        return jlPropertyName;
+    }
 
-    public JLabel getJlPropertyType() { return jlPropertyType; }
+    public JLabel getJlPropertyType() {
+        return jlPropertyType;
+    }
 
-    public JLabel getJlPricePerNight() { return jlPricePerNight; }
+    public JLabel getJlPricePerNight() {
+        return jlPricePerNight;
+    }
+
+    public JDateChooser getjDateChooserArrival() {
+        return jDateChooserArrival;
+    }
+
+    public JDateChooser getjDateChooserDeparture() {
+        return jDateChooserDeparture;
+    }
+
+    public JButton getjButtonConfirmReservation() {
+        return jButtonConfirmReservation;
+    }
 
     // Variables declaration - do not modify
-    private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooserArrival;
+    private com.toedter.calendar.JDateChooser jDateChooserDeparture;
+    private javax.swing.JButton jButtonConfirmReservation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

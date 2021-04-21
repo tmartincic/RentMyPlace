@@ -401,6 +401,9 @@ ALTER TABLE `user`
 ALTER TABLE `favorite`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+  ALTER TABLE `reservations`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Constraints for dumped tables
 --
@@ -447,6 +450,7 @@ ALTER TABLE `Property`
 	ADD CONSTRAINT `Property_fk2` FOREIGN KEY (`propertyTypeId`) REFERENCES `property_type`(`id`)  ON DELETE CASCADE;
 
 COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
