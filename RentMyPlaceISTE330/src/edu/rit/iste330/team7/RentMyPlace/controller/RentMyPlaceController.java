@@ -18,6 +18,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RentMyPlaceController {
     User currentUser = null;
@@ -645,13 +647,19 @@ public class RentMyPlaceController {
                         propertyType = btn.getText().toLowerCase();
                     }
                 }
+                if(propertyType.isBlank()) {
+                    System.out.println("Please select property type.");
+                    JOptionPane panel = new JOptionPane();
+                    panel.showMessageDialog(mainGui, "Please select property type.");
+                    return;
+                }
 
-                ArrayList<PropertyType> propertyTypes = new PropertyType()
+                PropertyType type = (PropertyType) new PropertyType()
                         .select(new String[]{"id"})
-                        .where("type", "=", propertyType)
-                        .get();
+                        .where("type", "like", propertyType)
+                        .get().get(0);
 
-                String propertyTypeId = String.valueOf(propertyTypes.get(0).getId());
+                String propertyTypeId = String.valueOf(type.getId());
 
                 String propertyName = mainGui.getjTextField13().getText();
                 String street = mainGui.getjTextField14().getText();
@@ -663,25 +671,54 @@ public class RentMyPlaceController {
                 String description = mainGui.getjTextField20().getText();
                 String imageUrl = mainGui.getjTextField21().getText();
 
-                Location location = new Location().create(Map.ofEntries(
-                        Map.entry("street", street),
-                        Map.entry("city", cityName),
-                        Map.entry("zip", zip)
-                ));
+                String regex = "https?:/(?:/[^/]+)+\\.(?:jpg|gif|png)";
+
+                Pattern pattern_name = Pattern.compile(regex);
+                Matcher matcher_name = pattern_name.matcher(imageUrl);
+
+                if(!matcher_name.find() || !mainGui.checkURL(imageUrl)) {
+                    System.out.println("Please enter valid image URL. \nSupported files are: .jpg, .gif & .png");
+                    JOptionPane panel = new JOptionPane();
+                    panel.showMessageDialog(mainGui, "Please enter valid image URL. \nSupported files are: .jpg, .gif & .png");
+                    return;
+                }
+
+                Location location = null;
+                try{
+                    location = new Location().create(Map.ofEntries(
+                            Map.entry("street", street),
+                            Map.entry("city", cityName),
+                            Map.entry("zip", zip)
+                    ));
+                }
+                catch (NumberFormatException nfe) {
+                    System.out.println("Number incorrectly formed: " + nfe.getMessage());
+                    JOptionPane panel = new JOptionPane();
+                    panel.showMessageDialog(mainGui, "Number incorrectly formed: " + nfe.getMessage());
+                    return;
+                }
 
                 String id = String.valueOf(Auth.getUser().getId());
-                Property property = new Property().create(Map.ofEntries(
-                        Map.entry("userId", id),
-                        Map.entry("locationId", String.valueOf(location.getId())),
-                        Map.entry("propertyName", propertyName),
-                        Map.entry("propertyTypeId", propertyTypeId),
-                        Map.entry("description", description),
-                        Map.entry("imagePath", imageUrl),
-                        Map.entry("bedrooms", numOfBedrooms),
-                        Map.entry("size", size),
-                        Map.entry("pricePerNight", pricePerNight)
-                ));
 
+                Property property = null;
+                try {
+                    property = new Property().create(Map.ofEntries(
+                            Map.entry("userId", id),
+                            Map.entry("locationId", String.valueOf(location.getId())),
+                            Map.entry("propertyName", propertyName),
+                            Map.entry("propertyTypeId", propertyTypeId),
+                            Map.entry("description", description),
+                            Map.entry("imagePath", imageUrl),
+                            Map.entry("bedrooms", numOfBedrooms),
+                            Map.entry("size", size),
+                            Map.entry("pricePerNight", pricePerNight)
+                    ));
+                }catch (NumberFormatException nfe) {
+                    System.out.println("Number incorrectly formed: " + nfe.getMessage());
+                    JOptionPane panel = new JOptionPane();
+                    panel.showMessageDialog(mainGui, "Number incorrectly formed: " + nfe.getMessage());
+                    return;
+                }
                 ArrayList<JCheckBox> checkBoxes = mainGui.getCheckBoxes();
                 ArrayList<String> checkedFeatures = new ArrayList<>();
                 for (JCheckBox box : checkBoxes) {
@@ -690,19 +727,21 @@ public class RentMyPlaceController {
                     }
                 }
 
-                ArrayList<Feature> features2 = new ArrayList<>();
+                ArrayList<Feature> features = new ArrayList<>();
 
                 for (String feature : checkedFeatures) {
-                    features2.add((Feature) new Feature().select(new String[]{"id"}).where("feature", "LIKE", feature).get().get(0));
+                    Feature f = (Feature) new Feature().select(new String[]{"id"}).where("feature", "LIKE", feature).get().get(0);
+                    features.add(f);
                 }
 
-                for (Feature feature : features2) {
+                for (Feature feature : features) {
                     new FeatureProperty().create(Map.ofEntries(
                             Map.entry("propertyId", String.valueOf(property.getId())),
                             Map.entry("featureId", String.valueOf(feature.getId()))
                     ));
                 }
-
+                JOptionPane panel = new JOptionPane();
+                panel.showMessageDialog(mainGui, "Property created succesfully!");
             }
         }
 
@@ -869,11 +908,10 @@ public class RentMyPlaceController {
                 if (orderBy.equals("ASC")) Collections.sort(properties);
                 else Collections.sort(properties, Collections.reverseOrder());
 
-                //locations.clear();
-                ArrayList<Location> favLocations = new ArrayList<>();
+                locations.clear();
                 for (Property property : properties) {
                     System.out.println(property.toString());
-                    favLocations.add((Location) new Location()
+                    locations.add((Location) new Location()
                             .select(new String[]{"id", "city"})
                             .where("id", "=", String.valueOf(property.getLocationId()))
                             .get().get(0));
@@ -890,7 +928,7 @@ public class RentMyPlaceController {
                     //set text and image
                     mainGui.getFavoritesResultNameLabel().get(i).setText(properties.get(i).getPropertyName());
                     //mainGui.getSearchResultLocationLabel().get(i).setText(locations.get(properties.get(i).getLocationId() - 1).getCity());
-                    mainGui.getFavoritesResultLocationLabel().get(i).setText(favLocations.get(i).getCity());
+                    mainGui.getFavoritesResultLocationLabel().get(i).setText(locations.get(i).getCity());
                     mainGui.getFavoritesResultPriceLabel().get(i).setText(String.valueOf(properties.get(i).getPricePerNight()));
                     mainGui.getFavoritesResultImageLabel().get(i).setText("");
                     mainGui.getFavoritesResultImageLabel().get(i).setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(i).getImagePath()), 500, 450));

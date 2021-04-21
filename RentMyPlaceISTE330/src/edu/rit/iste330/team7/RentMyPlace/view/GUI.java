@@ -1816,6 +1816,20 @@ public class GUI extends javax.swing.JFrame {
     }
 
     /**
+     * @param link
+     * @return boolean
+     */
+    public boolean checkURL(String link) {
+        URL url = null;
+        try {
+            url = new URL(link);
+        } catch (MalformedURLException e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * @param url
      * @param width
      * @param height
