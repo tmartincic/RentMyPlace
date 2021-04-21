@@ -690,13 +690,13 @@ public class RentMyPlaceController {
                     }
                 }
 
-                ArrayList<Feature> features = new ArrayList<>();
+                ArrayList<Feature> features2 = new ArrayList<>();
 
                 for (String feature : checkedFeatures) {
-                    features.add((Feature) new Feature().select(new String[]{"id"}).where("feature", "LIKE", feature).get().get(0));
+                    features2.add((Feature) new Feature().select(new String[]{"id"}).where("feature", "LIKE", feature).get().get(0));
                 }
 
-                for (Feature feature : features) {
+                for (Feature feature : features2) {
                     new FeatureProperty().create(Map.ofEntries(
                             Map.entry("propertyId", String.valueOf(property.getId())),
                             Map.entry("featureId", String.valueOf(feature.getId()))
@@ -853,10 +853,11 @@ public class RentMyPlaceController {
                 if (orderBy.equals("ASC")) Collections.sort(properties);
                 else Collections.sort(properties, Collections.reverseOrder());
 
-                locations.clear();
+                //locations.clear();
+                ArrayList<Location> favLocations = new ArrayList<>();
                 for (Property property : properties) {
                     System.out.println(property.toString());
-                    locations.add((Location) new Location()
+                    favLocations.add((Location) new Location()
                             .select(new String[]{"id", "city"})
                             .where("id", "=", String.valueOf(property.getLocationId()))
                             .get().get(0));
@@ -873,7 +874,7 @@ public class RentMyPlaceController {
                     //set text and image
                     mainGui.getFavoritesResultNameLabel().get(i).setText(properties.get(i).getPropertyName());
                     //mainGui.getSearchResultLocationLabel().get(i).setText(locations.get(properties.get(i).getLocationId() - 1).getCity());
-                    mainGui.getFavoritesResultLocationLabel().get(i).setText(locations.get(i).getCity());
+                    mainGui.getFavoritesResultLocationLabel().get(i).setText(favLocations.get(i).getCity());
                     mainGui.getFavoritesResultPriceLabel().get(i).setText(String.valueOf(properties.get(i).getPricePerNight()));
                     mainGui.getFavoritesResultImageLabel().get(i).setText("");
                     mainGui.getFavoritesResultImageLabel().get(i).setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(i).getImagePath()), 500, 450));
