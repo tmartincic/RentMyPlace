@@ -457,41 +457,46 @@ public class RentMyPlaceController {
 
             if (!Auth.checkPermission(ae.getActionCommand())) return;
 
-            ReserveGUI reserveGui = new ReserveGUI();
-            reserveGui.setVisible(true);
+            if(currentUser.getContactId() != -1) {
 
-            User currentUser = Auth.getUser();
+                ReserveGUI reserveGui = new ReserveGUI();
+                reserveGui.setVisible(true);
 
-            Contact contact = (Contact) new Contact()
-                    .select(new String[]{"fullName", "email"})
-                    .where("id", "=", String.valueOf(currentUser.getContactId()))
-                    .get().get(0);
+                User currentUser = Auth.getUser();
 
-            String[] name = contact.getFullName().split(" ");
-            String firstName = name[0];
-            String lastName = name[1];
+                Contact contact = (Contact) new Contact()
+                        .select(new String[]{"fullName", "email"})
+                        .where("id", "=", String.valueOf(currentUser.getContactId()))
+                        .get().get(0);
 
-            reserveGui.getJlFistName().setText(firstName);
-            reserveGui.getJlLastName().setText(lastName);
-            reserveGui.getJlEmail().setText(contact.getEmail());
+                String[] name = contact.getFullName().split(" ");
+                String firstName = name[0];
+                String lastName = name[1];
 
-            reserveGui.getJlPropertyName().setText(reserveGui.getJlPropertyName().getText() + getProperty(currentIndex).getPropertyName());
-            reserveGui.getJlLocation().setText(reserveGui.getJlLocation().getText() + locations.get(properties.get(currentIndex).getLocationId() - 1).getCity());
-            reserveGui.getJlPropertyType().setText(reserveGui.getJlPropertyType().getText() + propertyTypes.get(properties.get(currentIndex).getPropertyTypeId() - 1).getType());
-            reserveGui.getJlPricePerNight().setText(reserveGui.getJlPricePerNight().getText() + getProperty(currentIndex).getPricePerNight());
+                reserveGui.getJlFistName().setText(firstName);
+                reserveGui.getJlLastName().setText(lastName);
+                reserveGui.getJlEmail().setText(contact.getEmail());
+
+                reserveGui.getJlPropertyName().setText(reserveGui.getJlPropertyName().getText() + getProperty(currentIndex).getPropertyName());
+                reserveGui.getJlLocation().setText(reserveGui.getJlLocation().getText() + locations.get(properties.get(currentIndex).getLocationId() - 1).getCity());
+                reserveGui.getJlPropertyType().setText(reserveGui.getJlPropertyType().getText() + propertyTypes.get(properties.get(currentIndex).getPropertyTypeId() - 1).getType());
+                reserveGui.getJlPricePerNight().setText(reserveGui.getJlPricePerNight().getText() + getProperty(currentIndex).getPricePerNight());
 
 
-            reserveGui.getjButtonConfirmReservation().addActionListener(
-                    new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            Reservations reservation = new Reservations().create(Map.ofEntries(
-                                    Map.entry("userId", String.valueOf(currentUser.getId())),
-                                    Map.entry("propertyId", String.valueOf(properties.get(currentIndex).getId())),
-                                    Map.entry("arrivalDate", String.valueOf(reserveGui.getjDateChooserArrival().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())),
-                                    Map.entry("departureDate", String.valueOf(reserveGui.getjDateChooserDeparture().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())),
-                                    Map.entry("price", Double.toString(properties.get(currentIndex).getPricePerNight()))));
-                        }
-                    });
+                reserveGui.getjButtonConfirmReservation().addActionListener(
+                        new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                Reservations reservation = new Reservations().create(Map.ofEntries(
+                                        Map.entry("userId", String.valueOf(currentUser.getId())),
+                                        Map.entry("propertyId", String.valueOf(properties.get(currentIndex).getId())),
+                                        Map.entry("arrivalDate", String.valueOf(reserveGui.getjDateChooserArrival().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())),
+                                        Map.entry("departureDate", String.valueOf(reserveGui.getjDateChooserDeparture().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())),
+                                        Map.entry("price", Double.toString(properties.get(currentIndex).getPricePerNight()))));
+                            }
+                        });
+            }else{
+
+            }
         }
     }
 
@@ -841,23 +846,26 @@ public class RentMyPlaceController {
                     mainGui.getFavoritesResultImageLabel().get(i).setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(i).getImagePath()), 500, 450));
                     mainGui.getFavoritesRemoveFavoritesButton().get(i).addActionListener(new RemoveFavoriteListener((Favorite) new Favorite().select(new String[]{"id"}).where("propertyId", "=", String.valueOf(properties.get(i).getId())).get().get(0)));
                 }
-                //size with new and previous elements
-                int currentSize = mainGui.getFavoritesResultPanels().size();
+                if(mainGui.getFavoritesResultPanels() != null) {
+                    //size with new and previous elements
+                    int currentSize = mainGui.getFavoritesResultPanels().size();
 
-                //remove previous elements if there are results
-                if (!properties.isEmpty()) {
-                    for (int i = mainGui.getFavoritesResultPanels().size() - 1; i > currentSize - prevSize - 1; i--) {
-                        mainGui.removeFavoritesResultPanels(i);
+                    //remove previous elements if there are results
+                    if (!properties.isEmpty()) {
+                        for (int i = mainGui.getFavoritesResultPanels().size() - 1; i > currentSize - prevSize - 1; i--) {
+                            mainGui.removeFavoritesResultPanels(i);
+                        }
+                    } else {
+                        for (int i = currentSize - 1; i > -1; i--) {
+                            //toggle invisible
+                            mainGui.resetFavoritesResultPanels(i, false);
+                        }
                     }
-                } else {
-                    for (int i = currentSize - 1; i > -1; i--) {
-                        //toggle invisible
-                        mainGui.resetFavoritesResultPanels(i, false);
-                    }
+
+                    //group and attach generated panels to main search panel
+                    mainGui.attachFavoritesResultPanels();
+
                 }
-
-                //group and attach generated panels to main search panel
-                mainGui.attachFavoritesResultPanels();
             }
         }
     }
