@@ -61,7 +61,7 @@ public class DBCredentials {
             File myObj = new File(LOCAL_CREDENTIALS);
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
-                FileWriter myWriter = new FileWriter("filename.txt");
+                FileWriter myWriter = new FileWriter(LOCAL_CREDENTIALS);
                 myWriter.write("host=" + DB_HOST);
                 myWriter.write("port=" + DB_PORT);
                 myWriter.write("database=" + DB_DATABASE);
