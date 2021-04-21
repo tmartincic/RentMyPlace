@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 public class RentMyPlaceController {
     User currentUser = null;
     int currentIndex = 0;
+    int currentIndexRent = 0;
     ArrayList<Property> properties = null;
     ArrayList<Location> locations = null;
     ArrayList<Feature> features = null;
@@ -232,11 +233,11 @@ public class RentMyPlaceController {
 
             if (!Auth.checkPermission(ae.getActionCommand()) && guest == false) return;
 
-            currentIndex++;
-            if (currentIndex >= properties.size()) {
-                currentIndex = 0;
+            currentIndexRent++;
+            if (currentIndexRent >= properties.size()) {
+                currentIndexRent = 0;
             }
-            getProperty(currentIndex);
+            getProperty(currentIndexRent);
 
         }
     }
@@ -247,11 +248,11 @@ public class RentMyPlaceController {
 
             if (!Auth.checkPermission(ae.getActionCommand()) && guest == false) return;
 
-            currentIndex--;
-            if (currentIndex < 0) {
-                currentIndex = properties.size() - 1;
+            currentIndexRent--;
+            if (currentIndexRent < 0) {
+                currentIndexRent = properties.size() - 1;
             }
-            getProperty(currentIndex);
+            getProperty(currentIndexRent);
         }
     }
 
@@ -260,10 +261,10 @@ public class RentMyPlaceController {
         public void actionPerformed(ActionEvent e) {
             if (!Auth.checkPermission(e.getActionCommand())) return;
 
-            getProperty(currentIndex);
+            getProperty(currentIndexRent);
 
             int userId = Auth.getUser().getId();
-            Property property = properties.get(currentIndex);
+            Property property = properties.get(currentIndexRent);
             int propertyId = property.getId();
             if (!(favorites == null)) {
                 favorites.clear();
@@ -294,7 +295,7 @@ public class RentMyPlaceController {
 
             if (!Auth.checkPermission(ae.getActionCommand()) && guest == false) return;
 
-            int index = currentIndex;
+            int index = currentIndexRent;
 
             getProperty(index);
 
@@ -512,10 +513,10 @@ public class RentMyPlaceController {
                 reserveGui.getJlLastName().setText(lastName);
                 reserveGui.getJlEmail().setText(contact.getEmail());
 
-                reserveGui.getJlPropertyName().setText(reserveGui.getJlPropertyName().getText() + getProperty(currentIndex).getPropertyName());
-                reserveGui.getJlLocation().setText(reserveGui.getJlLocation().getText() + locations.get(properties.get(currentIndex).getLocationId() - 1).getCity());
-                reserveGui.getJlPropertyType().setText(reserveGui.getJlPropertyType().getText() + propertyTypes.get(properties.get(currentIndex).getPropertyTypeId() - 1).getType());
-                reserveGui.getJlPricePerNight().setText(reserveGui.getJlPricePerNight().getText() + getProperty(currentIndex).getPricePerNight());
+                reserveGui.getJlPropertyName().setText(reserveGui.getJlPropertyName().getText() + getProperty(currentIndexRent).getPropertyName());
+                reserveGui.getJlLocation().setText(reserveGui.getJlLocation().getText() + locations.get(properties.get(currentIndexRent).getLocationId() - 1).getCity());
+                reserveGui.getJlPropertyType().setText(reserveGui.getJlPropertyType().getText() + propertyTypes.get(properties.get(currentIndexRent).getPropertyTypeId() - 1).getType());
+                reserveGui.getJlPricePerNight().setText(reserveGui.getJlPricePerNight().getText() + getProperty(currentIndexRent).getPricePerNight());
 
 
                 reserveGui.getjButtonConfirmReservation().addActionListener(
@@ -523,10 +524,10 @@ public class RentMyPlaceController {
                             public void actionPerformed(ActionEvent e) {
                                 Reservations reservation = new Reservations().create(Map.ofEntries(
                                         Map.entry("userId", String.valueOf(currentUser.getId())),
-                                        Map.entry("propertyId", String.valueOf(properties.get(currentIndex).getId())),
+                                        Map.entry("propertyId", String.valueOf(properties.get(currentIndexRent).getId())),
                                         Map.entry("arrivalDate", String.valueOf(reserveGui.getjDateChooserArrival().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())),
                                         Map.entry("departureDate", String.valueOf(reserveGui.getjDateChooserDeparture().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())),
-                                        Map.entry("price", Double.toString(properties.get(currentIndex).getPricePerNight()))));
+                                        Map.entry("price", Double.toString(properties.get(currentIndexRent).getPricePerNight()))));
                             }
                         });
             }else{
