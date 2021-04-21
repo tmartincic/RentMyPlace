@@ -18,6 +18,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RentMyPlaceController {
     User currentUser = null;
@@ -668,6 +670,18 @@ public class RentMyPlaceController {
                 String size = mainGui.getjTextField19().getText();
                 String description = mainGui.getjTextField20().getText();
                 String imageUrl = mainGui.getjTextField21().getText();
+
+                String regex = "https?:/(?:/[^/]+)+\\.(?:jpg|gif|png)";
+
+                Pattern pattern_name = Pattern.compile(regex);
+                Matcher matcher_name = pattern_name.matcher(imageUrl);
+
+                if(!matcher_name.find() || !mainGui.checkURL(imageUrl)) {
+                    System.out.println("Please enter valid image URL. \nSupported files are: .jpg, .gif & .png");
+                    JOptionPane panel = new JOptionPane();
+                    panel.showMessageDialog(mainGui, "Please enter valid image URL. \nSupported files are: .jpg, .gif & .png");
+                    return;
+                }
 
                 Location location = null;
                 try{
