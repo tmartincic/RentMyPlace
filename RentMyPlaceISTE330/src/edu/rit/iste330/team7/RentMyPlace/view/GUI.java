@@ -458,7 +458,8 @@ public class GUI extends javax.swing.JFrame {
         jLabelSearchPrice2.setText("<price>");
 
         jButton12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton12.setText("Edit");
+        //jButton12.setText("Edit");
+        jButton12.setText("Delete");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -1389,6 +1390,33 @@ public class GUI extends javax.swing.JFrame {
         this.getjButton9().addActionListener(ae);
     }
 
+    public void addAddFavoritesEventListener(ActionListener ae){
+        this.getjButton7().setActionCommand("add_favorite");
+        this.getjButton7().addActionListener(ae);
+    }
+
+    public void addDeletePropertyFromMyRentalsListener(ActionListener ae){
+        this.getjButton12().setActionCommand("myrentals_delete");
+        this.getjButton12().addActionListener(ae);
+    }
+
+    //DELETE BUTTON
+    public JButton getjButton12() {
+        return jButton12;
+    }
+
+    public JButton getjButton7() {
+        return jButton7;
+    }
+
+    public JPanel getFavoritesPanel() { return favoritesPanel; }
+
+    public JLabel getjLabelSearchInputName2() { return jLabelSearchInputName2; }
+
+    public JLabel getjLabelSearchLocation2() { return jLabelSearchLocation2; }
+
+    public JLabel getjLabelSearchPrice2() { return jLabelSearchPrice2; }
+
     public JButton getjButton9() {
         return jButton9;
     }
@@ -1434,11 +1462,19 @@ public class GUI extends javax.swing.JFrame {
         return jComboBox1;
     }
 
+    public JComboBox<String> getjComboBox2() {
+        return jComboBox2;
+    }
+
+    public JComboBox<String> getjComboBox3() {
+        return jComboBox3;
+    }
+
     public JTextField getjTextField2() {
         return jTextField2;
     }
 
-
+    public JLabel getjLabel42() { return jLabel42; }
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:

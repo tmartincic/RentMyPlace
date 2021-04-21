@@ -263,8 +263,16 @@ INSERT INTO `permissions` (`id`, `route`, `role`) VALUES
 ('23', 'search', 'user'),
 
 ('24', 'add_property', 'admin'),
-('25', 'add_property', 'user');
+('25', 'add_property', 'user'),
 
+('26', 'See more details...', 'admin'),
+('27', 'See more details...', 'user'),
+
+('28', 'add_favorite', 'admin'),
+('29', 'add_favorite', 'user'),
+
+('30', 'myrentals_delete', 'admin'),
+('31', 'myrentals_delete', 'user');
 
 --
 -- Indexes for dumped tables
@@ -388,6 +396,9 @@ ALTER TABLE `property_type`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  
+ALTER TABLE `favorite`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

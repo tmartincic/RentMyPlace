@@ -42,9 +42,9 @@ public class ReserveGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jlPropertyName = new javax.swing.JLabel();
+        jlPropertyType = new javax.swing.JLabel();
+        jlPricePerNight = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -55,10 +55,10 @@ public class ReserveGUI extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jlFistName = new javax.swing.JLabel();
+        jlLastName = new javax.swing.JLabel();
+        jlEmail = new javax.swing.JLabel();
+        jlLocation = new javax.swing.JLabel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -77,11 +77,11 @@ public class ReserveGUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("PROPERTY INFORMATION");
 
-        jLabel7.setText("<Property name>");
+        jlPropertyName.setText("<Property name>");
 
-        jLabel8.setText("<Property type>");
+        jlPropertyType.setText("<Property type>");
 
-        jLabel9.setText("<Price per night>");
+        jlPricePerNight.setText("<Price per night>");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("OTHER INFORMATION");
@@ -129,13 +129,13 @@ public class ReserveGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setText("<first name>");
+        jlFistName.setText("<first name>");
 
-        jLabel14.setText("<last name>");
+        jlLastName.setText("<last name>");
 
-        jLabel15.setText("<email>");
+        jlEmail.setText("<email>");
 
-        jLabel16.setText("<Location>");
+        jlLocation.setText("<Location>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,12 +144,12 @@ public class ReserveGUI extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel9)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel8)
+                                        .addComponent(jlPricePerNight)
+                                        .addComponent(jlPropertyName)
+                                        .addComponent(jlPropertyType)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(14, 14, 14)
-                                                .addComponent(jLabel16)))
+                                                .addComponent(jlLocation)))
                                 .addGap(192, 192, 192))
                         .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,9 +172,9 @@ public class ReserveGUI extends javax.swing.JFrame {
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(jLabel2)
-                                                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jlFistName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addComponent(jLabel11)
                                                                         .addGroup(layout.createSequentialGroup()
                                                                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,7 +187,7 @@ public class ReserveGUI extends javax.swing.JFrame {
                                                                                 .addGap(60, 60, 60)
                                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                                        .addComponent(jlLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,24 +217,24 @@ public class ReserveGUI extends javax.swing.JFrame {
                                         .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel13)
-                                        .addComponent(jLabel14))
+                                        .addComponent(jlFistName)
+                                        .addComponent(jlLastName))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel15)
+                                .addComponent(jlEmail)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7)
+                                .addComponent(jlPropertyName)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel16)
+                                .addComponent(jlLocation)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel8)
+                                                .addComponent(jlPropertyType)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jLabel9)
+                                                .addComponent(jlPricePerNight)
                                                 .addGap(31, 31, 31)
                                                 .addComponent(jLabel10)
                                                 .addGap(18, 18, 18)
@@ -280,8 +280,22 @@ public class ReserveGUI extends javax.swing.JFrame {
     }
 
     /**
-     * @param args the command line arguments
+     * Getters
      */
+
+    public JLabel getJlFistName() { return jlFistName; }
+
+    public JLabel getJlLastName() { return jlLastName; }
+
+    public JLabel getJlEmail() { return jlEmail; }
+
+    public JLabel getJlLocation() { return jlLocation; }
+
+    public JLabel getJlPropertyName() { return jlPropertyName; }
+
+    public JLabel getJlPropertyType() { return jlPropertyType; }
+
+    public JLabel getJlPricePerNight() { return jlPricePerNight; }
 
     // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
@@ -289,18 +303,18 @@ public class ReserveGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jlFistName;
+    private javax.swing.JLabel jlLastName;
+    private javax.swing.JLabel jlEmail;
+    private javax.swing.JLabel jlLocation;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jlPropertyName;
+    private javax.swing.JLabel jlPropertyType;
+    private javax.swing.JLabel jlPricePerNight;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
