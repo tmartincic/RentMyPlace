@@ -378,6 +378,10 @@ public class RentMyPlaceController {
 
                 int billingId = Auth.getUser().getBillingId();
 
+                locations = new Location()
+                        .select(new String[]{"id", "city", "zip", "street"})
+                        .get();
+
                 billings = new Billing()
                         .select(new String[]{"id", "billingAddress", "creditCardNum", "CVC", "expireDate", "ownerName"})
                         .where("id", "=", String.valueOf(billingId))
