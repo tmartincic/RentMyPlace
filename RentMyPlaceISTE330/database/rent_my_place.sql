@@ -82,9 +82,9 @@ CREATE TABLE `feature` (
 
 INSERT INTO `feature` (`id`, `feature`) VALUES
 (1, 'Parking'),
-(2, 'Wi-fi'),
+(2, 'Wifi'),
 (3, 'Jacuzzi'),
-(4, 'Room service '),
+(4, 'Room service'),
 (5, 'Smoking room'),
 (6, 'Pet friendly'),
 (7, 'Air conditioning'),
@@ -450,7 +450,6 @@ ALTER TABLE `Property`
 	ADD CONSTRAINT `Property_fk2` FOREIGN KEY (`propertyTypeId`) REFERENCES `property_type`(`id`)  ON DELETE CASCADE;
 
 COMMIT;
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
