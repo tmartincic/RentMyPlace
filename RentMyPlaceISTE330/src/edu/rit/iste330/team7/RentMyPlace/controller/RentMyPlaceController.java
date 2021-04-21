@@ -778,10 +778,7 @@ public class RentMyPlaceController {
                 mainGui.getjLabelSearchLocation2().setText(location.getCity());
                 mainGui.getjLabelSearchPrice2().setText(String.valueOf(property.getPricePerNight()));
                 mainGui.getjLabel42().setText("");
-                try{
-                    mainGui.getjLabel42().setIcon(mainGui.bufferImageIcon(mainGui.createURL(property.getImagePath()), 500, 450));
-                }
-                catch (NullPointerException npe) { return; }
+                mainGui.getjLabel42().setIcon(mainGui.bufferImageIcon(mainGui.createURL(property.getImagePath()), 500, 450));
             } else return;
         }
 
