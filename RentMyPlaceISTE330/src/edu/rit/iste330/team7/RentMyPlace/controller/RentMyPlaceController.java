@@ -762,6 +762,7 @@ public class RentMyPlaceController {
             public void actionPerformed(ActionEvent e) {
                 if (!Auth.checkPermission(e.getActionCommand())) return;
                 if (mainGui.getjComboBox2().getSelectedItem() != null) {
+
                     int userId = Auth.getUser().getId();
                     Property property = (Property) new Property()
                             .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId"})
@@ -771,7 +772,22 @@ public class RentMyPlaceController {
                     property.delete();
 
                     getProperty(currentIndex);
+
+                    if (!properties.isEmpty()) {
+                        properties.clear();
+                    }
+                    properties = new Property()
+                            .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId"})
+                            .where("userId", "=", String.valueOf(userId))
+                            .get();
+
+                    mainGui.getjComboBox2().removeAllItems();
+                    for (Property prop : properties) {
+                        mainGui.getjComboBox2().addItem(prop.getPropertyName());
+                    }
+
                     displayFavorites();
+
                 } else return;
             }
         }
