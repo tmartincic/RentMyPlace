@@ -172,6 +172,8 @@ public class RentMyPlaceController {
                     registerGUI.dispose();
                     mainGui.setVisible(true);
                     mainGui.getjLabelUsername().setText(newUser.getUsername());
+
+                    currentUser = Auth.getUser();
                 } else {
                     JOptionPane jopMessage = new JOptionPane();
                     jopMessage.showMessageDialog(gui, "This username already exists!\nTry something else.");
@@ -377,18 +379,20 @@ public class RentMyPlaceController {
                         .select(new String[]{"id", "billingAddress", "creditCardNum", "CVC", "expireDate", "ownerName"})
                         .where("id", "=", String.valueOf(billingId))
                         .get();
-
-                mainGui.getjTextFieldContactFullName().setText(contacts.get(0).getFullName());
-                mainGui.getjTextFieldContactEmail().setText(contacts.get(0).getEmail());
-                mainGui.getjTextFieldContactStreet().setText(locations.get(0).getStreet());
-                mainGui.getjTextFieldContactCity().setText(locations.get(0).getCity());
-                mainGui.getjTextFieldContactZip().setText(String.valueOf(locations.get(0).getZip()));
-
-                mainGui.getjTextFieldBillingOwnerName().setText(billings.get(0).getOwnerName());
-                mainGui.getjTextFieldBillingCardNumber().setText(billings.get(0).getCreditCardNum());
-                mainGui.getjTextFieldBillingAddress().setText(billings.get(0).getBillingAddress());
-                mainGui.getjTextFieldBillingCVC().setText(billings.get(0).getCVC());
-                mainGui.getjDateChooserExpirationDate().setDate(billings.get(0).getExpireDate());
+                if(contactId != -1) {
+                    mainGui.getjTextFieldContactFullName().setText(contacts.get(0).getFullName());
+                    mainGui.getjTextFieldContactEmail().setText(contacts.get(0).getEmail());
+                    mainGui.getjTextFieldContactStreet().setText(locations.get(0).getStreet());
+                    mainGui.getjTextFieldContactCity().setText(locations.get(0).getCity());
+                    mainGui.getjTextFieldContactZip().setText(String.valueOf(locations.get(0).getZip()));
+                }
+                if(billingId != -1) {
+                    mainGui.getjTextFieldBillingOwnerName().setText(billings.get(0).getOwnerName());
+                    mainGui.getjTextFieldBillingCardNumber().setText(billings.get(0).getCreditCardNum());
+                    mainGui.getjTextFieldBillingAddress().setText(billings.get(0).getBillingAddress());
+                    mainGui.getjTextFieldBillingCVC().setText(billings.get(0).getCVC());
+                    mainGui.getjDateChooserExpirationDate().setDate(billings.get(0).getExpireDate());
+                }
             }
         }
     }
@@ -401,53 +405,82 @@ public class RentMyPlaceController {
             int contactId = Auth.getUser().getContactId();
             int billingId = Auth.getUser().getBillingId();
 
-            Contact newContact = (Contact) new Contact()
-                    .where("id", "=", String.valueOf(contactId))
-                    .get()
-                    .get(0);
-            Location newLocation = (Location) new Location()
-                    .where("id", "=", String.valueOf(billingId))
-                    .get()
-                    .get(0);
+            Contact newContact;
+            Billing newBilling;
+            Location newLocation;
+
+            // if contact and billing info already exists
+            if(contactId != -1 && billingId != -1) {
+                newContact = (Contact) new Contact()
+                        .where("id", "=", String.valueOf(contactId))
+                        .get()
+                        .get(0);
+
+                newBilling = (Billing) new Billing()
+                        .where("id", "=", String.valueOf(billingId))
+                        .get()
+                        .get(0);
+
+                newLocation = (Location) new Location()
+                        .where("id", "=", String.valueOf(billingId))
+                        .get()
+                        .get(0);
+
+                newContact.update(Map.ofEntries(
+                        Map.entry("fullName", mainGui.getjTextFieldContactFullName().getText()),
+                        Map.entry("email", mainGui.getjTextFieldContactEmail().getText())
+                ));
+
+                newBilling.update(Map.ofEntries(
+                        Map.entry("ownerName", mainGui.getjTextFieldBillingOwnerName().getText()),
+                        Map.entry("creditCardNum", mainGui.getjTextFieldBillingCardNumber().getText()),
+                        Map.entry("billingAddress", mainGui.getjTextFieldBillingAddress().getText()),
+                        Map.entry("CVC", mainGui.getjTextFieldBillingCVC().getText()),
+                        Map.entry("expireDate", String.valueOf(mainGui.getjDateChooserExpirationDate().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()))
+                ));
+
+                newLocation.update(Map.ofEntries(
+                        Map.entry("city", mainGui.getjTextFieldContactCity().getText()),
+                        Map.entry("street", mainGui.getjTextFieldContactStreet().getText()),
+                        Map.entry("zip", String.valueOf(mainGui.getjTextFieldContactZip().getText())
+                )));
 
 
-//            //set contact attributes
-            newContact.setFullName(mainGui.getjTextFieldContactFullName().getText());
-            newContact.setEmail(mainGui.getjTextFieldContactEmail().getText());
+            // if contact and billing info doesn't exist
+            // create new
+            }else{
+                newContact = new Contact();
+                newBilling = new Billing();
+                newLocation = new Location();
 
-            newLocation.setCity(mainGui.getjTextFieldContactCity().getText());
-            newLocation.setStreet(mainGui.getjTextFieldContactStreet().getText());
-            newLocation.setZip(Integer.parseInt(mainGui.getjTextFieldContactZip().getText()));
 
-            newLocation.update(Map.ofEntries(
-                    Map.entry("city", mainGui.getjTextFieldContactCity().getText()),
-                    Map.entry("street", mainGui.getjTextFieldContactStreet().getText()),
-                    Map.entry("zip", String.valueOf(mainGui.getjTextFieldContactZip().getText())
-                    )));
+                newLocation.create(Map.ofEntries(
+                        Map.entry("city", mainGui.getjTextFieldContactCity().getText()),
+                        Map.entry("street", mainGui.getjTextFieldContactStreet().getText()),
+                        Map.entry("zip", String.valueOf(mainGui.getjTextFieldContactZip().getText())
+                        )));
 
-            newContact.update(Map.ofEntries(
-                    Map.entry("fullName", mainGui.getjTextFieldContactFullName().getText()),
-                    Map.entry("email", mainGui.getjTextFieldContactEmail().getText())
-            ));
 
-            Billing newBilling = (Billing) new Billing()
-                    .where("id", "=", String.valueOf(billingId))
-                    .get()
-                    .get(0);
+                newContact.create(Map.ofEntries(
+                        Map.entry("locationId", String.valueOf(newLocation.getId())),
+                        Map.entry("fullName", mainGui.getjTextFieldContactFullName().getText()),
+                        Map.entry("phone", "123455667"),
+                        Map.entry("email", mainGui.getjTextFieldContactEmail().getText())
+                ));
 
-            newBilling.setOwnerName(mainGui.getjTextFieldBillingOwnerName().getText());
-            newBilling.setCVC(mainGui.getjTextFieldBillingCVC().getText());
-            newBilling.setCreditCardNum(mainGui.getjTextFieldBillingCardNumber().getText());
-            newBilling.setBillingAddress(mainGui.getjTextFieldBillingAddress().getText());
-            newBilling.setExpireDate(Date.valueOf(mainGui.getjDateChooserExpirationDate().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+                newBilling.create(Map.ofEntries(
+                        Map.entry("ownerName", mainGui.getjTextFieldBillingOwnerName().getText()),
+                        Map.entry("creditCardNum", mainGui.getjTextFieldBillingCardNumber().getText()),
+                        Map.entry("billingAddress", mainGui.getjTextFieldBillingAddress().getText()),
+                        Map.entry("CVC", mainGui.getjTextFieldBillingCVC().getText()),
+                        Map.entry("expireDate", String.valueOf(mainGui.getjDateChooserExpirationDate().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()))
+                ));
 
-            newBilling.update(Map.ofEntries(
-                    Map.entry("ownerName", mainGui.getjTextFieldBillingOwnerName().getText()),
-                    Map.entry("creditCardNum", mainGui.getjTextFieldBillingCardNumber().getText()),
-                    Map.entry("billingAddress", mainGui.getjTextFieldBillingAddress().getText()),
-                    Map.entry("CVC", mainGui.getjTextFieldBillingCVC().getText()),
-                    Map.entry("expireDate", String.valueOf(mainGui.getjDateChooserExpirationDate().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()))
-            ));
+                currentUser.update((Map.ofEntries(
+                        Map.entry("contactId", String.valueOf(newContact.getId())),
+                        Map.entry("billingId", String.valueOf(newBilling.getId()))
+                )));
+            }
         }
     }
 
