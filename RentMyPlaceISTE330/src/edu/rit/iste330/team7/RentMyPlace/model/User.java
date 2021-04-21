@@ -123,6 +123,7 @@ public class User extends Model
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();
         ArrayList<User> users = new ArrayList<>();
 
+        super.clearAttributes();
         for(HashMap< String, String> row : list_of_rows){
             User user = new User();
             user.assign(row);
@@ -171,8 +172,9 @@ public class User extends Model
             setContactId(user.getContactId());
             setBillingId(user.getBillingId());
             setUserType(user.getUserType());
-            generateToken();
 
+            generateToken();
+            user.clearAttributes();
             user.update(Map.ofEntries(
                     Map.entry("token", getToken())
             ));
@@ -201,6 +203,7 @@ public class User extends Model
         secureRandom.nextBytes(randomBytes);
         String token = base64Encoder.encodeToString(randomBytes);
         setToken(token);
+        this.clearAttributes();
         update(Map.ofEntries(
                 Map.entry("token", token)
         ));

@@ -165,7 +165,9 @@ public class RentMyPlaceController {
                             Map.entry("userType", userType)
                     ));
 
-                    Auth.checkUser(username, convPass);
+
+
+                    Auth.logToken(newUser.generateToken());
                     gui.dispose();
                     registerGUI.dispose();
                     mainGui.setVisible(true);
@@ -395,6 +397,7 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae) {
 
+            if(Auth.getUser() == null) return;
             int contactId = Auth.getUser().getContactId();
             int billingId = Auth.getUser().getBillingId();
 

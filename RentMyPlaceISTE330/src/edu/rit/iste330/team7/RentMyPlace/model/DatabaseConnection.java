@@ -76,9 +76,7 @@ public class DatabaseConnection {
             PreparedStatement stmt = (PreparedStatement) this.getCon().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             if(!values.isEmpty()){
-                System.out.println(stmt);
                 for(int i=0; i<values.size(); i++) {
-                    System.out.println(values.get(i));
                     stmt.setObject((i+1), values.get(i));
                 }
             }

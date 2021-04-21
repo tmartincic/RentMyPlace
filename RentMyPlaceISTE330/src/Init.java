@@ -1,5 +1,6 @@
 import edu.rit.iste330.team7.RentMyPlace.controller.Authentication;
 import edu.rit.iste330.team7.RentMyPlace.controller.RentMyPlaceController;
+import edu.rit.iste330.team7.RentMyPlace.model.Feature;
 import edu.rit.iste330.team7.RentMyPlace.model.Model;
 import edu.rit.iste330.team7.RentMyPlace.model.User;
 import edu.rit.iste330.team7.RentMyPlace.view.LoginGUI;
@@ -128,6 +129,7 @@ public class Init {
                 Map.entry("contactId", "2"),
                 Map.entry("billingId", "2")
         )).toString());*/
+        System.out.println(new Feature().select(new String[]{"id"}).where("feature", "LIKE", "Parking").get().get(0).toString());
 
         RentMyPlaceController controller = new RentMyPlaceController(new LoginGUI(), new Model("user"));
     }

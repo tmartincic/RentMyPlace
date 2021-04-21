@@ -136,7 +136,9 @@ public class Model<T> {
         }
         ResultSet rs = null;
         try {
-            return con.exists(sqlToString(), attributes);
+            boolean exists = con.exists(sqlToString(), attributes);
+            attributes.clear();
+            return exists;
         }
         catch(DLException e){
             System.out.println(e);
