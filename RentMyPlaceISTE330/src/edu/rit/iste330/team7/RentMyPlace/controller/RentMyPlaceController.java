@@ -10,6 +10,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -18,14 +19,6 @@ import java.util.Map;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 
 public class RentMyPlaceController {
     User currentUser = null;
@@ -92,22 +85,19 @@ public class RentMyPlaceController {
         //set user if token exists
         if (Auth.tokenExists()) {
             currentUser = Auth.getUser();
-        if(currentUser!=null) {
+            if (currentUser != null) {
 
-            if (currentUser.getUserType().equals("admin")) {
-                showAdminGUI();
-            }
+                if (currentUser.getUserType().equals("admin")) {
+                    showAdminGUI();
+                }
 
-            try {
-                mainGui.getjLabelUsername().setText(currentUser.getUsername());
-            } catch (NullPointerException npe) {
-                mainGui.getjLabelUsername().setText("");
+                try {
+                    mainGui.getjLabelUsername().setText(currentUser.getUsername());
+                } catch (NullPointerException npe) {
+                    mainGui.getjLabelUsername().setText("");
+                }
             }
         }
-        }
-
-        tryPDF();
-
     }
 
     public RentMyPlaceController() {
@@ -121,25 +111,6 @@ public class RentMyPlaceController {
         adminGUI.addRemoveUserListener(new RemoveUserListener());
         adminGUI.addPromoteUserListener(new PromoteUserListener());
 
-    }
-
-    public void tryPDF(){
-        Document document = new Document();
-        try
-        {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HelloWorld.pdf"));
-            document.open();
-
-            document.add(new Paragraph("A Hello World PDF document."));
-            document.close();
-            writer.close();
-        } catch (DocumentException e)
-        {
-            e.printStackTrace();
-        } catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public ArrayList<String> getUsers(){
@@ -643,7 +614,13 @@ public class RentMyPlaceController {
                 reserveGui.getjButtonConfirmReservation().addActionListener(
                         new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
-                                ArrayList<Reservations> chekcReservation = new Reservations()
+                                if(reserveGui.getjDateChooserArrival().getDate() == null || reserveGui.getjDateChooserDeparture().getDate() == null){
+                                    JOptionPane jopMessage = new JOptionPane();
+                                    jopMessage.showMessageDialog(reserveGui, "Please select the dates.");
+                                    return;
+                                }
+
+                                ArrayList<Reservations> checkReservation = new Reservations()
                                         .select(new String[]{"userId", "propertyId", "arrivalDate", "price"})
                                         .where("userId", "=", String.valueOf(currentUser.getId()))
                                         .where("propertyId", "=", String.valueOf(properties.get(currentIndexRent).getId()))
@@ -651,7 +628,7 @@ public class RentMyPlaceController {
                                         .where("departureDate", "=", String.valueOf(reserveGui.getjDateChooserDeparture().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()))
                                         .get();
 
-                                if(!chekcReservation.isEmpty()){
+                                if(!checkReservation.isEmpty()){
                                     JOptionPane jopMessage = new JOptionPane();
                                     jopMessage.showMessageDialog(reserveGui, "Reservation already exists.");
                                     return;
@@ -665,8 +642,20 @@ public class RentMyPlaceController {
                                         Map.entry("departureDate", String.valueOf(reserveGui.getjDateChooserDeparture().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())),
                                         Map.entry("price", Double.toString(properties.get(currentIndexRent).getPricePerNight()))));
 
-                                reserveGui.dispose();
                                confirmationGUI.setVisible(true);
+
+                               confirmationGUI.getExportButton().setActionCommand("export_pdf");
+                               confirmationGUI.getExportButton().addActionListener(new ActionListener() {
+                                   @Override
+                                   public void actionPerformed(ActionEvent e) {
+                                       if (!Auth.checkPermission(confirmationGUI.getExportButton().getActionCommand())) return;
+
+                                       SimpleDateFormat sdFormat = new SimpleDateFormat("YYYY-MM-dd");
+                                       confirmationGUI.generatePDFConfirmation(reserveGui.getJlFistName().getText() + " " + reserveGui.getJlLastName().getText(), reserveGui.getJlEmail().getText(), reserveGui.getJlPropertyName().getText(), reserveGui.getJlLocation().getText(), sdFormat.format(reserveGui.getjDateChooserArrival().getDate()), sdFormat.format(reserveGui.getjDateChooserDeparture().getDate()));
+                                   }
+                               });
+
+                                reserveGui.dispose();
                             }
                         });
             }else{

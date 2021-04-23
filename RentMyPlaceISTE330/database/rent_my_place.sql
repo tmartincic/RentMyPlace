@@ -47,11 +47,11 @@ CREATE TABLE `contact` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `contact` (`id`, `fullName`, `email`, `phone`, `locationId`) VALUES
-(1, 'Herbie Jefferson', 'herbieJ@gmail.com', 0993333333, 1),
-(2, 'Mia Wong', 'mia_wong@mail.com', 0987777777, 2),
-(3, 'Jackie Meldrum', 'jackie@hotmail.com', 0912222888, 3),
-(4, 'Peter Stanbrige', 'peter.stanbrige@mail.com', 0971111222, 4 ),
-(5,  'Desiree Burch',  'desireeBurch@hotmail.com', 0918888888, 5);
+(1, 'Herbie Jefferson', 'herbieJ@gmail.com', 0993333333, 11),
+(2, 'Mia Wong', 'mia_wong@mail.com', 0987777777, 12),
+(3, 'Jackie Meldrum', 'jackie@hotmail.com', 0912222888, 13),
+(4, 'Peter Stanbrige', 'peter.stanbrige@mail.com', 0971111222, 14 ),
+(5,  'Desiree Burch',  'desireeBurch@hotmail.com', 0918888888, 15);
 
 --
 -- Table structure for table `favorite`
@@ -136,7 +136,12 @@ INSERT INTO `location` (`id`, `street`, `city`, `zip`) VALUES
 (7, 'Ul. Josipa Lovretica','Vinkovci',32100),
 (8, 'Vukovarska ulica 8', 'Bjelovar', 43000),
 (9, 'Optujska ulica 50', 'Varazdin', 42000),
-(10, 'Ilica 50', 'Zagreb', 10000);
+(10, 'Ilica 50', 'Zagreb', 10000),
+(11, 'Damira Tomljanovica Gavrana 13', 'Zagreb', 10000),
+(12, 'Avenija Dubrovnik 30', 'Zagreb', 10000),
+(13, 'Ul. Frana Supila 15', 'Split', 21000),
+(14, 'Ul. Krste Frankopana 6', 'Bjelovar', 43000),
+(15, 'Ilica 50', 'Zagreb', 10000);
 
 --
 -- Table structure for table `property`
@@ -272,7 +277,10 @@ INSERT INTO `permissions` (`id`, `route`, `role`) VALUES
 ('29', 'add_favorite', 'user'),
 
 ('30', 'myrentals_delete', 'admin'),
-('31', 'myrentals_delete', 'user');
+('31', 'myrentals_delete', 'user'),
+
+('32', 'export_pdf', 'admin'),
+('33', 'export_pdf', 'user');
 
 --
 -- Indexes for dumped tables
