@@ -15,8 +15,17 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class RentMyPlaceController {
     User currentUser = null;
@@ -78,6 +87,7 @@ public class RentMyPlaceController {
 
         this.getProperty(currentIndex);
 
+
         //set user if token exists
         if (Auth.tokenExists()) {
             currentUser = Auth.getUser();
@@ -87,9 +97,30 @@ public class RentMyPlaceController {
                 mainGui.getjLabelUsername().setText("");
             }
         }
+
+        tryPDF();
     }
 
     public RentMyPlaceController() {
+    }
+
+    public void tryPDF(){
+        Document document = new Document();
+        try
+        {
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HelloWorld.pdf"));
+            document.open();
+
+            document.add(new Paragraph("A Hello World PDF document."));
+            document.close();
+            writer.close();
+        } catch (DocumentException e)
+        {
+            e.printStackTrace();
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public boolean usernameExists(String userName) {
