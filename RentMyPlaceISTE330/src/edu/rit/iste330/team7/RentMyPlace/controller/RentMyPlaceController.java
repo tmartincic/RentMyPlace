@@ -409,6 +409,7 @@ public class RentMyPlaceController {
 
                 locations = new Location()
                         .select(new String[]{"id", "city", "zip", "street"})
+                        .where("id", "=", String.valueOf(contacts.get(0).getLocationId()))
                         .get();
 
                 billings = new Billing()
@@ -640,6 +641,10 @@ public class RentMyPlaceController {
                             .where("locationId", "=", String.valueOf(location.getId()))
                             //.orderBy(new String[]{"pricePerNight"}, orderBy)
                             .get();
+
+                    if(tempProperty.isEmpty()){
+                        break;
+                    }
 
                     properties.add((Property) tempProperty.get(0));
                     tempProperty.clear();
