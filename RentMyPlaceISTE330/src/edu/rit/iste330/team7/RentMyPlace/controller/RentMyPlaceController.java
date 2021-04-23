@@ -1,10 +1,7 @@
 package edu.rit.iste330.team7.RentMyPlace.controller;
 
 import edu.rit.iste330.team7.RentMyPlace.model.*;
-import edu.rit.iste330.team7.RentMyPlace.view.GUI;
-import edu.rit.iste330.team7.RentMyPlace.view.LoginGUI;
-import edu.rit.iste330.team7.RentMyPlace.view.RegisterGUI;
-import edu.rit.iste330.team7.RentMyPlace.view.ReserveGUI;
+import edu.rit.iste330.team7.RentMyPlace.view.*;
 
 import java.awt.event.*;
 
@@ -38,6 +35,7 @@ public class RentMyPlaceController {
     Model model;
     GUI mainGui = new GUI();
     RegisterGUI registerGUI = new RegisterGUI();
+    ConfirmationGUI confirmationGUI = new ConfirmationGUI();
 
     boolean guest = false;
 
@@ -510,8 +508,15 @@ public class RentMyPlaceController {
                         .get().get(0);
 
                 String[] name = contact.getFullName().split(" ");
-                String firstName = name[0];
-                String lastName = name[1];
+                String firstName = "";
+                String lastName = "";
+                if(name.length > 1) {
+                     firstName = name[0];
+                     lastName = name[1];
+                }
+                else{
+                    firstName = name[0];
+                }
 
                 reserveGui.getJlFistName().setText(firstName);
                 reserveGui.getJlLastName().setText(lastName);
@@ -526,16 +531,35 @@ public class RentMyPlaceController {
                 reserveGui.getjButtonConfirmReservation().addActionListener(
                         new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
+                                ArrayList<Reservations> chekcReservation = new Reservations()
+                                        .select(new String[]{"userId", "propertyId", "arrivalDate", "price"})
+                                        .where("userId", "=", String.valueOf(currentUser.getId()))
+                                        .where("propertyId", "=", String.valueOf(properties.get(currentIndexRent).getId()))
+                                        .where("arrivalDate", "=",String.valueOf(reserveGui.getjDateChooserArrival().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()))
+                                        .where("departureDate", "=", String.valueOf(reserveGui.getjDateChooserDeparture().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()))
+                                        .get();
+
+                                if(!chekcReservation.isEmpty()){
+                                    JOptionPane jopMessage = new JOptionPane();
+                                    jopMessage.showMessageDialog(reserveGui, "Reservation already exists.");
+                                    return;
+                                }
+
+
                                 Reservations reservation = new Reservations().create(Map.ofEntries(
                                         Map.entry("userId", String.valueOf(currentUser.getId())),
                                         Map.entry("propertyId", String.valueOf(properties.get(currentIndexRent).getId())),
                                         Map.entry("arrivalDate", String.valueOf(reserveGui.getjDateChooserArrival().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())),
                                         Map.entry("departureDate", String.valueOf(reserveGui.getjDateChooserDeparture().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())),
                                         Map.entry("price", Double.toString(properties.get(currentIndexRent).getPricePerNight()))));
+
+                                reserveGui.dispose();
+                               confirmationGUI.setVisible(true);
                             }
                         });
             }else{
-
+                JOptionPane jopMessage = new JOptionPane();
+                jopMessage.showMessageDialog(mainGui, "Your contact and billing information are not defined. Please go to 'Settings' and set your information in order to make a reservation.");
             }
         }
     }
