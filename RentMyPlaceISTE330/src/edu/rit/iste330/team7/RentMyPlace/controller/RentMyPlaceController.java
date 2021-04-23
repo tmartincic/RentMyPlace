@@ -43,6 +43,7 @@ public class RentMyPlaceController {
     LoginGUI gui;
     Model model;
     GUI mainGui = new GUI();
+    AdminGUI adminGUI = null;
     RegisterGUI registerGUI = new RegisterGUI();
     ConfirmationGUI confirmationGUI = new ConfirmationGUI();
 
@@ -91,17 +92,35 @@ public class RentMyPlaceController {
         //set user if token exists
         if (Auth.tokenExists()) {
             currentUser = Auth.getUser();
+        if(currentUser!=null) {
+
+            if (currentUser.getUserType().equals("admin")) {
+                showAdminGUI();
+            }
+
             try {
                 mainGui.getjLabelUsername().setText(currentUser.getUsername());
             } catch (NullPointerException npe) {
                 mainGui.getjLabelUsername().setText("");
             }
         }
+        }
 
         tryPDF();
+
     }
 
     public RentMyPlaceController() {
+    }
+
+    public void showAdminGUI(){
+        adminGUI = new AdminGUI();
+        adminGUI.addUsers(getUsers());
+        adminGUI.setName(currentUser.getUsername());
+        adminGUI.getjListUsersInfo().setSelectedIndex(0);
+        adminGUI.addRemoveUserListener(new RemoveUserListener());
+        adminGUI.addPromoteUserListener(new PromoteUserListener());
+
     }
 
     public void tryPDF(){
@@ -121,6 +140,19 @@ public class RentMyPlaceController {
         {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<String> getUsers(){
+        ArrayList<User> temp = new User()
+                .select(new String[]{"id", "username", "userType"})
+                .get();
+        ArrayList<String> users = new ArrayList<>();
+        for(User user : temp){
+            String userInfo = String.valueOf(user.getId()) + "   " + user.getUserType() + "   " + user.getUsername();
+            users.add(userInfo);
+            System.out.println(userInfo);
+        }
+        return users;
     }
 
     public boolean usernameExists(String userName) {
@@ -160,6 +192,11 @@ public class RentMyPlaceController {
                 mainGui.setVisible(true);
                 //reset user
                 currentUser = Auth.getUser();
+
+                if(currentUser.getUserType().equals("admin")) {
+                    showAdminGUI();
+                }
+
                 mainGui.getjLabelUsername().setText(currentUser.getUsername());
 
             } else {
@@ -169,6 +206,46 @@ public class RentMyPlaceController {
         }
     }
 
+    class RemoveUserListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae){
+
+            User user = (User) new User()
+                    .select(new String[]{"id", "username", "password", "userType", "contactId", "billingId", "token"})
+                    .where("username", "LIKE", getSelectedUser())
+                    .get().get(0);
+            user.delete();
+
+            properties = new Property()
+                    .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId", "propertyTypeId", "bedrooms", "size"})
+                    .get();
+
+            adminGUI.addUsers(getUsers());
+        }
+    }
+
+    public String getSelectedUser(){
+        String temp = adminGUI.getjListUsersInfo().getSelectedValue().toString();
+        String[] splitArray = temp.split("   ");
+        String username = splitArray[2];
+        return username;
+    }
+
+    class PromoteUserListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            User user = (User) new User()
+                    .select(new String[]{"id", "username", "password", "userType", "contactId", "billingId", "token"})
+                    .where("username", "LIKE", getSelectedUser())
+                    .get().get(0);
+
+            user.update(Map.ofEntries(
+                            Map.entry("userType", "admin")
+                        ));
+
+            adminGUI.addUsers(getUsers());
+        }
+    }
 
     class RegisterListener implements ActionListener {
         @Override
@@ -219,6 +296,9 @@ public class RentMyPlaceController {
         public void actionPerformed(ActionEvent ae) {
             gui.setVisible(true);
             mainGui.dispose();
+            if(adminGUI!=null){
+                adminGUI.dispose();
+            }
 
             mainGui.getjTabbedPane2().setSelectedComponent(mainGui.getjPanelRent());
 
@@ -678,8 +758,10 @@ public class RentMyPlaceController {
                     mainGui.getSearchResultImageLabel().get(i).setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(i).getImagePath()), 500, 450));
                 }
                 //size with new and previous elements
-                int currentSize = mainGui.getSearchResultPanels().size();
-
+                int currentSize = 0;
+                if(mainGui.getSearchResultPanels() !=null) {
+                    currentSize = mainGui.getSearchResultPanels().size();
+                }
                 //remove previous elements if there are results
                 if (!properties.isEmpty()) {
                     for (int i = mainGui.getSearchResultPanels().size() - 1; i > currentSize - prevSize - 1; i--) {
