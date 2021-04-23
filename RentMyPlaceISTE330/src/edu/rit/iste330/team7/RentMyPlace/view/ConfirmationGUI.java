@@ -1,6 +1,16 @@
 package edu.rit.iste330.team7.RentMyPlace.view;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
 
 public class ConfirmationGUI extends javax.swing.JFrame {
 
@@ -56,11 +66,17 @@ public class ConfirmationGUI extends javax.swing.JFrame {
         jButton1.setText("Export PDF Confirmation");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                //jButton1ActionPerformed(evt);
             }
         });
 
         jButton2.setText("Close");
+
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dispose();
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,8 +111,43 @@ public class ConfirmationGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    public void generatePDFConfirmation(String userName, String email, String propertyName, String propertyLocation, String arrivalDate, String departureDate){
+        //https://howtodoinjava.com/java/library/read-generate-pdf-java-itext/
 
+        Font headingFont = FontFactory.getFont(FontFactory.HELVETICA, 24, Font.NORMAL, new CMYKColor(100,47,0,49));
+        Font subtitleFont = FontFactory.getFont(FontFactory.HELVETICA, 18, Font.NORMAL, new CMYKColor(100,28,0,16));
+        Font noteFont = FontFactory.getFont(FontFactory.HELVETICA, 10, Font.NORMAL, new CMYKColor(100,69,0,75));
+
+        Document document = new Document();
+        try
+        {
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Reservation Confirmation.pdf"));
+            document.open();
+
+            Paragraph headerParagraph = new Paragraph("***** RESERVATION CONFIRMATION *****", headingFont);
+            headerParagraph.setAlignment((int) CENTER_ALIGNMENT);
+            document.add(new Paragraph(headerParagraph));
+            document.add(new Paragraph("\nUSER INFORMATION", subtitleFont));
+            document.add(new Paragraph("Full name: " + userName));
+            document.add(new Paragraph("Email: " + email));
+            document.add(new Paragraph("\nPROPERTY INFORMATION", subtitleFont));
+            document.add(new Paragraph(propertyName));
+            document.add(new Paragraph(propertyLocation));
+            document.add(new Paragraph("Stay dates: " + arrivalDate + " - " + departureDate));
+            document.add(new Paragraph("\n\nReservation was made via RentMyPlace. Thank you for using our application!\nCopyright RentMyPlace 2021.", noteFont));
+            document.close();
+            writer.close();
+        } catch (DocumentException e)
+        {
+            e.printStackTrace();
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public JButton getExportButton() {
+        return jButton1;
     }
 
     // Variables declaration - do not modify
