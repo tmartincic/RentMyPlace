@@ -747,6 +747,16 @@ public class RentMyPlaceController {
                 }
                 JOptionPane panel = new JOptionPane();
                 panel.showMessageDialog(mainGui, "Property created succesfully!");
+
+                properties = new Property()
+                        .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId"})
+                        .where("userId", "=", String.valueOf(id))
+                        .get();
+
+                mainGui.getjComboBox2().removeAllItems();
+                for (Property prop : properties) {
+                    mainGui.getjComboBox2().addItem(prop.getPropertyName());
+                }
             }
         }
 
