@@ -8,8 +8,12 @@ import java.util.Map;
 
 import edu.rit.iste330.team7.RentMyPlace.controller.Authentication;
 
+/**
+ * Model class for the User table
+ */
 public class User extends Model
 {
+    //attributes
     private static final String table_name = "user";
 
     private int id;
@@ -20,6 +24,7 @@ public class User extends Model
     private int billingId;
     private String token;
 
+    //default constructor
     public User() {
         super(table_name);
         this.id = -1;
@@ -31,6 +36,7 @@ public class User extends Model
         this.token = null;
     }
 
+    //parametrized constructor
     public User(int id, String username, String password, String userType, int contactId, int billingId) {
         super(table_name);
         this.id = id;
@@ -42,7 +48,9 @@ public class User extends Model
         this.token = null;
     }
 
-
+    /**
+     * Getters and seters
+     */
     public int getId() {
         return id;
     }
@@ -103,6 +111,11 @@ public class User extends Model
                 '}';
     }
 
+    /**
+     * Assigns new values to the attributes
+     * @param row Map<String, String> map of attributes and values
+     * @return User
+     */
     public User assign(Map<String, String> row) {
         for (String attribute: row.keySet()) {
             if(row.get(attribute) == null) continue;
@@ -118,6 +131,11 @@ public class User extends Model
         }
         return this;
     }
+
+    /**
+     * Gets User table data
+     * @return ArrayList<User>
+     */
     @Override
     public ArrayList<User> get(){
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();
@@ -132,6 +150,11 @@ public class User extends Model
         return users;
     }
 
+    /**
+     * Creates an new instance of User
+     * @param row Map<String, String>
+     * @return User
+     */
     public User create(Map<String, String> row) {
         int id = super.createModel(row);
         setId(id);

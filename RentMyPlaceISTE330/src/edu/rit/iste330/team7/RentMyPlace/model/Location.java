@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Model class for the Location table
+ */
 public class Location extends Model
 {
+    //attributes
     private static final String table_name = "location";
 
     public int id;
@@ -13,6 +17,7 @@ public class Location extends Model
     public String city;
     public int zip;
 
+    //default constructor
     public Location() {
         super(table_name);
         this.id = -1;
@@ -21,6 +26,7 @@ public class Location extends Model
         this.zip = -1;
     }
 
+    //parametrized constructor
     public Location(int id, String street, String city, int zip) {
         super(table_name);
         this.id = id;
@@ -28,6 +34,10 @@ public class Location extends Model
         this.city = city;
         this.zip = zip;
     }
+
+    /**
+     * Gettes and setters
+     */
 
     public int getId() {
         return id;
@@ -71,6 +81,11 @@ public class Location extends Model
                 '}';
     }
 
+    /**
+     * Assings new values to the attributes
+     * @param row Map<String, String> map of attributes and values
+     * @return Location
+     */
     public Location assign(Map<String, String> row) {
         for (String attribute: row.keySet()) {
             switch (attribute) {
@@ -82,6 +97,11 @@ public class Location extends Model
         }
         return this;
     }
+
+    /**
+     * Gets Location table data
+     * @return ArrayList<Location>
+     */
     @Override
     public ArrayList<Location> get(){
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();
@@ -95,6 +115,11 @@ public class Location extends Model
         return locations;
     }
 
+    /**
+     * Creates a new Location
+     * @param row Map<String, String>
+     * @return Location
+     */
     public Location create(Map<String, String> row) {
         int id = super.createModel(row);
         setId(id);

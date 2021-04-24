@@ -14,12 +14,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Class for user authentication
+ */
 public class Auth implements ActionListener {
+    //attributes
     private User user;
     private static final String filename = "binaryToken.bin";
 
+    //default constructor
     public Auth() { }
 
+    /**
+     * Checks if the user has permission for given aciton
+     * @param button String
+     * @return boolean - true if it has permission, false if not
+     */
     public static boolean checkPermission(String button) {
         User user = Auth.getUser();
         if(user == null) return false;
@@ -32,6 +42,10 @@ public class Auth implements ActionListener {
         return permission;
     }
 
+    /**
+     * Gets the current user
+     * @return User current user
+     */
     public static User getUser() {
         Auth a = new Auth();
         if(a.tokenExists()) {
@@ -46,6 +60,12 @@ public class Auth implements ActionListener {
         return null;
     }
 
+    /**
+     * Checks if user credentials (username and password are correct)
+     * @param userName String
+     * @param password String
+     * @return boolean - true if authenticated
+     */
     public static boolean checkUser(String userName, String password) {
         ArrayList<User> user = new User()
                 .where("username", "LIKE", userName)
@@ -60,6 +80,10 @@ public class Auth implements ActionListener {
         return false;
     }
 
+    /**
+     * Reads the token from the binary file
+     * @return String
+     */
     public static String readToken() {
         Path path = Paths.get(filename);
         byte[] bytes = null;
@@ -72,7 +96,7 @@ public class Auth implements ActionListener {
         }
         return null;
     }
-    /***
+    /**
      *  If token file exists and it's not an empty file, return true
      * @return boolean
      */
@@ -87,6 +111,10 @@ public class Auth implements ActionListener {
         //will be overridden in classes extending this class
     }
 
+    /**
+     * Logs /writes token to the filename
+     * @param token String
+     */
     public static void logToken(String token) {
         Path path = Paths.get(filename);
         byte[] bytes = token.getBytes(StandardCharsets.UTF_8);
@@ -97,11 +125,11 @@ public class Auth implements ActionListener {
         catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("LOG  THIS: "+token);
-        System.out.println("READ THIS: "+readToken());
     }
 
+    /**
+     * GUI for entering user credentials and authenticating the user
+     */
     public void inputUserCredentials() {
         LoginGUI login = new LoginGUI();
         login.addRegisterListener(new AbstractAction() {

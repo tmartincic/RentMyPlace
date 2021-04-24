@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Model class for the Property table
+ */
 public class Property extends Model implements Comparable
 {
+    //attributes
     private static String table_name = "property";
 
     public int id;
@@ -19,6 +23,7 @@ public class Property extends Model implements Comparable
     public int size;
     public double pricePerNight;
 
+    //default constructor
     public Property() {
         super(table_name);
         this.id = -1;
@@ -33,6 +38,7 @@ public class Property extends Model implements Comparable
         this.pricePerNight = -1;
     }
 
+    //parametrized constructor
     public Property(int id, int userId, int locationId, String propertyName, String description, int propertyTypeId, String imagePath, int bedrooms, int size, double pricePerNight) {
         super(table_name);
         this.id = id;
@@ -62,6 +68,10 @@ public class Property extends Model implements Comparable
                 ", pricePerNight=" + pricePerNight +
                 '}';
     }
+
+    /**
+     * Getters and setters
+     */
 
     public int getId() {
         return id;
@@ -139,6 +149,11 @@ public class Property extends Model implements Comparable
         this.pricePerNight = pricePerNight;
     }
 
+    /**
+     * Assigns new values to the attributes
+     * @param row Map<String, String> map of attributes and values
+     * @return Property
+     */
     public Property assign(Map<String, String> row) {
         for (String attribute: row.keySet()) {
             switch (attribute) {
@@ -156,6 +171,11 @@ public class Property extends Model implements Comparable
         }
         return this;
     }
+
+    /**
+     * Gets Property table data
+     * @return ArrayList<Property>
+     */
     @Override
     public ArrayList<Property> get() {
         ArrayList<HashMap<String,String>> list_of_rows = super.getData();

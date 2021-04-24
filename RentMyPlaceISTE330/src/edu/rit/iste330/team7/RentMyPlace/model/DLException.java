@@ -14,6 +14,7 @@ public class DLException extends Exception{
         this.log(sqlException);
     }
 
+    //constructor
     public DLException(SQLSyntaxErrorException sqlException, String stmt){
         super("The operation can not be completed. Please contact the administrator.");
         this.log(sqlException, stmt);

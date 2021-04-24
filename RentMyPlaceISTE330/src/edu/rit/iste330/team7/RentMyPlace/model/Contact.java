@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Model class for the Contact table
+ */
 public class Contact extends Model
 {
+    //attributes
     private static final String table_name = "contact";
 
     public int id;
@@ -14,6 +18,7 @@ public class Contact extends Model
     public int phone;
     public int locationId;
 
+    //default constructor
     public Contact() {
         super(table_name);
         this.id = -1;
@@ -23,6 +28,7 @@ public class Contact extends Model
         this.locationId = -1;
     }
 
+    //parametrized constructor
     public Contact(int id, String fullName, String email, int phone, int locationId) {
         super(table_name);
         this.id = id;
@@ -31,6 +37,10 @@ public class Contact extends Model
         this.phone = phone;
         this.locationId = locationId;
     }
+
+    /**
+     * Getters and setters
+     */
 
     public int getId() {
         return id;
@@ -84,6 +94,11 @@ public class Contact extends Model
                 '}';
     }
 
+    /**
+     * Assignes new values to the attributes
+     * @param row Map<String, String> map of attributes and values
+     * @return Contact
+     */
     public Contact assign(Map<String, String> row) {
         for (String attribute: row.keySet()) {
             switch (attribute) {
@@ -97,7 +112,10 @@ public class Contact extends Model
         return this;
     }
 
-
+    /**
+     * Gets Contact table data
+     * @return ArrayList<Contact>
+     */
     @Override
     public ArrayList<Contact> get(){
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();
@@ -111,6 +129,11 @@ public class Contact extends Model
         return contacts;
     }
 
+    /**
+     * Creates an new instance of Contact
+     * @param row Map<String, String>
+     * @return Contact
+     */
     public Contact create(Map<String, String> row) {
         int id = super.createModel(row);
         setId(id);

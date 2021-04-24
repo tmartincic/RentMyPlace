@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Model class for the Favorite table
+ */
 public class Favorite extends Model
 {
+    //attributes
     private static final String table_name= "favorite";
 
     public int id;
     public int userId;
     public int propertyId;
 
+    //default constructor
     public Favorite() {
         super(table_name);
         this.id = -1;
@@ -19,12 +24,17 @@ public class Favorite extends Model
         this.propertyId = -1;
     }
 
+    //parametrized constructor
     public Favorite(int id, int userId, int propertyId) {
         super(table_name);
         this.id = id;
         this.userId = userId;
         this.propertyId = propertyId;
     }
+
+    /**
+     * Getters and setters
+     */
 
     public int getId() {
         return id;
@@ -59,6 +69,11 @@ public class Favorite extends Model
                 '}';
     }
 
+    /**
+     * Assigns new values to the attributes
+     * @param row Map<String, String> map of attributes and values
+     * @return Favorite
+     */
     public Favorite assign(Map<String, String> row){
         for(String attribute : row.keySet()) {
             switch(attribute) {
@@ -69,6 +84,11 @@ public class Favorite extends Model
         }
         return this;
     }
+
+    /**
+     * Gets Favorite table data
+     * @return ArrayList<Favorite>
+     */
     @Override
     public ArrayList<Favorite> get(){
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();
@@ -87,11 +107,15 @@ public class Favorite extends Model
         }
         catch(NumberFormatException e){
             System.out.println(e);
-            e.printStackTrace();
         }
         return null;
     }
 
+    /**
+     * Creates an new instance of Favorite
+     * @param row Map<String, String>
+     * @return Favorite
+     */
     public Favorite create(Map<String, String> row) {
         int id = super.createModel(row);
         setUserId(id);

@@ -2,22 +2,16 @@ package edu.rit.iste330.team7.RentMyPlace.controller;
 
 import edu.rit.iste330.team7.RentMyPlace.model.*;
 import edu.rit.iste330.team7.RentMyPlace.view.*;
-
 import java.awt.event.*;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
-import java.sql.Date;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -124,7 +118,6 @@ public class RentMyPlaceController {
         for(User user : temp){
             String userInfo = String.valueOf(user.getId()) + "   " + user.getUserType() + "   " + user.getUsername();
             users.add(userInfo);
-            System.out.println(userInfo);
         }
         return users;
     }
@@ -136,17 +129,6 @@ public class RentMyPlaceController {
         if (user.isEmpty()) return false;
         return true;
     }
-
-    public boolean autorization(User user) {
-        if (user.getUserType().equals("u")) {
-            System.out.println("User");
-        } else if (user.getUserType().equals("a")) {
-            System.out.println("Admin");
-        }
-
-        return true;
-    }
-
 
     class LoginListener implements ActionListener {
         @Override
@@ -307,7 +289,6 @@ public class RentMyPlaceController {
         public void actionPerformed(ActionEvent ae) {
             guest = true;
             Auth.logToken("");
-            System.out.println("Guest" + guest);
             registerGUI.dispose();
             gui.dispose();
             mainGui.setVisible(true);
@@ -372,12 +353,11 @@ public class RentMyPlaceController {
                 return;
             }
 
-            System.out.println("User id = " + userId + " propertyId = " + propertyId);
-            System.out.println(new Favorite().create(Map.ofEntries(
+            new Favorite().create(Map.ofEntries(
                     Map.entry("userId", String.valueOf(userId)),
                     Map.entry("propertyId", String.valueOf(propertyId))
                     )
-            ));
+            );
         }
     }
 
@@ -708,7 +688,6 @@ public class RentMyPlaceController {
                                         Map.entry("price", Double.toString(properties.get(currentIndexRent).getPricePerNight()))));
 
                                confirmationGUI.setVisible(true);
-                                System.out.println(reserveGui.getJlFistName().getText());
                             }
                         });
             }else{
@@ -737,9 +716,7 @@ public class RentMyPlaceController {
 
                 reserveGui.dispose();
 
-
-                System.out.println(reserveGui.getJlFistName().getText());
-                confirmationGUI.generatePDFConfirmation(fName + " " + lName, email, propertyName, location, arrivalDate, departureDate);
+                 confirmationGUI.generatePDFConfirmation(fName + " " + lName, email, propertyName, location, arrivalDate, departureDate);
             }
 
     }
@@ -756,7 +733,6 @@ public class RentMyPlaceController {
                 }
 
                 String givenPropertyLocation = mainGui.getjTextField2().getText();
-                //System.out.println(givenPropertyLocation);
 
                 String priceAscDesc = mainGui.getjComboBox1().getSelectedItem().toString();
                 String orderBy = "";
@@ -766,7 +742,6 @@ public class RentMyPlaceController {
                 } else {
                     orderBy = "DESC";
                 }
-                //System.out.println(priceAscDesc);
 
                 locations.clear();
                 locations.clear();
@@ -776,7 +751,6 @@ public class RentMyPlaceController {
                         .get();
 
                 if (locations.isEmpty()) {
-                    // System.out.println("No such property");
                     JOptionPane jopMessage = new JOptionPane();
                     jopMessage.showMessageDialog(mainGui, "No properties found on location: " + givenPropertyLocation + ".");
                 }
@@ -815,8 +789,6 @@ public class RentMyPlaceController {
 
                     //make visible
                     mainGui.resetSearchResultPanels(i, true);
-
-                    //System.out.println(properties.get(i).getPropertyName());
 
                     //set text and image
                     mainGui.getSearchResultNameLabel().get(i).setText(properties.get(i).getPropertyName());
@@ -864,7 +836,6 @@ public class RentMyPlaceController {
                     }
                 }
                 if(propertyType.isBlank()) {
-                    System.out.println("Please select property type.");
                     JOptionPane panel = new JOptionPane();
                     panel.showMessageDialog(mainGui, "Please select property type.");
                     return;
@@ -893,7 +864,6 @@ public class RentMyPlaceController {
                 Matcher matcher_name = pattern_name.matcher(imageUrl);
 
                 if(!matcher_name.find() || !mainGui.checkURL(imageUrl)) {
-                    System.out.println("Please enter valid image URL. \nSupported files are: .jpg, .gif & .png");
                     JOptionPane panel = new JOptionPane();
                     panel.showMessageDialog(mainGui, "Please enter valid image URL. \nSupported files are: .jpg, .gif & .png");
                     return;
@@ -908,7 +878,6 @@ public class RentMyPlaceController {
                     ));
                 }
                 catch (NumberFormatException nfe) {
-                    System.out.println("Number incorrectly formed: " + nfe.getMessage());
                     JOptionPane panel = new JOptionPane();
                     panel.showMessageDialog(mainGui, "Number incorrectly formed: " + nfe.getMessage());
                     return;
@@ -930,7 +899,6 @@ public class RentMyPlaceController {
                             Map.entry("pricePerNight", pricePerNight)
                     ));
                 }catch (NumberFormatException nfe) {
-                    System.out.println("Number incorrectly formed: " + nfe.getMessage());
                     JOptionPane panel = new JOptionPane();
                     panel.showMessageDialog(mainGui, "Number incorrectly formed: " + nfe.getMessage());
                     return;
@@ -1136,7 +1104,6 @@ public class RentMyPlaceController {
 
                 locations.clear();
                 for (Property property : properties) {
-                    System.out.println(property.toString());
                     locations.add((Location) new Location()
                             .select(new String[]{"id", "city"})
                             .where("id", "=", String.valueOf(property.getLocationId()))

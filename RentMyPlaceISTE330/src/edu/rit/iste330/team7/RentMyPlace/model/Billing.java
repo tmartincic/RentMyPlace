@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Model class for the Billing table
+ */
 public class Billing extends Model {
-
+    //attributes
     private static final String table_name="billing";
 
     public int id;
@@ -16,7 +19,7 @@ public class Billing extends Model {
     public java.sql.Date expireDate;
     public String ownerName;
 
-
+    //default constructor
     public Billing() {
         super(table_name);
         this.id = -1;
@@ -27,6 +30,7 @@ public class Billing extends Model {
         this.ownerName = null;
     }
 
+    //parametrized constructor
     public Billing(int id, String billingAddress, String creditCardNum, String CVC, Date expireDate, String ownerName) {
         super(table_name);
         this.id = id;
@@ -49,6 +53,9 @@ public class Billing extends Model {
                 '}';
     }
 
+    /**
+     * Getters and setters
+     */
     public int getId() {
         return id;
     }
@@ -97,6 +104,11 @@ public class Billing extends Model {
         this.ownerName = ownerName;
     }
 
+    /**
+     * Assignes new values to the attributes
+     * @param row Map<String, String> map of attributes and values
+     * @return Billing
+     */
     public Billing assign(Map<String, String> row) {
         for (String attribute: row.keySet()) {
             switch (attribute) {
@@ -111,6 +123,10 @@ public class Billing extends Model {
         return this;
     }
 
+    /**
+     * Gets Billing table data
+     * @return ArrayList<Billing>
+     */
     @Override
     public ArrayList<Billing> get(){
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();
@@ -124,6 +140,11 @@ public class Billing extends Model {
         return billings;
     }
 
+    /**
+     * Creates an new instance of Billing
+     * @param row Map<String, String>
+     * @return Billing
+     */
     public Billing create(Map<String, String> row) {
         int id = super.createModel(row);
         setId(id);
@@ -132,10 +153,10 @@ public class Billing extends Model {
     }
 
     /**
-     * Updates edu.rit.iste330.team7.RentMyPlace.model.Billing table, calls super updateModel() to perform needed task
+     * Updates Billing table, calls super updateModel() to perform needed task
      *               <column, value>
      * @param row Map<String, String>
-     * @return edu.rit.iste330.team7.RentMyPlace.model.Billing
+     * @return Billing
      */
     public Billing update(Map<String, String> row){
         super.updateModel(row, this.id);

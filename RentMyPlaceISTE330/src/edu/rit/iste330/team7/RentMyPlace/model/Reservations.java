@@ -3,8 +3,12 @@ package edu.rit.iste330.team7.RentMyPlace.model;
 import java.sql.Date;
 import java.util.*;
 
+/**
+ * Model class for the Reservations table
+ */
 public class Reservations extends Model
 {
+   //attributes
    private static String table_name = "reservations";    
 
    public int id;
@@ -14,6 +18,7 @@ public class Reservations extends Model
    public java.sql.Date departureDate;
    public double price;
 
+   //default constructor
    public Reservations() {
       super(table_name);
       this.id = -1;
@@ -24,6 +29,7 @@ public class Reservations extends Model
       this.price = -1;
    }
 
+   //parametrized constructor
    public Reservations(int id, int userId, int propertyId, Date arrivalDate, Date departureDate, double price) {
       super(table_name);
       this.id = id;
@@ -46,6 +52,9 @@ public class Reservations extends Model
               '}';
    }
 
+   /**
+    * Getters and setters
+    */
    public int getId() {
       return id;
    }
@@ -94,6 +103,11 @@ public class Reservations extends Model
       this.price = price;
    }
 
+   /**
+    * Assigns new values to the attributes
+    * @param row Map<String, String> map of attributes and values
+    * @return Reservations
+    */
    public Reservations assign(Map<String, String> row) {
       for (String attribute: row.keySet()) {
          switch (attribute) {
@@ -108,6 +122,10 @@ public class Reservations extends Model
       return this;
    }
 
+   /**
+    * Gets Reservations table data
+    * @return ArrayList<Reservations>
+    */
    @Override
    public ArrayList<Reservations> get() {
       ArrayList<HashMap<String, String>> list_of_rows = super.getData();
@@ -121,6 +139,11 @@ public class Reservations extends Model
       return reservations;
    }
 
+   /**
+    * Creates an new instance of Reservations
+    * @param row Map<String, String>
+    * @return Reservations
+    */
    public Reservations create(Map<String, String> row) {
       int id = super.createModel(row);
       setUserId(userId);

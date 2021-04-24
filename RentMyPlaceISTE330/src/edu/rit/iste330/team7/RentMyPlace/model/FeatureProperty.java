@@ -4,24 +4,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Model class for the FeatureProperty table
+ */
 public class FeatureProperty extends Model
 {
+    //attributes
     private static final String table_name = "feature_property";
 
     public int propertyId;
     public int featureId;
 
+    //default constructor
     public FeatureProperty() {
         super(table_name);
         this.propertyId = -1;
         this.featureId = -1;
     }
 
+    //default constructor
     public FeatureProperty(int propertyId, int featureId) {
         super(table_name);
         this.propertyId = propertyId;
         this.featureId = featureId;
     }
+
+    /**
+     * Getters and setters
+     */
 
     public int getPropertyId() {
         return propertyId;
@@ -47,6 +57,11 @@ public class FeatureProperty extends Model
                 '}';
     }
 
+    /**
+     * Assigns new values to the attributes
+     * @param row Map<String, String> map of attributes and values
+     * @return FeatureProperty
+     */
     public FeatureProperty assign(Map<String, String> row) {
         for (String attribute: row.keySet()) {
             switch (attribute) {
@@ -56,6 +71,11 @@ public class FeatureProperty extends Model
         }
         return this;
     }
+
+    /**
+     * Gets FeatureProperty table data
+     * @return ArrayList<FeatureProperty>
+     */
     @Override
     public ArrayList<FeatureProperty> get(){
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();
@@ -69,6 +89,11 @@ public class FeatureProperty extends Model
         return featureProperties;
     }
 
+    /**
+     * Creates an new instance of FeatureProperty
+     * @param row Map<String, String>
+     * @return FeatureProperty
+     */
     public FeatureProperty create(Map<String, String> row) {
         int id = super.createModel(row);
         setPropertyId(id);

@@ -4,24 +4,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Model class for the PropertyType table
+ */
 public class PropertyType extends Model
 {
+    //attributes
     private static final String table_name = "property_type";
 
     public int id;
     public String type;
 
+    //default constructor
     public PropertyType() {
         super(table_name);
         this.id = -1;
         this.type = null;
     }
 
+    //parametrized constructor
     public PropertyType(int id, String type) {
         super(table_name);
         this.id = id;
         this.type = type;
     }
+
+    /**
+     * Getters and setters
+     */
 
     public int getId() {
         return id;
@@ -47,6 +57,11 @@ public class PropertyType extends Model
                 '}';
     }
 
+    /**
+     * Assigns new values to the attributes
+     * @param row Map<String, String> map of attributes and values
+     * @return PropertyType
+     */
     public PropertyType assign(Map<String, String> row) {
         for (String attribute: row.keySet()) {
             switch (attribute) {
@@ -56,6 +71,11 @@ public class PropertyType extends Model
         }
         return this;
     }
+
+    /**
+     * Gets PropertyType table data
+     * @return ArrayList<PropertyType>
+     */
     @Override
     public ArrayList<PropertyType> get(){
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();
@@ -68,7 +88,11 @@ public class PropertyType extends Model
         }
         return propertyTypes;
     }
-
+    /**
+     * Creates an new instance of PropertyType
+     * @param row Map<String, String>
+     * @return PropertyType
+     */
     public PropertyType create(Map<String, String> row) {
         int id = super.createModel(row);
         setId(id);

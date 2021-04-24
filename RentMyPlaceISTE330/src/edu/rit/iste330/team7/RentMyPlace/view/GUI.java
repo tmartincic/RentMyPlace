@@ -1345,9 +1345,6 @@ public class GUI extends javax.swing.JFrame {
         buttonGroup.add(jRadioButton4);
         buttonGroup.add(jRadioButton5);
 
-        System.out.println(buttonGroup);
-
-
         getContentPane().add(jTabbedPane2, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -1905,7 +1902,7 @@ public class GUI extends javax.swing.JFrame {
         favoritesRemoveFavoritesButton.add(jButtonFavoritesRemoveFavorites);
 
         JButton jButtonFavoritesMoreDetails = new JButton();
-        favoritesMoreDetailsButton.add(jButtonFavoritesMoreDetails);
+        //favoritesMoreDetailsButton.add(jButtonFavoritesMoreDetails);
 
         ///styling
         favoritesLocationLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1926,12 +1923,12 @@ public class GUI extends javax.swing.JFrame {
         favoritesResultPriceLabel.get(num).setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         favoritesResultPriceLabel.get(num).setText("<price>");
 
-        favoritesMoreDetailsButton.get(num).setText("See more details...");
-        favoritesMoreDetailsButton.get(num).addActionListener(new java.awt.event.ActionListener() {
+        //favoritesMoreDetailsButton.get(num).setText("See more details...");
+        /*favoritesMoreDetailsButton.get(num).addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jButton10ActionPerformed(evt);
             }
-        });
+        });*/
 
         favoritesResultImageLabel.get(num).setBackground(new java.awt.Color(255, 204, 204));
         favoritesResultImageLabel.get(num).setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1965,7 +1962,7 @@ public class GUI extends javax.swing.JFrame {
                                         .addGroup(favoritesPropertyPanel1Layout.createSequentialGroup()
                                                 .addGap(61, 61, 61)
                                                 .addGroup(favoritesPropertyPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(favoritesMoreDetailsButton.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        //.addComponent(favoritesMoreDetailsButton.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(favoritesRemoveFavoritesButton.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(favoritesResultImageLabel.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
@@ -1990,8 +1987,8 @@ public class GUI extends javax.swing.JFrame {
                                                         .addComponent(favoritesResultPriceLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                                                 .addComponent(favoritesRemoveFavoritesButton.get(num))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(favoritesMoreDetailsButton.get(num)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                                //.addComponent(favoritesMoreDetailsButton.get(num)))
                                         .addComponent(favoritesResultImageLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 16, Short.MAX_VALUE))
         );
@@ -2043,11 +2040,11 @@ public class GUI extends javax.swing.JFrame {
         JLabel jLabelSearchPriceTitle = new JLabel();
         searchPriceLabel.add(jLabelSearchPriceTitle);
 
-        JButton jButtonSearchAddFavorites = new JButton();
-        searchAddFavoritesButton.add(jButtonSearchAddFavorites);
+       /* JButton jButtonSearchAddFavorites = new JButton();
+        searchAddFavoritesButton.add(jButtonSearchAddFavorites);*/
 
-        JButton jButtonSearchMoreDetails = new JButton();
-        searchMoreDetailsButton.add(jButtonSearchMoreDetails);
+        //JButton jButtonSearchMoreDetails = new JButton();
+        //searchMoreDetailsButton.add(jButtonSearchMoreDetails);
 
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(searchResultPanels.get(num));
@@ -2067,14 +2064,14 @@ public class GUI extends javax.swing.JFrame {
                                                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                                 .addComponent(searchResultNameLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addComponent(searchResultLocationLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(searchResultPriceLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(searchResultPriceLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        /*.addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(92, 92, 92))
+                                                //.addComponent(searchAddFavoritesButton.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel5Layout.createSequentialGroup()
-                                                .addGap(92, 92, 92)
-                                                .addComponent(searchAddFavoritesButton.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                                .addGap(73, 73, 73)
-                                                .addComponent(searchMoreDetailsButton.get(num))))
-                                .addGap(18, 18, 18)
+                                                .addGap(73, 73, 73)))
+                                               // .addComponent(searchMoreDetailsButton.get(num))))*/
+                                //.addGap(18, 18, 18)
                                 .addComponent(searchResultImageLabel.get(num), javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))
         );
 
@@ -2093,11 +2090,11 @@ public class GUI extends javax.swing.JFrame {
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(searchPriceLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(searchResultPriceLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(16, 16, 16)
-                                .addComponent(searchAddFavoritesButton.get(num))
-                                .addGap(18, 18, 18)
-                                .addComponent(searchMoreDetailsButton.get(num))
-                                .addGap(112, 112, 112))
+                                .addGap(100, 100, 100))
+                                //.addComponent(searchAddFavoritesButton.get(num))
+                                //.addGap(18, 18, 18)
+                                //.addComponent(searchMoreDetailsButton.get(num))
+                                //.addGap(112, 112, 112))
                         .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(searchResultImageLabel.get(num), javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
@@ -2131,19 +2128,19 @@ public class GUI extends javax.swing.JFrame {
         searchResultImageLabel.get(num).setText("<imageHere>");
 
 
-        searchMoreDetailsButton.get(num).setText("See more details...");
+       /* searchMoreDetailsButton.get(num).setText("See more details...");
         searchMoreDetailsButton.get(num).addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jButton4ActionPerformed(evt);
             }
-        });
+        });*/
 
-        searchAddFavoritesButton.get(num).setText("Add to favorites");
+       /* searchAddFavoritesButton.get(num).setText("Add to favorites");
         searchAddFavoritesButton.get(num).addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 //                jButton8ActionPerformed(evt);
             }
-        });
+        });*/
     }
 
     /**
@@ -2199,8 +2196,8 @@ public class GUI extends javax.swing.JFrame {
         getSearchLocationLabel().get(index).setVisible(toggle);
         getSearchPriceLabel().get(index).setVisible(toggle);
         getSearchNameLabel().get(index).setVisible(toggle);
-        getSearchAddFavoritesButton().get(index).setVisible(toggle);
-        getSearchMoreDetailsButton().get(index).setVisible(toggle);
+        //getSearchAddFavoritesButton().get(index).setVisible(toggle);
+        //getSearchMoreDetailsButton().get(index).setVisible(toggle);
     }
 
     /**
@@ -2218,8 +2215,8 @@ public class GUI extends javax.swing.JFrame {
         getSearchLocationLabel().remove(index);
         getSearchPriceLabel().remove(index);
         getSearchNameLabel().remove(index);
-        getSearchAddFavoritesButton().remove(index);
-        getSearchMoreDetailsButton().remove(index);
+       // getSearchAddFavoritesButton().remove(index);
+        //getSearchMoreDetailsButton().remove(index);
     }
 
     public void resetFavoritesResultPanels(int index, boolean toggle) {
@@ -2234,7 +2231,7 @@ public class GUI extends javax.swing.JFrame {
         getFavoritesPriceLabel().get(index).setVisible(toggle);
         getFavoritesNameLabel().get(index).setVisible(toggle);
         getFavoritesRemoveFavoritesButton().get(index).setVisible(toggle);
-        getFavoritesMoreDetailsButton().get(index).setVisible(toggle);
+        //getFavoritesMoreDetailsButton().get(index).setVisible(toggle);
     }
 
     public void removeFavoritesResultPanels(int index){
@@ -2249,7 +2246,7 @@ public class GUI extends javax.swing.JFrame {
         getFavoritesPriceLabel().remove(index);
         getFavoritesNameLabel().remove(index);
         getFavoritesRemoveFavoritesButton().remove(index);
-        getFavoritesMoreDetailsButton().remove(index);
+        //getFavoritesMoreDetailsButton().remove(index);
     }
 
 

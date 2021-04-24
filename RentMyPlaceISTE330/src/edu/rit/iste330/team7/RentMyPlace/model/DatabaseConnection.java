@@ -107,6 +107,11 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Connects to the database
+     * @return boolean - true if successfully connected, false if unsuccessfully
+     * @throws DLException
+     */
     public boolean connect() throws DLException {
 
         try{
@@ -123,6 +128,11 @@ public class DatabaseConnection {
         return false;
     }
 
+    /**
+     * Closes database connection
+     * @return boolean - true if successfully closed, false if unsuccessfully
+     * @throws DLException
+     */
     public boolean close() throws DLException {
         try{
             this.con.close();
@@ -133,6 +143,9 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     *Getters
+     */
     public String getPort() {
         return port;
     }
@@ -155,6 +168,9 @@ public class DatabaseConnection {
         this.url = "jdbc:mysql://"+host+":"+port+"/"+database+"?serverTimezone=CET";
     }
 
+    /**
+     * Setters
+     */
     public void setHost(String host) {
         this.host = host;
         generateUrl();

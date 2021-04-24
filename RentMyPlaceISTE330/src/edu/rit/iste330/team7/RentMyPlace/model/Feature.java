@@ -4,24 +4,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Model class for the Feature table
+ */
 public class Feature extends Model
 {
+    //attributes
     private static final String table_name = "feature";
 
     public int id;
     public String feature;
 
+    //default constructor
     public Feature() {
         super(table_name);
         this.id = -1;
         this.feature = null;
     }
 
+    //parametrized constructor
     public Feature(int id, String feature) {
         super(table_name);
         this.id = id;
         this.feature = feature;
     }
+
+    /**
+     * Getters and setters
+     */
 
     public int getId() {
         return id;
@@ -48,6 +58,11 @@ public class Feature extends Model
                 '}';
     }
 
+    /**
+     * Assignes new values to the attributes
+     * @param row Map<String, String> map of attributes and values
+     * @return Feature
+     */
     public Feature assign(Map<String, String> row) {
         for (String attribute: row.keySet()) {
             switch (attribute) {
@@ -57,6 +72,11 @@ public class Feature extends Model
         }
         return this;
     }
+
+    /**
+     * Gets Feature table data
+     * @return ArrayList<Feature>
+     */
     @Override
     public ArrayList<Feature> get(){
         ArrayList<HashMap<String, String>> list_of_rows = super.getData();
@@ -70,6 +90,11 @@ public class Feature extends Model
         return features;
     }
 
+    /**
+     * Creates an new instance of Feature
+     * @param row Map<String, String>
+     * @return Feature
+     */
     public Feature create(Map<String, String> row) {
         int id = super.createModel(row);
         setId(id);
