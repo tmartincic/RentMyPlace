@@ -218,10 +218,14 @@ public class RentMyPlaceController {
                                 .get().get(0);
                         user.delete();
                 } else {
+                    User user = (User) new User()
+                            .select(new String[]{"id", "username", "password", "userType", "contactId", "billingId", "token"})
+                            .where("username", "LIKE", getSelectedUser())
+                            .get().get(0);
+                    user.delete();
                     return;
                 }
             }
-
 
             properties = new Property()
                     .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId", "propertyTypeId", "bedrooms", "size"})
