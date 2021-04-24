@@ -221,7 +221,7 @@ public class Model<T> {
         catch(DLException e){
             System.out.println(e);
         }
-        if(column_value_list.size() == 0) System.out.println("No results were found in following query: "+sqlToString());
+        if(column_value_list.size() == 0)
         clearAttributes();
         return column_value_list;
     }
