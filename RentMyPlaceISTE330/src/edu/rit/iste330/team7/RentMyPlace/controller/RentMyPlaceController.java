@@ -207,11 +207,21 @@ public class RentMyPlaceController {
         @Override
         public void actionPerformed(ActionEvent ae){
             if(getSelectedUser().isBlank()) return;
-            User user = (User) new User()
-                    .select(new String[]{"id", "username", "password", "userType", "contactId", "billingId", "token"})
-                    .where("username", "LIKE", getSelectedUser())
-                    .get().get(0);
-            user.delete();
+            String currentUser = Auth.getUser().getUsername();
+            if(getSelectedUser().equals(currentUser)) {
+
+                if (JOptionPane.showConfirmDialog(gui, "Are you sure you want to delete yourself?", "WARNING",
+                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        User user = (User) new User()
+                                .select(new String[]{"id", "username", "password", "userType", "contactId", "billingId", "token"})
+                                .where("username", "LIKE", getSelectedUser())
+                                .get().get(0);
+                        user.delete();
+                } else {
+                    return;
+                }
+            }
+
 
             properties = new Property()
                     .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId", "propertyTypeId", "bedrooms", "size"})
