@@ -10,6 +10,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -182,7 +183,7 @@ public class RentMyPlaceController {
     class RemoveUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae){
-
+            if(getSelectedUser().isBlank()) return;
             User user = (User) new User()
                     .select(new String[]{"id", "username", "password", "userType", "contactId", "billingId", "token"})
                     .where("username", "LIKE", getSelectedUser())
@@ -198,15 +199,22 @@ public class RentMyPlaceController {
     }
 
     public String getSelectedUser(){
-        String temp = adminGUI.getjListUsersInfo().getSelectedValue().toString();
-        String[] splitArray = temp.split("   ");
-        String username = splitArray[2];
+        String temp, username;
+        try{
+            temp = adminGUI.getjListUsersInfo().getSelectedValue().toString();
+            String[] splitArray = temp.split("   ");
+            username = splitArray[2];
+        }
+        catch (NullPointerException npe) {
+            username = "";
+        }
         return username;
     }
 
     class PromoteUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae){
+            if(getSelectedUser().isBlank()) return;
             User user = (User) new User()
                     .select(new String[]{"id", "username", "password", "userType", "contactId", "billingId", "token"})
                     .where("username", "LIKE", getSelectedUser())
@@ -454,36 +462,54 @@ public class RentMyPlaceController {
                 int userId = Auth.getUser().getId();
 
                 int contactId = Auth.getUser().getContactId();
-
-                contacts = new Contact()
-                        .select(new String[]{"id", "fullName", "email", "phone", "locationId"})
-                        .where("id", "=", String.valueOf(contactId))
-                        .get();
+                Contact contact = null;
+                try{
+                    contact = (Contact) new Contact()
+                            .select(new String[]{"id", "fullName", "email", "phone", "locationId"})
+                            .where("id", "=", String.valueOf(contactId))
+                            .get().get(0);
+                }
+                catch (IndexOutOfBoundsException ee) {
+                    System.out.println("No contact information found for " + Auth.getUser().getUsername());
+                }
 
                 int billingId = Auth.getUser().getBillingId();
+                Location location = null;
+                try{
+                    if(contact != null && contact.getLocationId() != -1) {
+                        location = (Location) new Location()
+                                .select(new String[]{"id", "city", "zip", "street"})
+                                .where("id", "=", String.valueOf(contact.getLocationId()))
+                                .get().get(0);
+                    }
+                }
+                catch (IndexOutOfBoundsException eee) {
+                    System.out.println("No location information found for " + Auth.getUser().getUsername());
+                }
+                Billing billing = null;
+                try{
+                    billing = (Billing) new Billing()
+                            .select(new String[]{"id", "billingAddress", "creditCardNum", "CVC", "expireDate", "ownerName"})
+                            .where("id", "=", String.valueOf(billingId))
+                            .get().get(0);
+                }
+                catch (IndexOutOfBoundsException eeeee) {
+                    System.out.println("No billing information found for " + Auth.getUser().getUsername());
+                }
 
-                locations = new Location()
-                        .select(new String[]{"id", "city", "zip", "street"})
-                        .where("id", "=", String.valueOf(contacts.get(0).getLocationId()))
-                        .get();
-
-                billings = new Billing()
-                        .select(new String[]{"id", "billingAddress", "creditCardNum", "CVC", "expireDate", "ownerName"})
-                        .where("id", "=", String.valueOf(billingId))
-                        .get();
                 if(contactId != -1) {
-                    mainGui.getjTextFieldContactFullName().setText(contacts.get(0).getFullName());
-                    mainGui.getjTextFieldContactEmail().setText(contacts.get(0).getEmail());
-                    mainGui.getjTextFieldContactStreet().setText(locations.get(0).getStreet());
-                    mainGui.getjTextFieldContactCity().setText(locations.get(0).getCity());
-                    mainGui.getjTextFieldContactZip().setText(String.valueOf(locations.get(0).getZip()));
+                    mainGui.getjTextFieldContactFullName().setText(contact.getFullName());
+                    mainGui.getjTextFieldContactEmail().setText(contact.getEmail());
+                    mainGui.getjTextFieldContactStreet().setText(location.getStreet());
+                    mainGui.getjTextFieldContactCity().setText(location.getCity());
+                    mainGui.getjTextFieldContactZip().setText(String.valueOf(location.getZip()));
                 }
                 if(billingId != -1) {
-                    mainGui.getjTextFieldBillingOwnerName().setText(billings.get(0).getOwnerName());
-                    mainGui.getjTextFieldBillingCardNumber().setText(billings.get(0).getCreditCardNum());
-                    mainGui.getjTextFieldBillingAddress().setText(billings.get(0).getBillingAddress());
-                    mainGui.getjTextFieldBillingCVC().setText(billings.get(0).getCVC());
-                    mainGui.getjDateChooserExpirationDate().setDate(billings.get(0).getExpireDate());
+                    mainGui.getjTextFieldBillingOwnerName().setText(billing.getOwnerName());
+                    mainGui.getjTextFieldBillingCardNumber().setText(billing.getCreditCardNum());
+                    mainGui.getjTextFieldBillingAddress().setText(billing.getBillingAddress());
+                    mainGui.getjTextFieldBillingCVC().setText(billing.getCVC());
+                    mainGui.getjDateChooserExpirationDate().setDate(billing.getExpireDate());
                 }
             }
         }
@@ -518,25 +544,31 @@ public class RentMyPlaceController {
                         .get()
                         .get(0);
 
-                newContact.update(Map.ofEntries(
-                        Map.entry("fullName", mainGui.getjTextFieldContactFullName().getText()),
-                        Map.entry("email", mainGui.getjTextFieldContactEmail().getText())
-                ));
+                try{
+                    newContact.update(Map.ofEntries(
+                            Map.entry("fullName", mainGui.getjTextFieldContactFullName().getText()),
+                            Map.entry("email", mainGui.getjTextFieldContactEmail().getText())
+                    ));
 
-                newBilling.update(Map.ofEntries(
-                        Map.entry("ownerName", mainGui.getjTextFieldBillingOwnerName().getText()),
-                        Map.entry("creditCardNum", mainGui.getjTextFieldBillingCardNumber().getText()),
-                        Map.entry("billingAddress", mainGui.getjTextFieldBillingAddress().getText()),
-                        Map.entry("CVC", mainGui.getjTextFieldBillingCVC().getText()),
-                        Map.entry("expireDate", String.valueOf(mainGui.getjDateChooserExpirationDate().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()))
-                ));
+                    newBilling.update(Map.ofEntries(
+                            Map.entry("ownerName", mainGui.getjTextFieldBillingOwnerName().getText()),
+                            Map.entry("creditCardNum", mainGui.getjTextFieldBillingCardNumber().getText()),
+                            Map.entry("billingAddress", mainGui.getjTextFieldBillingAddress().getText()),
+                            Map.entry("CVC", mainGui.getjTextFieldBillingCVC().getText()),
+                            Map.entry("expireDate", String.valueOf(mainGui.getjDateChooserExpirationDate().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()))
+                    ));
 
-                newLocation.update(Map.ofEntries(
-                        Map.entry("city", mainGui.getjTextFieldContactCity().getText()),
-                        Map.entry("street", mainGui.getjTextFieldContactStreet().getText()),
-                        Map.entry("zip", String.valueOf(mainGui.getjTextFieldContactZip().getText())
-                )));
+                    newLocation.update(Map.ofEntries(
+                            Map.entry("city", mainGui.getjTextFieldContactCity().getText()),
+                            Map.entry("street", mainGui.getjTextFieldContactStreet().getText()),
+                            Map.entry("zip", String.valueOf(mainGui.getjTextFieldContactZip().getText())
+                    )));
 
+                }
+                catch (NumberFormatException nfe) {
+                    JOptionPane jopMessage = new JOptionPane();
+                    jopMessage.showMessageDialog(jopMessage, "Information incorrectly formed at: "+nfe.getLocalizedMessage());
+                }
 
             // if contact and billing info doesn't exist
             // create new
@@ -544,31 +576,60 @@ public class RentMyPlaceController {
                 newContact = new Contact();
                 newBilling = new Billing();
                 newLocation = new Location();
+                boolean save = true;
 
+                try{
+                    newLocation.create(Map.ofEntries(
+                            Map.entry("city", mainGui.getjTextFieldContactCity().getText()),
+                            Map.entry("street", mainGui.getjTextFieldContactStreet().getText()),
+                            Map.entry("zip", String.valueOf(mainGui.getjTextFieldContactZip().getText())
+                            )));
+                }
+                catch (NumberFormatException nfe) {
+                    JOptionPane jopMessage = new JOptionPane();
+                    jopMessage.showMessageDialog(jopMessage, "Location information incorrectly formed at: "+nfe.getLocalizedMessage());
+                    save = false;
+                }
 
-                newLocation.create(Map.ofEntries(
-                        Map.entry("city", mainGui.getjTextFieldContactCity().getText()),
-                        Map.entry("street", mainGui.getjTextFieldContactStreet().getText()),
-                        Map.entry("zip", String.valueOf(mainGui.getjTextFieldContactZip().getText())
-                        )));
+                try{
+                    newContact.create(Map.ofEntries(
+                            Map.entry("locationId", String.valueOf(newLocation.getId())),
+                            Map.entry("fullName", mainGui.getjTextFieldContactFullName().getText()),
+                            Map.entry("phone", "123455667"),
+                            Map.entry("email", mainGui.getjTextFieldContactEmail().getText())
+                    ));
+                }
+                catch (NumberFormatException nfe) {
+                    JOptionPane jopMessage = new JOptionPane();
+                    jopMessage.showMessageDialog(jopMessage, "Contact information incorrectly formed at: "+nfe.getLocalizedMessage());
+                    save = false;
+                }
+                catch(Exception e) {
+                    JOptionPane jopMessage = new JOptionPane();
+                    jopMessage.showMessageDialog(jopMessage, "Contact information incorrectly formed.");
+                    save = false;
+                }
+                try {
+                    newBilling.create(Map.ofEntries(
+                            Map.entry("ownerName", mainGui.getjTextFieldBillingOwnerName().getText()),
+                            Map.entry("creditCardNum", mainGui.getjTextFieldBillingCardNumber().getText()),
+                            Map.entry("billingAddress", mainGui.getjTextFieldBillingAddress().getText()),
+                            Map.entry("CVC", mainGui.getjTextFieldBillingCVC().getText()),
+                            Map.entry("expireDate", String.valueOf(mainGui.getjDateChooserExpirationDate().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()))
+                    ));
+                }
+                catch (NumberFormatException nfe) {
+                    JOptionPane jopMessage = new JOptionPane();
+                    jopMessage.showMessageDialog(jopMessage, "Billing information incorrectly formed at: "+nfe.getLocalizedMessage());
+                    save = false;
+                }
+                catch (NullPointerException npe) {
+                    JOptionPane jopMessage = new JOptionPane();
+                    jopMessage.showMessageDialog(jopMessage, "Please choose the correct expiry date of credit card.");
+                    save = false;
+                }
 
-
-                newContact.create(Map.ofEntries(
-                        Map.entry("locationId", String.valueOf(newLocation.getId())),
-                        Map.entry("fullName", mainGui.getjTextFieldContactFullName().getText()),
-                        Map.entry("phone", "123455667"),
-                        Map.entry("email", mainGui.getjTextFieldContactEmail().getText())
-                ));
-
-                newBilling.create(Map.ofEntries(
-                        Map.entry("ownerName", mainGui.getjTextFieldBillingOwnerName().getText()),
-                        Map.entry("creditCardNum", mainGui.getjTextFieldBillingCardNumber().getText()),
-                        Map.entry("billingAddress", mainGui.getjTextFieldBillingAddress().getText()),
-                        Map.entry("CVC", mainGui.getjTextFieldBillingCVC().getText()),
-                        Map.entry("expireDate", String.valueOf(mainGui.getjDateChooserExpirationDate().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()))
-                ));
-
-                currentUser.update((Map.ofEntries(
+                if(save) currentUser.update((Map.ofEntries(
                         Map.entry("contactId", String.valueOf(newContact.getId())),
                         Map.entry("billingId", String.valueOf(newBilling.getId()))
                 )));
@@ -707,6 +768,7 @@ public class RentMyPlaceController {
                 }
                 //System.out.println(priceAscDesc);
 
+                locations.clear();
                 locations.clear();
                 locations = new Location()
                         .select(new String[]{"id", "city", "zip", "street"})
