@@ -12,20 +12,17 @@ public class DLException extends Exception{
     public DLException(SQLException sqlException){
         super("The operation can not be completed. Please contact the administrator.");
         this.log(sqlException);
-        sqlException.printStackTrace();
     }
 
     public DLException(SQLSyntaxErrorException sqlException, String stmt){
         super("The operation can not be completed. Please contact the administrator.");
         this.log(sqlException, stmt);
-        sqlException.printStackTrace();
     }
 
     //constructor
     public DLException(Exception exception){
         super("The operation can not be completed. Please contact the administrator.");
         this.log(exception);
-        exception.printStackTrace();
     }
 
     /**
@@ -39,7 +36,6 @@ public class DLException extends Exception{
         exceptionOutput += "CLASS: "+item.getClassName()+"\n";
         exceptionOutput += "LINE: "+item.getLineNumber()+"\n";
 
-
         this.write(exceptionOutput);
     }
 
@@ -52,7 +48,6 @@ public class DLException extends Exception{
         StackTraceElement item = sqlException.getStackTrace()[0];
         exceptionOutput += "CLASS: "+item.getClassName()+"\n";
         exceptionOutput += "LINE: "+item.getLineNumber()+"\n";
-
 
         this.write(exceptionOutput);
     }
