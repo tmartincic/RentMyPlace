@@ -954,7 +954,13 @@ public class RentMyPlaceController {
             }
         }
 
-        class AddPropertyListener implements ActionListener {
+    /**
+     * Communicates with the main GUI presentation layer, mainly the MyRentals tab,
+     * checks the authentication and the permission, indicating if the user can add a new property
+     * to the database, gather information entered by the user and with proper validation adds
+     * the property to the database
+     */
+    class AddPropertyListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!Auth.checkPermission(e.getActionCommand())) return;
@@ -1070,6 +1076,11 @@ public class RentMyPlaceController {
             }
         }
 
+    /**
+     * On change inner class listener which fills the jComboBox in the MyRentals tab once the user clicks on the tab,
+     * once the user changes the jComboBox selected item, the displayMyRentalsSelect() method is called which sets the
+     * properties owned by the user
+     */
         class MyRentalsListener implements ChangeListener {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -1093,6 +1104,9 @@ public class RentMyPlaceController {
             }
         }
 
+    /**
+     * Inner item listener which displays rentals
+     */
         class MyRentalsChangeListener implements ItemListener {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -1100,6 +1114,9 @@ public class RentMyPlaceController {
             }
         }
 
+    /**
+     * Method for fetching and creating a new object of the Property model using selectedItem property names
+     */
         public void displayMyRentalsSelect() {
             if (mainGui.getjComboBox2().getSelectedItem() != null) {
                 int userId = Auth.getUser().getId();
@@ -1121,6 +1138,10 @@ public class RentMyPlaceController {
             } else return;
         }
 
+    /**
+     * Inner class which implements an action listener waiting for the Delete button on the MyRentals tab to be clicked.
+     * Deletes the property with the currently selectedItem propertyName updates
+     */
         class DeleteMyRentalsListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1156,6 +1177,10 @@ public class RentMyPlaceController {
             }
         }
 
+    /**
+     * Inner class implementing a change listener, once the FAVORITES tab is clicked,
+     * calls the method displayFavorites() which fill the GUI
+     */
         class FavoritesListener implements ChangeListener {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -1163,6 +1188,10 @@ public class RentMyPlaceController {
             }
         }
 
+    /**
+     * Inner class implementing an item listener, and displaying favorites depending on the
+     * item selected in the jComboBox
+     */
         class SelectChangeListener implements ItemListener {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -1170,6 +1199,9 @@ public class RentMyPlaceController {
             }
         }
 
+    /**
+     * Inner class implementing an action listener and responsible for removing a favorite from the FAVORITES tab
+     */
         class RemoveFavoriteListener implements ActionListener {
             private Favorite favorite = null;
             public RemoveFavoriteListener(Favorite _favorite) {
@@ -1182,6 +1214,10 @@ public class RentMyPlaceController {
             }
         }
 
+    /**
+     * Method responsible for displaying favorite properties of the user if the tab selected is FAVORITES
+     * creates panels dynamically by calling methods from the main GUI class
+     */
         public void displayFavorites() {
             if (!Auth.checkPermission(String.valueOf(mainGui.getjTabbedPane2().getSelectedIndex()))) return;
             //store prev size to remove for next search results
