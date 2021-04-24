@@ -107,6 +107,15 @@ public class ConfirmationGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
+    /**
+     * Creates a confirmation PDF based on the property reservartion information
+     * @param userName
+     * @param email
+     * @param propertyName
+     * @param propertyLocation
+     * @param arrivalDate
+     * @param departureDate
+     */
     public void generatePDFConfirmation(String userName, String email, String propertyName, String propertyLocation, String arrivalDate, String departureDate){
         //https://howtodoinjava.com/java/library/read-generate-pdf-java-itext/
 

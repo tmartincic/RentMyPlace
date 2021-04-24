@@ -96,32 +96,6 @@ public class ReserveGUI extends javax.swing.JFrame {
 
         jLabel12.setText("Departure Date");
 
-//        jTextField4.setText("2021");
-//        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jTextField4ActionPerformed(evt);
-//            }
-//        });
-//
-//        jTextField5.setText("04");
-//
-//        jTextField6.setText("17");
-//        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jTextField6ActionPerformed(evt);
-//            }
-//        });
-//
-//        jTextField7.setText("2021");
-//        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jTextField7ActionPerformed(evt);
-//            }
-//        });
-//
-//        jTextField8.setText("04");
-//
-//        jTextField9.setText("20");
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField9ActionPerformed(evt);
