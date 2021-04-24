@@ -107,6 +107,7 @@ public class RentMyPlaceController {
         adminGUI.getjListUsersInfo().setSelectedIndex(0);
         adminGUI.addRemoveUserListener(new RemoveUserListener());
         adminGUI.addPromoteUserListener(new PromoteUserListener());
+        adminGUI.addDemoteUserListener(new DemoteUserListener());
 
     }
 
@@ -205,6 +206,24 @@ public class RentMyPlaceController {
             user.update(Map.ofEntries(
                             Map.entry("userType", "admin")
                         ));
+
+            adminGUI.addUsers(getUsers());
+        }
+    }
+
+
+    class DemoteUserListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            if(getSelectedUser().isBlank()) return;
+            User user = (User) new User()
+                    .select(new String[]{"id", "username", "password", "userType", "contactId", "billingId", "token"})
+                    .where("username", "LIKE", getSelectedUser())
+                    .get().get(0);
+
+            user.update(Map.ofEntries(
+                    Map.entry("userType", "user")
+            ));
 
             adminGUI.addUsers(getUsers());
         }

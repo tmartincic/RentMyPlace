@@ -11,6 +11,7 @@ public class AdminGUI extends JFrame{
     private JPanel usersSection;
     private JPanel buttonsPanel;
     private JButton buttonPromote;
+    private JButton buttonDemote;
     private JLabel title;
     private String[] usersList;
     private JButton buttonRemove;
@@ -52,6 +53,7 @@ public class AdminGUI extends JFrame{
 
         buttonRemove = new JButton("Remove user");
         buttonPromote = new JButton("Promote to admin");
+        buttonDemote = new JButton("Demote to user");
         buttonRemove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jListUsersInfo = new JList();
@@ -60,6 +62,7 @@ public class AdminGUI extends JFrame{
 
         buttonsPanel.add(buttonRemove);
         buttonsPanel.add(buttonPromote);
+        buttonsPanel.add(buttonDemote);
 
         main.add(title);
         main.add(usersSection);
@@ -86,6 +89,10 @@ public class AdminGUI extends JFrame{
 
     public JButton getButtonRemove() {
         return buttonRemove;
+    }
+
+    public JButton getButtonDemote() {
+        return buttonDemote;
     }
 
     public JButton getButtonPromote() {
@@ -128,6 +135,13 @@ public class AdminGUI extends JFrame{
      */
     public void addPromoteUserListener(ActionListener ae){
         this.getButtonPromote().addActionListener(ae);
+    }
+
+    /**
+     * @param ae click on demote user button
+     */
+    public void addDemoteUserListener(ActionListener ae){
+        this.getButtonDemote().addActionListener(ae);
     }
 
 
