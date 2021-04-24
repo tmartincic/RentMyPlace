@@ -1843,9 +1843,14 @@ public class GUI extends javax.swing.JFrame {
             e.printStackTrace();
         }
         assert image != null;
-        Image newImg = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-
-        return new ImageIcon(newImg);
+        try {
+            Image newImg = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            return new ImageIcon(newImg);
+        }
+        catch (NullPointerException npe) {
+            System.out.println("Image is not in correct format.");
+        }
+        return new ImageIcon();
     }
 
     /**

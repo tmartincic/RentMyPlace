@@ -98,6 +98,10 @@ public class DatabaseConnection {
             System.out.println("Data incorrectly formed.");
             return -1;
         }
+        catch (SQLIntegrityConstraintViolationException ee) {
+            System.out.println("Could not complete operation. Data not formed correctly.");
+            return -1;
+        }
         catch (Exception e) {
             throw new DLException(e);
         }
