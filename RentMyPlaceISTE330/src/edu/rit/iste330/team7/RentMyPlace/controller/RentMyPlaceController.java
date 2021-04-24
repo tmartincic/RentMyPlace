@@ -33,6 +33,7 @@ public class RentMyPlaceController {
     ArrayList<Billing> billings = null;
     ArrayList<User> users = null;
     ArrayList<Favorite> favorites = null;
+    ReserveGUI reserveGui = null;
     LoginGUI gui;
     Model model;
     GUI mainGui = new GUI();
@@ -78,6 +79,7 @@ public class RentMyPlaceController {
         registerGUI.addGuestListener(new GuestUserListener());
 
         mainGui.addLogOutButtonEventListener(new LogOutListener());
+        confirmationGUI.addExportButtonListener(new ExportListener());
 
         this.getProperty(currentIndex);
 
@@ -267,6 +269,8 @@ public class RentMyPlaceController {
         public void actionPerformed(ActionEvent ae) {
             gui.setVisible(true);
             mainGui.dispose();
+            confirmationGUI.dispose();
+
             if(adminGUI!=null){
                 adminGUI.dispose();
             }
@@ -580,10 +584,10 @@ public class RentMyPlaceController {
 
             if(currentUser.getContactId() != -1) {
 
-                ReserveGUI reserveGui = new ReserveGUI();
+                reserveGui = new ReserveGUI();
                 reserveGui.setVisible(true);
 
-                User currentUser = Auth.getUser();
+                currentUser = Auth.getUser();
 
                 Contact contact = (Contact) new Contact()
                         .select(new String[]{"fullName", "email"})
@@ -643,19 +647,7 @@ public class RentMyPlaceController {
                                         Map.entry("price", Double.toString(properties.get(currentIndexRent).getPricePerNight()))));
 
                                confirmationGUI.setVisible(true);
-
-                               confirmationGUI.getExportButton().setActionCommand("export_pdf");
-                               confirmationGUI.getExportButton().addActionListener(new ActionListener() {
-                                   @Override
-                                   public void actionPerformed(ActionEvent e) {
-                                       if (!Auth.checkPermission(confirmationGUI.getExportButton().getActionCommand())) return;
-
-                                       SimpleDateFormat sdFormat = new SimpleDateFormat("YYYY-MM-dd");
-                                       confirmationGUI.generatePDFConfirmation(reserveGui.getJlFistName().getText() + " " + reserveGui.getJlLastName().getText(), reserveGui.getJlEmail().getText(), reserveGui.getJlPropertyName().getText(), reserveGui.getJlLocation().getText(), sdFormat.format(reserveGui.getjDateChooserArrival().getDate()), sdFormat.format(reserveGui.getjDateChooserDeparture().getDate()));
-                                   }
-                               });
-
-                                reserveGui.dispose();
+                                System.out.println(reserveGui.getJlFistName().getText());
                             }
                         });
             }else{
@@ -663,6 +655,32 @@ public class RentMyPlaceController {
                 jopMessage.showMessageDialog(mainGui, "Your contact and billing information are not defined. Please go to 'Settings' and set your information in order to make a reservation.");
             }
         }
+    }
+
+
+
+    class ExportListener implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!Auth.checkPermission(confirmationGUI.getExportButton().getActionCommand())) return;
+
+                SimpleDateFormat sdFormat = new SimpleDateFormat("YYYY-MM-dd");
+                String fName = reserveGui.getJlFistName().getText();
+                String lName = reserveGui.getJlLastName().getText();
+                String email = reserveGui.getJlEmail().getText();
+                String propertyName = reserveGui.getJlPropertyName().getText();
+                String location = reserveGui.getJlLocation().getText();
+                String arrivalDate = sdFormat.format(reserveGui.getjDateChooserArrival().getDate());
+                String departureDate = sdFormat.format(reserveGui.getjDateChooserDeparture().getDate());
+
+                reserveGui.dispose();
+
+
+                System.out.println(reserveGui.getJlFistName().getText());
+                confirmationGUI.generatePDFConfirmation(fName + " " + lName, email, propertyName, location, arrivalDate, departureDate);
+            }
+
     }
 
         class SearchListener implements ActionListener {

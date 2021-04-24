@@ -5,6 +5,7 @@ import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -64,11 +65,6 @@ public class ConfirmationGUI extends javax.swing.JFrame {
         jLabel1.setToolTipText("");
 
         jButton1.setText("Export PDF Confirmation");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //jButton1ActionPerformed(evt);
-            }
-        });
 
         jButton2.setText("Close");
 
@@ -121,7 +117,7 @@ public class ConfirmationGUI extends javax.swing.JFrame {
         Document document = new Document();
         try
         {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Reservation Confirmation.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Reservation Confirmation.pdf", false));
             document.open();
 
             Paragraph headerParagraph = new Paragraph("***** RESERVATION CONFIRMATION *****", headingFont);
@@ -148,6 +144,12 @@ public class ConfirmationGUI extends javax.swing.JFrame {
 
     public JButton getExportButton() {
         return jButton1;
+    }
+
+
+    public void addExportButtonListener(ActionListener ae){
+        getExportButton().setActionCommand("export_pdf");
+        getExportButton().addActionListener(ae);
     }
 
     // Variables declaration - do not modify
