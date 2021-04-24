@@ -1,7 +1,6 @@
 package edu.rit.iste330.team7.RentMyPlace.view;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,26 +12,12 @@ public class AdminGUI extends JFrame{
     private JPanel buttonsPanel;
     private JButton buttonPromote;
     private JLabel title;
-
-    public JList getjListUsersInfo() {
-        return jListUsersInfo;
-    }
-
-    public String[] getUsersList() {
-        return usersList;
-    }
-
-    public JButton getButtonRemove() {
-        return buttonRemove;
-    }
-
-    public JButton getButtonPromote() {
-        return buttonPromote;
-    }
-
     private String[] usersList;
     private JButton buttonRemove;
 
+    /**
+     * constructor, load components and set Nimbus LookAndFeel
+     */
     public AdminGUI() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -54,7 +39,7 @@ public class AdminGUI extends JFrame{
         initComponents();
 
     }
-
+    // <editor-fold defaultstate="collapsed" desc="GUI Code">
     private void initComponents(){
         main = new JPanel(new GridLayout(0,1));
 
@@ -86,31 +71,61 @@ public class AdminGUI extends JFrame{
         setVisible(true);
         setSize(new java.awt.Dimension(535, 343));
         setResizable(true);
+    }// </editor-fold>
 
+    /**
+     * GETTERS
+     */
+    public JList getjListUsersInfo() {
+        return jListUsersInfo;
     }
 
+    public String[] getUsersList() {
+        return usersList;
+    }
+
+    public JButton getButtonRemove() {
+        return buttonRemove;
+    }
+
+    public JButton getButtonPromote() {
+        return buttonPromote;
+    }
+
+    /**
+     * Takes a list of users and adds them to JList
+     * @param users ArrayList of users in database
+     * @return usersList
+     */
     public String[] addUsers(ArrayList<String> users){
         usersList = new String[users.size()];
-
         for (int i = 0; i < users.size(); i++) {
             usersList[i] = users.get(i);
         }
-
-
         jListUsersInfo.setListData(users.toArray());
 
         return usersList;
     }
 
+    /**
+     * Set welcoming title
+     * @param name of currentUser
+     */
     public void setName(String name){
         String result = "Welcome admin: " + name;
         title.setText(result);
     }
 
+    /**
+     * @param ae click on remove user button
+     */
     public void addRemoveUserListener(ActionListener ae){
         this.getButtonRemove().addActionListener(ae);
     }
 
+    /**
+     * @param ae click on promote user button
+     */
     public void addPromoteUserListener(ActionListener ae){
         this.getButtonPromote().addActionListener(ae);
     }
