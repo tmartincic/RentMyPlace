@@ -32,7 +32,7 @@ public class Model<T> {
         this.whereSql = "WHERE 1";
     }
 
-    /*
+     /*
         Used to build select part of query
      */
     public Model select(String[] attributes) {
@@ -43,7 +43,11 @@ public class Model<T> {
         }
         return this;
     }
-
+    
+     /*
+       Clears the attributes which are collected for prepared statement
+       Used when executing multiple queries with the instant of Model
+     */
     public void clearAttributes() {
         this.attributes.clear();
     }
@@ -107,6 +111,8 @@ public class Model<T> {
 
     /*
         Used to output built SQL string
+
+        @return String
      */
     public String sqlToString() {
         //construct pieces and return
@@ -116,6 +122,8 @@ public class Model<T> {
 
     /*
         Used to build order by part of query
+        
+        @return Model class
      */
     public Model orderBy(String[] attributes, String asc) {
         this.order = "ORDER BY ";
@@ -125,7 +133,13 @@ public class Model<T> {
         }
         return this;
     }
+    
+    /*
+      Used to determine if formed query will find 
+      Any matching rows
 
+      @return boolean
+     */ 
     public boolean exists(){
         DatabaseConnection con = new DatabaseConnection();
         try {
