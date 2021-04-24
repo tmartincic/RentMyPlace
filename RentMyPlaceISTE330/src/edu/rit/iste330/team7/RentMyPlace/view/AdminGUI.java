@@ -55,6 +55,8 @@ public class AdminGUI extends JFrame{
         buttonPromote = new JButton("Promote to admin");
         buttonDemote = new JButton("Demote to user");
         buttonRemove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buttonPromote.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buttonDemote.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jListUsersInfo = new JList();
         jListUsersInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -67,7 +69,6 @@ public class AdminGUI extends JFrame{
         main.add(title);
         main.add(usersSection);
         main.add(buttonsPanel);
-
 
         add(main);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
