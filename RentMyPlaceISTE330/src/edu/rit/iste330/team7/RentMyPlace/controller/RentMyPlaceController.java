@@ -38,6 +38,11 @@ public class RentMyPlaceController {
 
     boolean guest = false;
 
+    /**
+     * Constructor
+     * @param gui - starting login gui
+     * @param model
+     */
     public RentMyPlaceController(LoginGUI gui, Model model) {
         this.gui = gui;
         if (Auth.getUser() != null) {
@@ -47,10 +52,16 @@ public class RentMyPlaceController {
         } else gui.setVisible(true);
         this.model = model;
 
+        /**
+         * Button listeners for the LoginGUI
+         */
         gui.addLoginListener(new LoginListener());
         gui.addRegisterListener(new RegisterListener());
         gui.addGuestListener(new GuestUserListener());
 
+        /**
+         * Button listeners for the main GUI
+         */
         mainGui.addjButton2EventListener(new NextPropertyActionListener());
         mainGui.addjButton1EventListener(new PreviousPropertyActionListener());
         mainGui.addjButton3EventListener(new MorePropertyDetailsActionListener());
@@ -59,23 +70,36 @@ public class RentMyPlaceController {
         mainGui.addjButton5EventListener(new SearchListener());
         mainGui.addAddFavoritesEventListener(new AddToFavoritesListener());
         mainGui.addDeletePropertyFromMyRentalsListener(new DeleteMyRentalsListener());
+        mainGui.addAddPropertyEventListener(new AddPropertyListener());
+        mainGui.addLogOutButtonEventListener(new LogOutListener());
 
+
+        /**
+         * Change listeners for changing tabs
+         */
         mainGui.getjTabbedPane2().addChangeListener(new FavoritesListener());
         mainGui.getjTabbedPane2().addChangeListener(new MyRentalsListener());
         mainGui.getjTabbedPane2().addChangeListener(new SettingListener());
 
+        /**
+         * Combo box item listeners
+         */
         mainGui.getjComboBox3().addItemListener(new SelectChangeListener());
         mainGui.getjComboBox2().addItemListener(new MyRentalsChangeListener());
 
-        mainGui.addAddPropertyEventListener(new AddPropertyListener());
-
+        /**
+         * RegisterGUI button listeners
+         */
         registerGUI.addRegisterListener(new AddUserListener());
         registerGUI.addReturnToLoginListener(new ReturnLoginListener());
         registerGUI.addGuestListener(new GuestUserListener());
 
-        mainGui.addLogOutButtonEventListener(new LogOutListener());
+        /**
+         * ConfirmationGUI button listener
+         */
         confirmationGUI.addExportButtonListener(new ExportListener());
 
+        // Initial getProperty
         this.getProperty(currentIndex);
 
 
@@ -97,9 +121,9 @@ public class RentMyPlaceController {
         }
     }
 
-    public RentMyPlaceController() {
-    }
-
+    /**
+     * Method for showing the AdminGUI and attaching listeners to it
+     */
     public void showAdminGUI(){
         adminGUI = new AdminGUI();
         adminGUI.addUsers(getUsers());
@@ -111,6 +135,11 @@ public class RentMyPlaceController {
 
     }
 
+    /**
+     * Method which selects all users into the temp Array using select method
+     * and adds them into the ArrayList<String> users
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getUsers(){
         ArrayList<User> temp = new User()
                 .select(new String[]{"id", "username", "userType"})
@@ -123,6 +152,11 @@ public class RentMyPlaceController {
         return users;
     }
 
+    /**
+     * Method for checking if a user with the provided username exists
+     * @param userName
+     * @return boolean
+     */
     public boolean usernameExists(String userName) {
         ArrayList<User> user = new User()
                 .where("username", "LIKE", userName)
@@ -131,6 +165,10 @@ public class RentMyPlaceController {
         return true;
     }
 
+    /**
+     * Inner class which implements the login listener and communicates with the
+     * presentation layer to gather information from the LoginGUI gui
+     */
     class LoginListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -144,8 +182,6 @@ public class RentMyPlaceController {
                 jopMessage.showMessageDialog(gui, "Log in successful.");
                 gui.dispose();
                 registerGUI.dispose();
-//                gui.setVisible(false);
-//                registerGUI.setVisible(false);
                 mainGui.setVisible(true);
                 //reset user
                 currentUser = Auth.getUser();
@@ -163,6 +199,10 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * Inner class responsible for removing a user and their properties, communicates both with the
+     * presentation layer and the data layer. Updates the user list using the adminGUI provide method addUsers
+     */
     class RemoveUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae){
@@ -181,6 +221,11 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * Method for getting the selected user, communicates with the presentation
+     * layer to get the currently selected value from the jList
+     * @return String
+     */
     public String getSelectedUser(){
         String temp, username;
         try{
@@ -194,6 +239,10 @@ public class RentMyPlaceController {
         return username;
     }
 
+    /**
+     * Inner class responsible for handling promotion of a normal user to admin
+     * in the AdminGUI
+     */
     class PromoteUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae){
@@ -211,7 +260,10 @@ public class RentMyPlaceController {
         }
     }
 
-
+    /**
+     * Inner class responsible for handling demotion of an admin to user
+     * in the AdminGUI
+     */
     class DemoteUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae){
@@ -229,6 +281,10 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * RegisterListener inner class which responds to the register button being clicked on the LoginGUI,
+     * when clicked LoginGUI is changed to setVisible(false) while registerGUI appears
+     */
     class RegisterListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -237,6 +293,11 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * Method for adding a user to the database and hashing their password using the method provided in the
+     * Authentication class, communicates with the registerGUI to gather information entered into the text fields and
+     * finally creates a user into the database with the converted hashed password being stored
+     */
     class AddUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -257,7 +318,8 @@ public class RentMyPlaceController {
                     ));
 
 
-
+                    // Generating the token for the newly created user so they can access
+                    // all the functionality
                     Auth.logToken(newUser.generateToken());
                     gui.dispose();
                     registerGUI.dispose();
@@ -273,6 +335,11 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * LogOut listener inner class which communicates with the main GUI and responds to the log out button being clicked
+     * sets the authentication log token an empty string, forcing the user to enter their password the next time they
+     * enter the application
+     */
     class LogOutListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -294,15 +361,22 @@ public class RentMyPlaceController {
         }
     }
 
-
+    /**
+     * Inner class implementing an action listener which is connected to the return to login button once the user is in the
+     * registerGUI
+     */
     class ReturnLoginListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            registerGUI.setVisible(false); //dispose only if guest or user signed/logged in
+            registerGUI.setVisible(false);
             gui.setVisible(true);
         }
     }
 
+    /**
+     * Guest user action listener, which communicates with the LoginGUI, sets the presentation layer tabs to
+     * to be disabled as well as set the Authentication token to be an empty string
+     */
     class GuestUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -319,6 +393,10 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * Inner class which implements an action listener for the next button on the RENT tab,
+     * increments the currentIndexRent and gets the property at the new index
+     */
     class NextPropertyActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -334,6 +412,10 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * Inner listener for the previous button on the RENT tab, decrements the currentIndexRent and gets
+     * the property at the new currentIndexRent
+     */
     class PreviousPropertyActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -348,6 +430,10 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * Inner class listening for the add to favorites icon button, communicates with the main GUI and the data layer,
+     * adds the favorite to the database
+     */
     class AddToFavoritesListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -380,6 +466,11 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * More property details inner class action listener, opens an jOptionPane dialog
+     * with the information regarding the property, including features, bedrooms etc.
+     * in HTML format
+     */
     class MorePropertyDetailsActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -411,6 +502,13 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * Method which takes a paramater of an integer, and gathers information from the data layer and adds them
+     * into array lists of their model class. Finally sets the texts and images of the property on to the main GUI RENT
+     * tab
+     * @param currentIndex
+     * @return Property
+     */
     public Property getProperty(int currentIndex) {
         properties = new Property()
                 .select(new String[]{"id", "propertyName", "description", "pricePerNight", "imagePath", "locationId", "propertyTypeId", "bedrooms", "size"})
@@ -442,15 +540,16 @@ public class RentMyPlaceController {
         }
 
         mainGui.getjLabel2().setText(properties.get(currentIndex).getPropertyName());
-
         mainGui.getjLabel9().setText(locations.get(properties.get(currentIndex).getLocationId() - 1).getCity());
-
         mainGui.getjLabel11().setText(String.valueOf(properties.get(currentIndex).getPricePerNight()));
-
         mainGui.getjLabel12().setIcon(mainGui.bufferImageIcon(mainGui.createURL(properties.get(currentIndex).getImagePath()), 600, 450));
         return properties.get(currentIndex);
     }
 
+    /**
+     * Settings inner class which gets the user contact and billing information to the GUI if they exist in the database,
+     * if not the user sees the generic information
+     */
     class SettingListener implements ChangeListener {
 
         @Override
@@ -514,6 +613,10 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * Inner class implementing an action listener, responsible for getting the information user entered into the presentation
+     * layer and updates the entered information to the database
+     */
     class SaveSettingsListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -562,7 +665,6 @@ public class RentMyPlaceController {
                             Map.entry("street", mainGui.getjTextFieldContactStreet().getText()),
                             Map.entry("zip", String.valueOf(mainGui.getjTextFieldContactZip().getText())
                     )));
-
                 }
                 catch (NumberFormatException nfe) {
                     JOptionPane jopMessage = new JOptionPane();
@@ -636,6 +738,12 @@ public class RentMyPlaceController {
         }
     }
 
+    /**
+     * Inner class listener for the reserve button on the main GUI for the Reserve button,
+     * splits the full name into a first name and last name and set the text from the database
+     * into the ReserveGUI components, as well as confirm the reservation by sending it to the database,
+     * also checks if a reservation already exists and sends the reservation to the database
+     */
     class ReserveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -717,7 +825,10 @@ public class RentMyPlaceController {
     }
 
 
-
+    /**
+     * Inner class export listener which communicates with the ConfirmationGUI and its' button,
+     * generates a new pdf documents with the provided information and disposes the ReserveGUI
+     */
     class ExportListener implements ActionListener {
 
             @Override
@@ -740,6 +851,10 @@ public class RentMyPlaceController {
 
     }
 
+    /**
+     * Inner class for the search button listener, dynamically creates properties into the GUI withing a for loop
+     * through all properties, creates panels using methods provided by the GUI class createSearchResultPanel, and getters
+     */
         class SearchListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -762,7 +877,6 @@ public class RentMyPlaceController {
                     orderBy = "DESC";
                 }
 
-                locations.clear();
                 locations.clear();
                 locations = new Location()
                         .select(new String[]{"id", "city", "zip", "street"})
@@ -801,7 +915,7 @@ public class RentMyPlaceController {
                 if (orderBy.equals("ASC")) Collections.sort(properties);
                 else Collections.sort(properties, Collections.reverseOrder());
 
-/////////////////////////////////////////////////////////////////  DYNAMIC RESULT PANELS
+                // DYNAMIC RESULT PANELS
                 for (int i = 0; i < properties.size(); i++) {
                     //generate panels based on results
                     mainGui.createSearchResultPanel(i);
@@ -836,8 +950,6 @@ public class RentMyPlaceController {
 
                 //group and attach generated panels to main search panel
                 mainGui.attachSearchResultPanels();
-
-//////////////////////////////////////////////////////////////// END DYNAMIC PANELS
 
             }
         }
@@ -1129,7 +1241,6 @@ public class RentMyPlaceController {
                             .get().get(0));
                 }
 
-//////////////////////////////////////////////////////////////////////
                 for (int i = 0; i < properties.size(); i++) {
                     //generate panels based on results
                     mainGui.createFavoritesResultPanel(i);
